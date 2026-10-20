@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- WPF aplikace: vykreslení meteogramu, okno šetřiče, nastavení. Kód bez XAML (pixel-přesné kreslení). -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>Meteo</AssemblyName>
+    <RootNamespace>Meteo.Wpf</RootNamespace>
+    <StartupObject>Meteo.Wpf.Program</StartupObject>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <!-- WPF SDK tyto implicitní usingy odebírá (kvůli kolizím názvů), tak je vracíme. -->
+  <ItemGroup>
+    <Using Include="System.IO" />
+    <Using Include="System.Net.Http" />
+    <Using Include="System.Threading" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Meteo.Core\Meteo.Core.csproj" />
+    <ProjectReference Include="..\Meteo.Windows\Meteo.Windows.csproj" />
+  </ItemGroup>
+
+  <!-- Windows spouští šetřiče jako *.scr. Po sestavení vznikne kopie Meteo.scr vedle .exe. -->
+  <Target Name="MakeScr" AfterTargets="Build">
+    <Copy SourceFiles="$(OutDir)Meteo.exe" DestinationFiles="$(OutDir)Meteo.scr" ContinueOnError="true" />
+  </Target>
+
+  <!-- Totéž po "dotnet publish": do složky publish přibude Meteo.scr. -->
+  <Target Name="MakeScrPublish" AfterTargets="Publish">
+    <Copy SourceFiles="$(PublishDir)Meteo.exe" DestinationFiles="$(PublishDir)Meteo.scr" ContinueOnError="true" />
+  </Target>
+
+</Project>

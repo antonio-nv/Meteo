@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Vše, co závisí na Windows 11 (Win32 API, konvence spořičů .scr). Bez WPF, bez UI.
+       Pro Linux Mint vznikne sourozenecký projekt Meteo.Linux se stejnými rozhraními z Meteo.Core. -->
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>Meteo.Windows</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Meteo.Core\Meteo.Core.csproj" />
+  </ItemGroup>
+
+</Project>

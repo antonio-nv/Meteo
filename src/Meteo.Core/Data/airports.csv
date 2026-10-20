@@ -1,0 +1,918 @@
+Code;Name;Locality;Latitude;Longitude
+LKBA;Břeclav Airfield;Břeclav;48.79044;16.89253
+LKBE;Benešov Airfield;Benešov;49.74080;14.64470
+LKBO;Bohuňovice Airfield;Bohuňovice;49.67060;17.29500
+LKBR;Broumov Airfield;Broumov;50.56190;16.34280
+LKBU;Bubovice Airfield;Bubovice;49.97440;14.17810
+LKCB;Cheb Airfield;Cheb;50.06610;12.41170
+LKCE;Česká Lípa Airfield;Česká Lípa;50.70940;14.56670
+LKCH;Chomutov Airfield;Otvice;50.46890;13.46810
+LKCM;Medlánky Airfield;Medlánky;49.23670;16.55500
+LKCR;Chrudim Airfield;Chrudim;49.93640;15.78060
+LKCS;České Budějovice South Bohemian Airport;České Budějovice;48.94817;14.42832
+LKCT;Chotěboř Airfield;Chotěboř;49.68580;15.67610
+LKCV;Čáslav Air Base;Chotusice;49.93970;15.38180
+LKDK;Dvůr Králové nad Labem Airfield;Dvůr Králové nad Labem;50.41420;15.83690
+LKER;Erpužice Airfield;Erpužice;49.80280;13.03810
+LKFR;Frýdlant Airfield;Frýdlant;49.58940;18.37920
+LKHB;Havlíčkův Brod Airfield;Havlíčkův Brod;49.59720;15.54920
+LKHC;Hořice Airfield;Holovousy;50.35760;15.57698
+LKHD;Hodkovice nad Mohelkou Airfield;Hodkovice nad Mohelkou;50.65720;15.07780
+LKHK;Hradec Králové Airport;Hradec Králové;50.25320;15.84520
+LKHN;Hranice Airfield;Hranice;49.54610;17.70440
+LKHS;Hosín Airfield;Hluboká nad Vltavou;49.04000;14.49500
+LKHV;Hořovice Airfield;Hořovice;49.84810;13.89350
+LKJA;Jaroměř Airfield;Jaroměř;50.33140;15.95390
+LKJC;Jičín Airfield;Jičín;50.43000;15.33310
+LKJH;Jindřichův Hradec Airfield;Jindřichův Hradec;49.15068;14.97241
+LKJI;Jihlava Airfield;Jihlava;49.41940;15.63530
+LKKA;Křižanov Airfield;Křižanov;49.36830;16.11610
+LKKB;Prague–Kbely Air Base;Praha;50.12140;14.54360
+LKKC;Kříženec Planá Airfield;Planá;49.87060;12.77250
+LKKL;Kladno Airfield;Kladno;50.11280;14.08970
+LKKM;Kroměříž Airfield;Kroměříž;49.28560;17.41580
+LKKO;Kolín Airfield;Kolín;50.00190;15.17330
+LKKR;Krnov Airfield;Krnov;50.07441;17.69522
+LKKT;Klatovy Josef Hubáč Airfield;Klatovy;49.41830;13.32190
+LKKU;Kunovice Airport;Uherské Hradiště;49.02940;17.43970
+LKKV;Karlovy Vary Airport;Karlovy Vary;50.20300;12.91500
+LKKY;Kyjov Airfield;Svatobořice;48.98000;17.12470
+LKLB;Liberec Airfield;Liberec;50.76705;15.02307
+LKLN;Plzeň-Líně Airport;Plzen;49.67520;13.27460
+LKLT;Letňany Airfield;Letňany;50.13140;14.52560
+LKMB;Mladá Boleslav Airfield;Mladá Boleslav;50.39830;14.89830
+LKMH;Mnichovo Hradiště Airport;Mnichovo Hradiště;50.54020;15.00660
+LKMI;Mikulovice Airfield;Mikulovice;50.30170;17.29750
+LKMK;Moravská Třebová Airfield;Moravská Třebová;49.79830;16.68780
+LKMO;Most Airfield;Most;50.52500;13.68310
+LKMT;Leoš Janáček Airport Ostrava;Mošnov;49.69630;18.11110
+LKNA;Náměšť Air Base;Sedlec;49.16627;16.12398
+LKNM;Nové Město nad Metují Airfield;Nové Město nad Metují;50.36420;16.11360
+LKNY;Nymburk Airfield;Nymburk;50.16910;15.05245
+LKOL;Olomouc Airport;Olomouc;49.58771;17.20928
+LKOT;Zlín Otrokovice Airfield;Otrokovice;49.19830;17.51780
+LKPA;Polička Airfield;Polička;49.73940;16.25890
+LKPC;Panensky Tynec Airfield;Panensky Tynec;50.30610;13.93420
+LKPD;Pardubice Airport;Pardubice;50.01505;15.73981
+LKPI;Přibyslav Airfield;Přibyslav;49.58080;15.76280
+LKPJ;Prostějov Airfield;Prostějov;49.44780;17.13390
+LKPL;Letkov Airfield;Letkov;49.72310;13.45220
+LKPM;Příbram Airfield;Drásov;49.72010;14.10060
+LKPN;Podhořany Airfield;Podhořany u Ronova;49.93920;15.54970
+LKPO;Přerov Air Base;Přerov;49.42580;17.40470
+LKPR;Václav Havel Airport Prague;Praha;50.10087;14.25991
+LKPS;Plasy Rybnice Airfield;Plasy;49.92030;13.37690
+LKRA;Rana Loumy Airfield;Raná;50.40390;13.75190
+LKRK;Rakovnik Airfield;Rakovnik;50.09420;13.68890
+LKRO;Roudnice nad Labem Airfield;Roudnice nad Labem;50.41019;14.22708
+LKRY;Rokycany Airfield;Rokycany;49.75194;13.58972
+LKSA;Staňkov Airfield;Staňkov;49.56652;13.04867
+LKSB;Stichovice Pluml Airfield;Mostkovice;49.48739;17.05261
+LKSK;Skuteč Airfield;Skuteč;49.82780;16.00580
+LKSN;Slaný Airfield;Slaný;50.21639;14.08784
+LKSO;Soběslav Airfield;Soběslav;49.24550;14.71299
+LKSR;Prachatice Airfield;Prachatice;49.08250;14.07580
+LKST;Strakonice Airfield;Strakonice;49.25170;13.89280
+LKSU;Šumperk Airfield;Nový Malín;49.96060;17.01780
+LKSZ;Sazená Airfield;Sazená;50.32470;14.25890
+LKTA;Tábor Airfield;Tábor;49.39110;14.70830
+LKTB;Brno-Tuřany Airport;Brno;49.15128;16.69397
+LKTC;Točná Airfield;Praha;49.98544;14.42647
+LKTD;Tachov Airfield;Tachov;49.79722;12.70717
+LKTO;Toužim Airfield;Toužim;50.08640;12.95280
+LKUL;Usti Nad Labem Airfield;Usti Nad Labem;50.69970;13.96970
+LKUO;Ústí Nad Orlicí Airfield;Ústí nad Orlicí;49.97860;16.42640
+LKVL;Vlašim Airfield;Vlašim;49.72890;14.87890
+LKVM;Vysoké Mýto Airfield;Vysoké Mýto;49.92810;16.18503
+LKVO;Vodochody Airport;Vodochody;50.21660;14.39580
+LKVP;Velké Poříčí Airfield;Velke Porici;50.46780;16.20560
+LKVR;Vrchlabí Airfield;Lánov;50.62420;15.64640
+LKVY;Letiště Vyškov;Vyskov;49.30030;17.02530
+LKZA;Zábřeh Dolní Benešov Airfield;Dolní Benešov;49.92826;18.07556
+LKZB;Zbraslavice Airfield;Zbraslavice;49.81420;15.20170
+LKZD;Žatec-Macerka Airfield;Žatec;50.31750;13.51280
+LKZM;Žamberk Airfield;Žamberk;50.08390;16.44390
+LKZN;Znojmo Airfield;Znojmo;48.81774;16.06583
+;Bezdružice Airstrip;Bezdružice;49.89971;12.96496
+;Bezno Airstrip;Bezno;50.35692;14.80683
+;Bitozeves Airfield;Bitozeves;50.37272;13.63398
+;Bobrová Ultralight Airfield;Bobrová;49.49550;16.10199
+;Bojkovice Airfield;Bojkovice;49.03023;17.81786
+;Boleradice Airfield;;48.96194;16.83167
+;Borek Airfield;Borek;50.21086;14.65769
+;Borovník Airfield;Borovník;49.35861;16.24222
+;Boršice Airfield;Boršice;49.05151;17.36761
+;Bořitov ULM;Bořitov;49.43554;16.59305
+;Bošovice Airstrip;;49.06051;16.84340
+;Brusné Airfield;Brusné;49.36788;17.65228
+;Brťov Airfield;Brťov-Jeneč;49.41086;16.49944
+;Budkov Airstrip;Budkov;49.07178;15.65954
+;Budkovice Airfield;Ivančice;49.07869;16.35562
+;Budíškovice Airstrip;Budíškovice;49.07552;15.54656
+;Buranos Aires Ultralight Strip;Nižbor;50.00893;14.03774
+;Bynovec Airfield;Bynovec;50.82190;14.27174
+;Bystřice nad Pernštejnem Airfield;Bystřice nad Pernštejnem;49.52278;16.23222
+;Bánov Airstrip;Bánov;48.98340;17.70459
+;Březno u Chomutova Airstrip;Droužkovice;50.40943;13.44546
+;Březí Falcon Airfield;Březí;49.33889;16.23137
+;Cebin Airfield;Kuřim;49.31868;16.49682
+;Chabeřice Private ULM Airstrip;Chabeřice;49.74757;15.06424
+;Charvátce Airfield;Libčeves;50.43343;13.81111
+;Choceň Airstrip;Choceň;49.97728;16.18492
+;Chornice Airfield;Chornice;49.68610;16.73091
+;Choteč Airfield;Choteč;50.43389;15.53056
+;Chotěšov Airfield;Chotěšov;49.65167;13.18972
+;Chrášťany Airfield;Chrášťany;50.05872;14.92307
+;Chvojenec Airstrip;Chvojenec;50.10863;15.92674
+;Chřibská Airfield;Chřibská;50.85819;14.46569
+;Dlouhé Dvory Airfield;Střezetice;50.26494;15.73942
+;Dolní Bojanovice Airstrip;;48.85482;17.01794
+;Domaželice Airstrip;;49.44472;17.54156
+;Doudleby Airstrip;Doudleby;48.88504;14.48638
+;Druzcov u Lípy Ultralight Airfield;Osečná;50.72779;14.92524
+;Dušníky Ultralight Airfield;Dušníky;50.41278;14.19806
+;Dynín Airstrip;Dynín u Třeboně;49.12834;14.63344
+;Dětřichov Oáza ULM;Uničov;49.72917;17.11806
+;Excalibur City Airfield;Chvalovice;48.76155;16.05541
+;Frymburk ULM;Frymburk;48.69861;14.19750
+;Hlaska Airfield;;49.06694;14.24139
+;Horni Prim Airfield;Horní Priam;50.22931;15.70205
+;Horní Libchava Ultralight Airfield;Horní Libchava;50.70301;14.49898
+;Horní Počáply Airstrip;Horní Počáply;50.41812;14.38427
+;Hory Airfield;Hory;50.21695;12.77669
+;Hrabice airstrip;;49.06812;13.76030
+;Hradčany Airfield;Kuřívody;50.61925;14.73275
+;Ivančice u Brna ULM;Ivančice u Brna;49.09537;16.48052
+;Jarošov Airstrip;;49.18714;15.04273
+;Jehnědí Airfield;Jehnědí;49.96500;16.30972
+;Jeneč Airstrip;Praha;50.08250;14.22278
+;Jestřabí v Krkonoších ULM;;50.68215;15.48237
+;Jilemnice Airstrip;Jilemnice;50.61056;15.53862
+;Jilmovi Ultralight Strip;;49.39830;16.32169
+;Jinošov Airstrip;Jinošov;49.22693;16.17660
+;Jiřičky UL;Křelovice;49.55222;15.15556
+;Kaplice UL;Kaplice;48.71861;14.45056
+;Katovice Airstrip;;49.26835;13.80078
+;Kejžlice Airfield;Kejžlice;49.59190;15.40137
+;Kelč Airstrip;Kelč;49.45777;17.82017
+;Kněževes Airstrip;Kněževes;49.46190;15.98493
+;Kněžice u Jičína Airfield;Kněžice u Jičína;50.26300;15.29741
+;Kněžmost Airstrip;Kněžmost;50.47862;15.00551
+;Kostelec Airstrip;Kostelec;49.67076;13.03224
+;Kostomlaty Airstrip;;50.20843;14.92585
+;Kotvrdovice Airfield;Kotvrdovice;49.36399;16.78490
+;Kozmice Airstrip;Kozmice;49.91333;18.16430
+;Kozojedy Airstrip;Kozojedy;50.32500;15.38890
+;Kralovice Airstrip;;49.98509;13.52882
+;Kramolín UL;Kramolín;48.91500;14.72639
+;Kravi Hora Airfield;Bořetice;48.91704;16.84132
+;Krpy Airfield;;50.32592;14.66553
+;Kunětice Airfield;Kunětice;50.06833;15.81250
+;Křinec Airstrip;Křinec;50.25470;15.12511
+;Letiště Hať u Hlučína;Hať;49.95181;18.26516
+;Letiště Orlová;;49.85503;18.43521
+;Letovice Airfield;Letovice;49.54667;16.59861
+;Liban Airfield;;50.37044;15.20104
+;Lipová Sport Airfield;Lipová;51.00873;14.34385
+;Litochovice u Strakonic Airstrip;Litochovice;49.15434;13.95672
+;Litomyšl ULM;Litomyšl;49.87414;16.33640
+;Lochousice;Lochousice;49.67491;13.09942
+;Lomnice nad Popelkou Airfield;Lomnice nad Popelkou;50.54000;15.38806
+;Loučeň Airstrip;Loučeň;50.27874;15.06101
+;Luhačovice Airfield;Luhačovice;49.08819;17.71877
+;Luka nad Jihlavou ULM;Luka nad Jihlavou;49.38244;15.71368
+;Lukla Airstrip;Blatno;50.51102;13.33914
+;Manětín Airstrip;Manětín;49.98280;13.22784
+;Milhostov u Chebu ULM;Milhostov;50.16412;12.46409
+;Milovice UL;;50.23743;14.90999
+;Miroslav Aircon ULM;Miroslav;48.93167;16.33972
+;Miroslav ULM;Miroslav;48.93139;16.29861
+;Mladá Airfield;Milovice;50.24359;14.85586
+;Moravské Budějovice Airfield;Moravské Budějovice;49.04269;15.82864
+;Moravský Beroun;Moravský Beroun;49.78611;17.48611
+;Místek;Místek;49.65278;18.34583
+;Mříčná Airstrip;Mříčná;50.59624;15.48122
+;Nabočany Airstrip;Nabočany;49.94600;15.89545
+;Napajedla Airfield;;49.19889;13.60000
+;Nová Včelnice Airstrip;Nová Včelnice;49.26722;15.07778
+;Nový Jičín Airstrip;;49.63195;18.12781
+;Nučice Airfield;Nučice;49.95110;14.86994
+;Náchod Vysokov Airfield;Vysokov;50.41296;16.12185
+;Nížkovice Airstrip;;49.11761;16.89077
+;Opava-Kylešovice Airstrip;Opava;49.89917;17.92296
+;Opava-Velké Hoštice Airfield;Velké Hoštice;49.94056;17.98611
+;Osičiny Airstrip;Osičiny;50.01647;14.77221
+;Ostrov Airfield;Ostrov;50.33628;12.96915
+;Panoší Újezd Airfield;Panoší Újezd;50.03867;13.69681
+;Plešnice Airfield;Plešnice;49.77222;13.16222
+;Podbořany Airstrip;Podbořany;50.25067;13.40972
+;Poděbrady Airfield;Poděbrady;50.18431;15.16655
+;Polepy Airfield;Polepy;50.52027;14.27224
+;Poličná-Juřinka Airfield;Valašské Meziříčí;49.47593;17.92634
+;Písek UL Airstrip;Písek;49.33944;14.11389
+;Pěnčín;;49.56829;16.99918
+;Přešťovice u Strakonic Airstrip;Přešťovice;49.28438;13.96844
+;Příchvoj u Jičína ULM;Markvartice;50.44135;15.23598
+;Rabi Airfield;Rabi;49.27515;13.62781
+;Radim u Chrudimi ULM;Luže;49.90672;16.00672
+;Radovesice Airfield;Radovesice;50.40905;14.08401
+;Ramŝ Airfield;Sosnová;50.64167;14.54139
+;Rohozec Airfield;Rohozec;49.98194;15.39278
+;Rovná u Sokolova Airstrip;Rovná u Sokolova;50.10113;12.67876
+;Sazomín Ultralight Field;Sazomín;49.50861;15.97111
+;Sedliště Airstrip;Sedliště;49.72207;18.37492
+;Slezská Harta Airstrip;Razová;49.90879;17.53577
+;Slušovice Airfield;Slušovice;49.25903;17.81334
+;Stará Paka Airfield;Stará Paka;50.50139;15.48306
+;Stará Voda Emergency Field;Stará Voda;49.99679;12.57512
+;Strachotice u Znojma ULM;Strachotice;48.80669;16.16148
+;Strachotín u Mikulova Airstrip;Strachotín-Hustopeče u Brna;48.91722;16.65883
+;Stránecká Zhoř cropduster strip;Stránecká Zhoř;49.38575;15.93104
+;Strážnice Airfield;;48.88778;17.29444
+;Studenec ULM;Studenec;50.54958;15.53591
+;Syrovice Airfield;Syrovice;49.08774;16.54078
+;Sázava Airfield;Sázava;49.88783;14.94055
+;Teplice Airfield;Zabrušany;50.62083;13.80977
+;Terezín Airfield;Terezín;50.51944;14.15583
+;Trnávka Airstrip;Trnávka;49.69157;18.16402
+;Trutnov-Volanov Airfield;Trutnov;50.56750;15.86528
+;Třebihošť ULM;Třebihošť;50.43546;15.69312
+;Třebíč Airfield;Třebíč;49.19833;15.90306
+;Velké Pavlovice Airfield;Velké Pavlovice;48.88056;16.82500
+;Veselí u Přelouče Airfield;Veselí u Přelouče;50.00682;15.61692
+;Vlastibořice Airstrip;;50.61929;15.03542
+;Vodňany Airstrip;;49.12821;14.17325
+;Vraclav u Vysokého Mýta ULM;Vraclav;49.95313;16.10776
+;Vracov Cropduster Airstrip;Vracov;48.98146;17.23771
+;Vrátkov Airfield;Vrátkov;50.03954;14.82274
+;Vyskeř UL;Vyskeř;50.53714;15.15714
+;Všeň Airstrip;Všeň;50.55511;15.09461
+;Zbilidy Ultrallightport;Zbilidy;49.44803;15.44008
+;Zbudov Airstrip;Zbudov u Žamberka;50.11153;16.51745
+;Zlín Štípa Airfield;Zlín;49.27278;17.74639
+;Zvole Western Airfield;Zvole;49.47985;16.17137
+;Záhoří;;49.46639;17.66528
+;Česká Skalice Ultralight Airfield;Dolany;50.39967;15.99102
+;Česká Třebová Airstrip;Česká Třebová;49.91000;16.45528
+;Český Dub Airfield;Český Dub;50.67806;14.99972
+;Částkovice Airfield;Nová Cerekev;49.40935;15.14369
+;Říčany Airstrip;Říčany u Prahy;49.97444;14.64917
+;Šeborov North UL;Uhřínov;49.35782;15.93147
+;Šeborov South Airstrip;Uhřínov;49.35564;15.92900
+;Škudly Airstrip;Přelouč;50.02194;15.52056
+;Štětí Airstrip;Štětí;50.46500;14.40611
+;Šumvald Ultralight Airstrip;Šumvald;49.84520;17.13848
+;Želeč Airstrip;Želeč;49.33055;14.65889
+;Žihle u Plas Airstrip;;50.03095;13.33782
+EDAB;Bautzen Airfield (DE);Kubschütz;51.19361;14.51972
+EDAC;Leipzig–Altenburg Airport (DE);Nobitz;50.98195;12.50639
+EDAD;Dessau Airfield (DE);Dessau-Roßlau;51.83180;12.18401
+EDAE;Eisenhüttenstadt Airfield (DE);Siehdichum;52.19720;14.58570
+EDAG;Großrückerswalde Airfield (DE);Großrückerswalde;50.64417;13.12639
+EDAH;Heringsdorf Airport (DE);Zirchow;53.87870;14.15230
+EDAI;Sonderlandeplatz Segeletz (DE);Neustadt;52.82667;12.54194
+EDAJ;Gera-Leumnitz Airfield (DE);Gera;50.88167;12.13583
+EDAK;Großenhain Airfield (DE);Großenhain;51.30806;13.55556
+EDAM;Merseburg Airfield (DE);Merseburg;51.36256;11.94113
+EDAN;Neustadt-Glewe Airfield (DE);Neustadt-Glewe;53.36244;11.61376
+EDAO;Nordhausen Airfield (DE);Nordhausen;51.49347;10.83756
+EDAP;Cottbus-Neuhausen Airfield (DE);Neuhausen/Spree;51.68472;14.42306
+EDAQ;Halle-Oppin Airfield (DE);Landsberg;51.55222;12.05389
+EDAR;Pirna-Pratzschwitz Airfield (DE);Pirna;50.97960;13.90845
+EDAS;Finsterwalde-Heinrichsruh Airfield (DE);Finsterwalde;51.63464;13.67505
+EDAT;Nardt Airfield (DE);Hoyerswerda;51.45111;14.19944
+EDAU;Riesa-Göhlis Airport (DE);Riesa;51.29361;13.35611
+EDAV;Eberswalde-Finow Airfield (DE);Eberswalde;52.82631;13.70132
+EDAW;Roitzschjora Airfield (DE);Roitzschjora;51.57778;12.49444
+EDAX;Müritz Airpark (DE);Lärz;53.30639;12.75222
+EDAY;Strausberg Airfield (DE);Strausberg;52.58055;13.91667
+EDAZ;Schönhagen Airfield (DE);Trebbin;52.20463;13.15953
+EDBA;Arnstadt-Alkersleben Airfield (DE);Osthausen-Wülfershausen;50.84187;11.06993
+EDBC;Cochstedt Airport (DE);Hecklingen;51.85640;11.42030
+EDBE;Brandenburg-Mühlenfeld Airfield (DE);Brandenburg an der Havel;52.43750;12.59000
+EDBF;Fehrbellin Airfield (DE);Fehrbellin;52.79349;12.76032
+EDBG;Burg Airfield (DE);Burg bei Magdeburg;52.24177;11.85619
+EDBH;Stralsund-Barth Airport (DE);Barth;54.33825;12.71051
+EDBI;Zwickau Airfield (DE);Zwickau;50.70167;12.45389
+EDBJ;Jena-Schöngleina Airfield (DE);Schöngleina;50.91535;11.71420
+EDBK;Kyritz Airfield (DE);Kyritz;52.91889;12.42528
+EDBL;Laucha Airfield (DE);Laucha an der Unstrut;51.24583;11.69333
+EDBM;Magdeburg City Airfield (DE);Magdeburg;52.07361;11.62639
+EDBN;Neubrandenburg Trollenhagen Airport (DE);Trollenhagen;53.60220;13.30600
+EDBO;Oehna Airfield (DE);Niedergörsdorf;51.89973;13.05281
+EDBP;Pinnow Airfield (DE);Pinnow;53.61528;11.56111
+EDBQ;Bronkow Airfield (DE);Luckaitztal;51.67207;13.96010
+EDBR;Rothenburg/Görlitz Airfield (DE);Rothenburg/Oberlausitz;51.36333;14.95000
+EDBS;Sömmerda-Dermsdorf Airfield (DE);Kölleda;51.19841;11.19176
+EDBT;Allstedt Airfield (DE);Allstedt;51.38055;11.44667
+EDBU;Pritzwalk-Sommersberg Airfield (DE);Pritzwalk;53.18002;12.18455
+EDBV;Stralsund Airfield (DE);Stralsund;54.33584;13.04333
+EDBW;Werneuchen Airfield (DE);Werneuchen;52.63167;13.76694
+EDBX;Görlitz Airfield (DE);Görlitz;51.15889;14.95028
+EDBY;Schmoldow Airfield (DE);Bandelin;53.97276;13.34338
+EDBZ;Schwarzheide/Schipkau Airfield (DE);Schwarzheide;51.49193;13.87937
+EDCA;Anklam Otto Lilienthal Airfield (DE);Anklam;53.83280;13.66861
+EDCB;Ballenstedt Airfield (DE);Ballenstedt;51.74583;11.22972
+EDCE;Müncheberg-Eggersdorf Airfield (DE);Müncheberg;52.48279;14.09074
+EDCG;Rügen Airport (DE);Dreschvitz;54.38347;13.32554
+EDCH;Sprossen (Zeitz) Airfield (DE);Zeitz;51.04341;12.23189
+EDCI;Klix Airfield (DE);Großdubrau;51.27182;14.50571
+EDCJ;Chemnitz/Jahnsdorf Airfield (DE);Jahnsdorf;50.74750;12.83750
+EDCK;Köthen Airport (DE);Köthen (Anhalt);51.72375;11.94883
+EDCL;Klietz-Scharlibbe Airfield (DE);Klietz;52.70944;12.07333
+EDCM;Kamenz Airfield (DE);Kamenz;51.29694;14.12750
+EDCO;Obermehler-Schlotheim Airfield (DE);Nottertal-Heilinger Höhen;51.26778;10.63472
+EDCP;Peenemünde Airport (DE);Peenemünde;54.15778;13.77444
+EDCQ;Aschersleben Airfield (DE);Aschersleben;51.76694;11.49833
+EDCR;Rerik-Zweedorf Airfield (DE);Bastorf;54.08194;11.64917
+EDCS;Saarmund Airfield (DE);Nuthetal;52.30833;13.10056
+EDCT;Taucha Airfield (DE);Taucha;51.39500;12.53694
+EDCU;Güstrow Airfield (DE);Güstrow;53.80528;12.23056
+EDCV;Pasewalk Airfield (DE);Pasewalk;53.50528;13.94833
+EDCW;Wismar Airfield (DE);Wismar;53.91444;11.49944
+EDCX;Purkshof Airfield (DE);Klein Kussewitz;54.16167;12.24861
+EDCY;Spremberg-Welzow Airfield (DE);Welzow;51.57556;14.13694
+EDDB;Berlin Brandenburg Airport (DE);Berlin;52.36174;13.50234
+EDDC;Dresden Airport (DE);Dresden;51.13412;13.76783
+EDDE;Erfurt-Weimar Airport (DE);Erfurt;50.97828;10.96071
+EDDF;Frankfurt Main Airport (DE);Frankfurt;50.02671;8.55835
+EDDG;Münster Osnabrück Airport (DE);Greven;52.13382;7.68848
+EDDH;Hamburg Helmut Schmidt Airport (DE);Hamburg;53.63040;9.98823
+EDDK;Cologne Bonn Airport (DE);Köln (Cologne);50.86590;7.14274
+EDDL;Düsseldorf Airport (DE);Düsseldorf;51.28950;6.76678
+EDDM;Munich Airport (DE);München;48.35380;11.78610
+EDDN;Nuremberg Airport (DE);Nürnberg;49.49870;11.07806
+EDDP;Leipzig/Halle Airport (DE);Schkeuditz;51.42066;12.23270
+EDDR;Saarbrücken Airport (DE);Saarbrücken;49.21455;7.10973
+EDDS;Stuttgart Airport (DE);Stuttgart;48.68990;9.22196
+EDDV;Hannover Airport (DE);Hannover;52.46110;9.68508
+EDDW;Bremen Airport (DE);Bremen;53.04679;8.78932
+EDEB;Bad Langensalza Airfield (DE);Bad Langensalza;51.12917;10.62222
+EDEG;Gotha-Ost Airfield (DE);Gotha;50.97000;10.72778
+EDEH;Herrenteich Airfield (DE);Hockenheim;49.34500;8.48778
+EDEL;Langenlonsheim Airfield (DE);Langenlonsheim;49.90833;7.90778
+EDEM;Mosenberg Airfeld (DE);Homburg (Efze);51.06275;9.42201
+EDEN;Bad Hersfeld Airfield (DE);Bad Hersfeld;50.84405;9.70722
+EDEP;Heppenheim Glider Field (DE);Heppenheim;49.62194;8.62444
+EDEQ;Mühlhausen Airfield (DE);Mühlhausen;51.21305;10.54861
+EDER;Wasserkuppe Airfield (DE);Gersfeld (Rhön);50.49881;9.95417
+EDEW;Walldürn Airfield (DE);Walldürn;49.58167;9.40222
+EDFA;Anspach-Taunus Airfield (DE);Wehrheim;50.28833;8.53389
+EDFB;Reichelsheim Airfield (DE);Reichelsheim;50.33797;8.87898
+EDFC;Aschaffenburg Airfield (DE);Großostheim;49.93881;9.06278
+EDFD;Bad Neustadt/Saale-Grasberg Airfield (DE);Bad Neustadt an der Saale;50.30606;10.22728
+EDFE;Frankfurt-Egelsbach Airport (DE);Egelsbach;49.96000;8.64304
+EDFG;Gelnhausen Airfield (DE);Gelnhausen;50.19674;9.16706
+EDFH;Frankfurt-Hahn Airport (DE);Frankfurt am Main (Lautzenhausen);49.94635;7.26173
+EDFI;Hirzenhain Airfield (DE);Eschenburg;50.78778;8.39278
+EDFJ;Lager Hammelburg Airfield (DE);Hammelburg;50.09852;9.88390
+EDFK;Bad Kissingen Airfield (DE);Bad Kissingen;50.21056;10.06889
+EDFL;Gießen-Lützellinden Airfield (DE);Gießen;50.54479;8.59275
+EDFM;Mannheim-City Airport (DE);Mannheim;49.47306;8.51417
+EDFN;Marburg-Schönstadt Airfield (DE);Cölbe;50.87444;8.81500
+EDFO;Michelstadt-Odenwald Airfield (DE);Michelstadt;49.67847;8.97161
+EDFP;Ober-Mörlen Airfield (DE);Ober-Mörlen;50.36220;8.71164
+EDFQ;Allendorf-Eder Airfield (DE);Allendorf (Eder);51.03527;8.68100
+EDFR;Rothenburg ob der Tauber Airfield (DE);Rothenburg ob der Tauber;49.38894;10.21856
+EDFS;Schweinfurt South Airfield (DE);Gochsheim;50.01083;10.25111
+EDFT;Lauterbach Airfield (DE);Lauterbach (Hessen);50.68367;9.41170
+EDFU;Mainbullau Airfield (DE);Miltenberg;49.69504;9.18236
+EDFV;Worms Airfield (DE);Worms;49.60695;8.36833
+EDFW;Würzburg-Schenkenturm Airfield (DE);Würzburg;49.81778;9.89750
+EDFX;Hockenheim Airfield (DE);Hockenheim;49.32528;8.52861
+EDFY;Limburg-Elz Airfield (DE);Limburg an der Lahn;50.42695;8.01111
+EDFZ;Mainz-Finthen Airfield (DE);Mainz;49.96750;8.14722
+EDGA;Ailertchen Airfield (DE);Ailertchen;50.59306;7.94500
+EDGB;Breitscheid Airfield (DE);Breitscheid;50.67639;8.16944
+EDGE;Eisenach-Kindel Airport (DE);Hörselberg-Hainich;50.99160;10.47973
+EDGF;Fulda-Jossa Airfield (DE);Hosenfeld;50.47528;9.44322
+EDGH;Hettstadt Airfield (DE);Hettstadt;49.79861;9.83667
+EDGI;Ingelfingen-Bühlhof Airfield (DE);Ingelfingen;49.32167;9.66306
+EDGJ;Ochsenfurt Airfield (DE);Ochsenfurt;49.67361;10.07139
+EDGK;Korbach Airfield (DE);Korbach;51.25222;8.87361
+EDGM;Mosbach-Lohrbach Airfield (DE);Mosbach;49.39889;9.12389
+EDGP;Oppenheim Airfield (DE);Oppenheim;49.84167;8.37667
+EDGQ;Schameder Airfield (DE);Schameder;51.00027;8.30914
+EDGR;Gießen-Reiskirchen Airfield (DE);Reiskirchen;50.56638;8.86916
+EDGS;Siegerland Airport (DE);Burbach;50.70770;8.08297
+EDGT;Bottenhorn Airfield (DE);Bad Endbach;50.79528;8.45833
+EDGU;Unterschüpf Airfield (DE);Boxberg;49.51584;9.66944
+EDGW;Flugplatz „Graner Berg“ (DE);Wolfhagen;51.30722;9.17528
+EDGX;Walldorf Airfield (DE);Walldorf;49.30306;8.65889
+EDGZ;Weinheim/Bergstraße Airfield (DE);Weinheim;49.56676;8.61145
+EDHB;Grube Airfield (DE);Grube;54.24445;11.02472
+EDHC;Lüchow-Rehbeck Airfield (DE);Lüchow;53.01716;11.14473
+EDHD;Eichsfeld Airfield (DE);Heilbad Heiligenstadt;51.40755;10.14530
+EDHE;Uetersen-Heist Airfield (DE);Heist;53.64548;9.70350
+EDHF;Itzehoe Hungriger Wolf Airfield (DE);Hohenlockstedt;53.99201;9.57641
+EDHG;Lüneburg Airfield (DE);Lüneburg;53.24832;10.45871
+EDHI;Hamburg-Finkenwerder Airport (DE);Hamburg;53.53528;9.83556
+EDHK;Kiel-Holtenau Airport (DE);Kiel;54.37957;10.14527
+EDHL;Lübeck Blankensee Airport (DE);Lübeck;53.80540;10.71920
+EDHM;Hartenholm Airfield (DE);Hasenmoor;53.91500;10.03556
+EDHN;Neumünster Airport (DE);Neumünster;54.07944;9.94139
+EDHO;Ahrenlohe Airfield (DE);Tornesch;53.70031;9.74212
+EDHS;Stade Airfield (DE);Stade;53.56111;9.49917
+EDHU;Lauenbrück Airfield (DE);Lauenbrück;53.20750;9.57333
+EDHW;Wahlstedt Airfield (DE);Wahlstedt;53.96944;10.22167
+EDJA;Memmingen Allgau Airport (DE);Memmingen;47.98809;10.23825
+EDJG;Grabenstätt Airfield (DE);Grabenstätt;47.85276;12.55037
+EDKA;Aachen-Merzbrück Airport (DE);Aachen;50.82305;6.18639
+EDKB;Bonn-Hangelar Airfield (DE);Bonn;50.76889;7.16333
+EDKD;Altena-Hegenscheid Airfield (DE);Iserlohn;51.31246;7.70413
+EDKF;Bergneustadt-Auf dem Dümpel Airfield (DE);Bergneustadt;51.05209;7.70683
+EDKH;Hünsborn Airfield (DE);Wenden;50.92861;7.89917
+EDKI;Betzdorf-Kirchen Airfield (DE);Kirchen (Sieg);50.81722;7.83056
+EDKL;Leverkusen Airfield (DE);Leverkusen;51.01528;7.00556
+EDKM;Meschede-Schüren Airfield (DE);Meschede;51.30278;8.23917
+EDKN;Wipperfürth-Neye Airfield (DE);Wipperfürth;51.12417;7.37361
+EDKO;Brilon-Hochsauerland Airfield (DE);Brilon;51.40283;8.64304
+EDKP;Plettenberg-Hüinghausen Airfield (DE);Herscheid;51.19188;7.79098
+EDKR;Schmallenberg-Rennefeld Airfield (DE);Schmallenberg;51.16150;8.26067
+EDKU;Attendorn-Finnentrop Airfield (DE);Attendorn;51.14583;7.93667
+EDKV;Dahlemer Binz Airfield (DE);Dahlhem;50.40611;6.53026
+EDKW;Werdohl-Küntrop Airfield (DE);Neuenrade;51.29722;7.81833
+EDKZ;Meinerzhagen Airfield (DE);Meinerzhagen;51.09940;7.59690
+EDLA;Arnsberg-Menden Airfield (DE);Arnsberg;51.48389;7.89833
+EDLB;Borkenberge Airfield (DE);Lüdinghausen;51.78000;7.28806
+EDLC;Kamp-Lintfort Airfield (DE);Rheinberg;51.52917;6.53611
+EDLD;Dinslaken-Schwarze Heide Airfield (DE);Hünxe;51.61602;6.86126
+EDLE;Essen-Mülheim Airport (DE);Essen;51.40230;6.93733
+EDLF;Grefrath-Niershorst Airfield (DE);Grefrath;51.33389;6.35944
+EDLG;Goch-Asperden Airfield (DE);Goch;51.69083;6.10417
+EDLH;Hamm-Lippewiesen Airfield (DE);Hamm;51.68972;7.81611
+EDLI;Bielefeld Airport (DE);Bielefeld;51.96472;8.54444
+EDLJ;Detmold Airfield (DE);Detmold;51.94083;8.90472
+EDLK;Krefeld-Egelsberg Airfield (DE);Krefeld;51.38500;6.58778
+EDLM;Marl-Loemühle Airfield (DE);Marl;51.64720;7.16333
+EDLN;Mönchengladbach Airport (DE);Mönchengladbach;51.23028;6.50444
+EDLO;Oerlinghausen Airfield (DE);Oerlinghausen;51.93222;8.66167
+EDLP;Paderborn Lippstadt Airport (DE);Büren;51.61253;8.61746
+EDLQ;Beelen Airfield (DE);Beelen;51.93167;8.08167
+EDLR;Paderborn-Haxterberg Airfield (DE);Paderborn;51.68833;8.77528
+EDLS;Stadtlohn-Vreden Airfield (DE);Stadtlohn;51.99583;6.84056
+EDLT;Münster-Telgte Airfield (DE);Telgte;51.94474;7.77362
+EDLU;Oelde Bergeler Airfield (DE);;51.83060;8.17472
+EDLV;Weeze (Niederrhein) Airport (DE);Weeze;51.60136;6.14123
+EDLW;Dortmund Airport (DE);Dortmund;51.51830;7.61224
+EDLX;Wesel-Römerwardt Airfield (DE);Wesel;51.66278;6.59583
+EDLY;Borken-Hoxfeld Airfield (DE);Borken;51.85333;6.81472
+EDLZ;Soest-Bad Sassendorf Airfield (DE);Bad Sassendorf;51.57806;8.21472
+EDMA;Augsburg Airport (DE);Augsburg;48.42528;10.93167
+EDMB;Biberach an der Riß Airfield (DE);Warthausen;48.11236;9.76401
+EDMC;Blaubeuren Airfield (DE);Blaubeuren;48.41972;9.79833
+EDMD;Dachau-Gröbenried Airfield (DE);Bergkirchen;48.22868;11.42213
+EDME;Eggenfelden Airfield (DE);Eggenfelden;48.39611;12.72361
+EDMF;Fürstenzell Airfield (DE);Fürstenzell;48.51805;13.34583
+EDMG;Günzburg-Donauried Airfield (DE);Günzburg;48.48667;10.28333
+EDMH;Gunzenhausen-Reutberg Airfield (DE);Gunzenhausen;49.11223;10.78217
+EDMI;Illertissen Airfield (DE);Illertissen;48.23500;10.13770
+EDMJ;Jesenwang Airfield (DE);Jesenwang;48.17437;11.12536
+EDMK;Kempten-Durach Airfield (DE);Durach;47.69194;10.33806
+EDML;Landshut Airfield (DE);Landshut;48.51202;12.03486
+EDMN;Mindelheim-Mattsies Airfield (DE);Tussenhausen;48.10695;10.52500
+EDMO;Oberpfaffenhofen Airport (DE);Weßling;48.08140;11.28310
+EDMP;Vilsbiburg Airfield (DE);Vilsbiburg;48.42611;12.34528
+EDMQ;Donauwörth-Genderkingen Airfield (DE);Genderkingen;48.70306;10.85232
+EDMS;Straubing Airport (DE);Atting;48.90083;12.51667
+EDMT;Tannheim Airfield (DE);Tannheim;48.01000;10.09861
+EDMU;Gundelfingen Airfield (DE);Gundelfingen an der Donau;48.56934;10.35854
+EDMV;Vilshofen Airfield (DE);Vilshofen an der Donau;48.63500;13.19556
+EDMW;Deggendorf Airfield (DE);Deggendorf;48.83028;12.87972
+EDMY;Mühldorf Airfield (DE);Mühldorf am Inn;48.27958;12.50045
+EDNA;Ampfing-Waldkraiburg Airfield (DE);Ampfing;48.26361;12.41167
+EDNB;Arnbruck Airfield (DE);Arnbruck;49.12472;12.98556
+EDNC;Beilngries Airfield (DE);Beilngries;49.02139;11.48472
+EDND;Dinkelsbühl-Sinbronn Airfield (DE);Dinkelsbühl;49.06508;10.40352
+EDNE;Erbach Airfield (DE);Erbach;48.34222;9.91611
+EDNF;Elsenthal Grafe Airfield (DE);Grafenau;48.82250;13.36750
+EDNG;Giengen/Brenz Airfield (DE);Giengen an der Brenz;48.63425;10.21648
+EDNH;Bad Wörishofen (Nord) Airfield (DE);Bad Wörishofen;48.01612;10.61502
+EDNI;Berching Airfield (DE);Berching;49.13104;11.44321
+EDNJ;Neuburg-Egweil Airfield (DE);Egweil;48.78194;11.21528
+EDNK;Kirchdorf/Inn Airfield (DE);Kirchdorf am Inn;48.23833;12.97667
+EDNL;Leutkirch-Unterzeil Airfield (DE);Leutkirch im Allgäu;47.85889;10.01417
+EDNM;Nittenau-Bruck Airfield (DE);Bruck in der Oberpfalz;49.22250;12.29667
+EDNO;Nördlingen Airfield (DE);Nördlingen;48.87056;10.50500
+EDNP;Pfarrkirchen Airfield (DE);Rahberg;48.42028;12.86472
+EDNQ;Bopfingen Airfield (DE);Bopfingen;48.84806;10.33389
+EDNR;Regensburg-Oberhub Airfield (DE);Regenstauf;49.14194;12.08194
+EDNS;Schwabmünchen Airfield (DE);Schwabmünchen;48.17917;10.70278
+EDNT;Treuchtlingen-Bubenheim Airfield (DE);Treuchtlingen;48.99611;10.88417
+EDNU;Thannhausen Airfield (DE);Thannhausen;48.29000;10.44194
+EDNV;Vogtareuth Airfield (DE);Vogtareuth;47.94611;12.20472
+EDNW;Weißenhorn Airfield (DE);Weißenhorn;48.28944;10.14028
+EDNX;Schleissheim Airfield (DE);Oberschleissheim;48.23917;11.55933
+EDNY;Bodensee Airport Friedrichshafen (DE);Friedrichshafen;47.67130;9.51149
+EDNZ;Zell-Haidberg Airfield (DE);Zell im Fichtelgebirge;50.13694;11.79444
+EDOA;Auerbach Airfield (DE);Auerbach/Vogtland;50.49730;12.37799
+EDOB;Bad Berka Airfield (DE);Bad Berka;50.90445;11.26028
+EDOC;Gardelegen Airfield (DE);Gardelegen;52.52964;11.34942
+EDOD;Reinsdorf Airfield (DE);Niederer Fläming;51.90083;13.19444
+EDOE;Böhlen Airfield (DE);Großpösna;51.21389;12.36361
+EDOF;Bad Frankenhausen Airfield (DE);Bad Frankenhausen;51.37250;11.14139
+EDOG;Torgau-Beilrode Airfield (DE);Beilrode;51.57091;13.05164
+EDOH;Langhennersdorf Airfield (DE);Oberschöna;50.94833;13.26167
+EDOI;Bienenfarm Airfield (DE);Paulinenaue;52.66167;12.74583
+EDOJ;Lüsse Airfield (DE);Bad Belzig;52.14271;12.67144
+EDOK;Rudolstadt-Groschwitz Airfield (DE);Rudolstadt;50.73278;11.23611
+EDOL;Oschersleben Glider Field (DE);Oschersleben;52.03805;11.20556
+EDOM;Klein Mühlingen Airfield (DE);Bördeland;51.94750;11.76972
+EDON;Neuhardenberg Marxwalde Airfield (DE);Neuhardenberg;52.61306;14.24278
+EDOQ;Oschatz Airfield (DE);Oschatz;51.29677;13.07869
+EDOR;Stölln-Rhinow Airfield (DE);Gollenberg;52.74083;12.39000
+EDOS;Pennewitz Airfield (DE);Ilmenau;50.66969;11.05109
+EDOT;Greiz-Obergrochlitz Airfield (DE);Greiz;50.64398;12.17457
+EDOU;Weimar-Umpferstedt Airfield (DE);Umpferstedt;50.96509;11.39980
+EDOV;Stendal-Borstel Airfield (DE);Stendal;52.62889;11.81861
+EDOW;Waren-Vielist Airfield (DE);Waren;53.56833;12.65278
+EDOX;Renneritz Airfield (DE);Sandersdorf;51.59511;12.23791
+EDOZ;Schönebeck-Zackmünde Airfield (DE);Pömmelte;51.99713;11.78979
+EDPA;Aalen Heidenheim Elchingen Airfield (DE);Neresheim;48.77778;10.26472
+EDPB;Bad Ditzenbach Airfield (DE);Bad Ditzenbach;48.56278;9.72889
+EDPC;Bad Endorf/Jolling Airfield (DE);Bad Endorf;47.92690;12.28720
+EDPD;Dingolfing Airfield (DE);Dingolfing;48.65673;12.49879
+EDPE;Eichstätt Airfield (DE);Eichstätt;48.87694;11.18222
+EDPF;Schwandorf Airfield (DE);Schwandorf;49.33972;12.18806
+EDPG;Griesau Airfield (DE);Pfatter;48.95389;12.42139
+EDPH;Schwabach-Heidenberg Airfield (DE);Büchenbach;49.26802;11.01261
+EDPI;Moosburg auf der Kippe Airfield (DE);Moosburg an der Isar;48.45659;11.94162
+EDPJ;Laichingen Jakob Laur Airfield (DE);Laichingen;48.49694;9.64028
+EDPK;Schönberg Airfield (DE);Kienberg;48.04778;12.50056
+EDPM;Donzdorf Airfield (DE);Donzdorf;48.67818;9.84591
+EDPO;Neumarkt-Oberpfalz Airfield (DE);Neumarkt in der Oberpfalz;49.28556;11.44306
+EDPQ;Schmidgaden Airfield (DE);Schmidgaden;49.42944;12.09806
+EDPS;Flugplatz Sonnen (DE);Waldkirchen;48.68278;13.69472
+EDPT;Gerstetten Airfield (DE);Gerstetten;48.62028;10.05833
+EDPU;Bartholomä-Amalienhof Airfield (DE);Bartholomä;48.74667;10.00500
+EDPW;Thalmässing-Waizenhofen Airfield (DE);Thalmässing;49.06417;11.20917
+EDPY;Ellwangen Airfield (DE);Ellwangen an der Jagst;48.96148;10.23449
+EDQA;Bamberg-Breitenau Airfield (DE);Bamberg;49.92040;10.91423
+EDQB;Bad Windsheim Airfield (DE);Bad Windsheim;49.51000;10.36639
+EDQC;Coburg-Brandensteinsebene Airfield (DE);Coburg;50.26250;10.99556
+EDQD;Bayreuth Airport (DE);Bindlach;49.98500;11.64000
+EDQE;Burg Feuerstein Airport (DE);Ebermannstadt;49.79417;11.13361
+EDQF;Ansbach-Petersdorf Airfield (DE);Weihenzell;49.36111;10.66944
+EDQG;Giebelstadt Airport (DE);Giebelstadt;49.64806;9.96639
+EDQH;Herzogenaurach Airfield (DE);Herzogenaurach;49.58271;10.87834
+EDQI;Lauf-Lillinghof Airfield (DE);Schnaittach;49.60516;11.28358
+EDQK;Kulmbach Airfield (DE);Kulmbach;50.13492;11.45907
+EDQL;Lichtenfels Airfield (DE);Lichtenfels;50.14861;11.04806
+EDQM;Hof-Plauen Airport (DE);Hof;50.28854;11.85288
+EDQN;Neustadt/Aisch Airfield (DE);Neustadt an der Aisch;49.58750;10.57750
+EDQO;Ottengrüner Heide Airfield (DE);Helmbrechts;50.22583;11.73167
+EDQP;Rosenthal-Plössen Airfield (DE);Speichersdorf;49.86333;11.78778
+EDQR;Ebern-Sendelbach Airfield (DE);Ebern;50.04000;10.82254
+EDQS;Suhl-Goldlauter Airfield (DE);Goldlauter-Heidersbach;50.63205;10.72601
+EDQT;Haßfurt-Schweinfurt Airfield (DE);Haßfurt;50.01820;10.52917
+EDQW;Weiden in der Oberpfalz Airfield (DE);Weiden in der Oberpfalz;49.67890;12.11640
+EDQX;Hetzleser Berg Airfield (DE);Neunkirchen am Brand;49.64234;11.16257
+EDQY;Coburg-Steinrücken Airfield (DE);Coburg;50.23056;10.99583
+EDQZ;Pegnitz-Zipser Berg Airfield (DE);Pegnitz;49.76238;11.57462
+EDRA;Bad Neuenahr-Ahrweiler Airfield (DE);Bad Neuenahr;50.55778;7.13714
+EDRB;Bitburg Airport (DE);Bitburg;49.94528;6.56500
+EDRC;Marpingen Glider Airfield (DE);Marpingen;49.45300;7.03900
+EDRD;Neumagen-Dhron Airfield (DE);Neumagen;49.84306;6.91611
+EDRF;Bad Dürkheim Airfield (DE);Bad Dürkheim;49.47280;8.19574
+EDRG;Idar-Oberstein/Göttschied Airfield (DE);Idar-Oberstein;49.73222;7.33611
+EDRH;Hoppstädten-Weiersbach Airfield (DE);Hoppstädten;49.61056;7.18667
+EDRI;Linkenheim Airfield (DE);Linkenheim;49.14167;8.39472
+EDRJ;Saarlouis-Düren Airfield (DE);Saarlouis;49.31250;6.67444
+EDRK;Koblenz-Winningen Airfield (DE);Koblenz;50.32556;7.52861
+EDRL;Flugplatz Lachen-Speyerdorf (DE);Neustadt an der Weinstraße;49.33083;8.20972
+EDRM;Traben-Trarbach/Mont Royal Airfield (DE);Traben-Trarbach;49.96778;7.11194
+EDRN;Nannhausen Airfield (DE);Nannhausen;49.96992;7.47836
+EDRO;Schweighofen Airfield (DE);Schweighofen;49.03188;7.99051
+EDRP;Pirmasens-Pottschütthöhe Airfield (DE);Battweiler;49.26444;7.48833
+EDRS;Bad Sobernheim-Domberg Airfield (DE);Bad Sobernheim;49.79083;7.66611
+EDRT;Trier-Föhren Airfield (DE);Föhren;49.86389;6.78750
+EDRV;Wershofen/Eifel Airfield (DE);Wershofen;50.45190;6.78409
+EDRW;Dierdorf-Wienau Airfield (DE);Dierdorf;50.56611;7.65333
+EDRX;Bexbach Glider Field (DE);Bexbach;49.34000;7.25333
+EDRY;Speyer Airfield (DE);Speyer;49.30472;8.45139
+EDRZ;Zweibrücken Airport (DE);Zweibrücken;49.20940;7.40056
+EDSA;Albstadt-Degerfeld Airfield (DE);Albstadt;48.24972;9.06250
+EDSB;Karlsruhe Baden-Baden Airport (DE);Rheinmünster;48.77940;8.08050
+EDSE;Göppingen-Bezgenriet Airfield (DE);Göppingen;48.65861;9.62417
+EDSG;Grabenstetten Airfield (DE);Grabenstetten;48.53611;9.43694
+EDSH;Backnang-Heiningen Airfield (DE);Backnang;48.91972;9.45528
+EDSI;Binningen Glider Field (DE);Hilzingen;47.79877;8.71855
+EDSK;Kehl-Sundheim Airfield (DE);Kehl;48.56111;7.84333
+EDSL;Blumberg Airfield (DE);Blumberg;47.84368;8.56434
+EDSN;Neuhausen ob Eck Airfield (DE);Neuhausen ob Eck;47.97666;8.90389
+EDSO;Gruibingen-Nortel Airfield (DE);Salach;48.62120;9.65570
+EDSP;Poltringen Airfield (DE);Ammerbuch;48.54728;8.94592
+EDSR;Radolfzell-Stahlringen Airfield (DE);Radolfzell am Bodensee;47.80259;8.97938
+EDST;Hahnweide Airfield (DE);Kirchheim unter Teck;48.63184;9.42920
+EDSW;Altdorf-Wallburg Airfield (DE);Kippenheim;48.26988;7.84194
+EDSX;Völkleshofen-Lichtenberg Airfield (DE);Aspach;49.00933;9.35460
+EDSZ;Rottweil-Zepfenhan Airfield (DE);Rottweil;48.18660;8.72280
+EDTB;Baden-Oos Airfield (DE);Baden-Baden;48.79194;8.18583
+EDTC;Bruchsal Airfield (DE);;49.13484;8.56412
+EDTD;Donaueschingen-Villingen Airfield (DE);Donaueschingen;47.97333;8.52222
+EDTF;Freiburg im Breisgau Airfield (DE);Freiburg im Breisgau;48.02278;7.83250
+EDTG;Bremgarten Airfield (DE);Eschbach;47.90319;7.61742
+EDTH;Heubach Airfield (DE);Heubach;48.80300;9.92771
+EDTL;Lahr Airport (DE);Lahr/Schwarzwald;48.36930;7.82772
+EDTM;Mengen-Hohentengen Airfield (DE);Mengen;48.05389;9.37278
+EDTN;Nabern-Teck Airfield (DE);Kirchheim unter Teck;48.61278;9.47722
+EDTO;Offenburg-Baden Airfield (DE);Offenburg;48.44813;7.92356
+EDTP;Pfullendorf Airfield (DE);Pfullendorf;47.90889;9.25056
+EDTQ;Pattonville Airfield (DE);Remseck am Neckar;48.86417;9.22472
+EDTR;Herten-Rheinfelden Airfield (DE);Rheinfelden (Baden);47.56028;7.74833
+EDTS;Schwenningen am Neckar Airfield (DE);Villingen-Schwenningen;48.06583;8.57139
+EDTU;Bad Saulgau Airfield (DE);Bad Saulgau;48.02945;9.50722
+EDTW;Winzeln-Schramberg Airfield (DE);Schramberg;48.27917;8.42833
+EDTX;Schwäbisch Hall-Weckrieden Airfield (DE);Schwäbisch Hall;49.12444;9.78111
+EDTY;Adolf Würth Airport (DE);Schwäbisch Hall;49.11833;9.78389
+EDTZ;Konstanz Airfield (DE);Konstanz;47.68144;9.13926
+EDUA;Flugplatz Stechow-Ferchesar (DE);Stechow-Ferchesar;52.65055;12.48778
+EDUF;Falkenberg-Lönnewitz Airfield (DE);Mühlberg;51.54778;13.22806
+EDUO;Oberrißdorf Airfield (DE);Hedersleben;51.54290;11.59524
+EDUW;Tutow-Betriebs Airfield (DE);Tutow;53.91773;13.22026
+EDUZ;Zerbst Airfield (DE);Straguth;52.00083;12.14861
+EDVA;Bad Gandersheim Airfield (DE);Bad Gandersheim;51.85417;10.02556
+EDVC;Celle-Arloh Airfield (DE);Celle;52.68816;10.11278
+EDVE;Braunschweig-Wolfsburg Airport (DE);Braunschweig;52.31920;10.55610
+EDVF;Blomberg-Borkhausen Airfield (DE);Blomberg;51.91722;9.11167
+EDVG;Mengeringhausen Airfield (DE);Bad Arolsen;51.37639;8.98111
+EDVH;Hodenhagen Airfield (DE);Hodenhagen;52.76187;9.61056
+EDVI;Höxter-Holzminden Airfield (DE);Höxter;51.80667;9.37833
+EDVJ;Salzgitter-Schäferstuhl Airfield (DE);Salzgitter;52.03068;10.36247
+EDVK;Kassel Airport (DE);Calden;51.41839;9.39164
+EDVL;Hölleberg Airfield (DE);Trendelburg;51.61088;9.39837
+EDVM;Hildesheim Airfield (DE);Hildesheim;52.17982;9.94580
+EDVN;Northeim Airfield (DE);Northeim;51.70639;10.03972
+EDVR;Rinteln Airfield (DE);Rinteln;52.17528;9.05333
+EDVT;Ithwiesen Airfield (DE);Ith;51.95200;9.66200
+EDVU;Uelzen Airfield (DE);Uelzen;52.98370;10.46542
+EDVW;Bad Pyrmont Airfield (DE);Bad Pyrmont;51.96667;9.29167
+EDVY;Porta Westfalica Airfield (DE);Porta Westfalica;52.22137;8.85976
+EDWC;Damme Airfield (DE);Damme;52.48756;8.18515
+EDWE;Emden Airport (DE);Emden;53.39111;7.22750
+EDWF;Flugplatz Leer-Papenburg (DE);Leer;53.27194;7.44167
+EDWG;Wangerooge Airport (DE);Wangerooge;53.78254;7.91958
+EDWH;Oldenburg-Hatten Airfield (DE);Hatten;53.06889;8.31361
+EDWI;JadeWeser Airport (DE);Wilhelmshaven;53.50222;8.05222
+EDWJ;Juist Airport (DE);Juist;53.68142;7.05640
+EDWK;Karlshöfen Airfield (DE);Gnarrenburg;53.33278;9.02833
+EDWL;Langeoog Airport (DE);Langeoog;53.74238;7.49634
+EDWM;Weser-Wümme Airfield (DE);Hellwege;53.05389;9.20861
+EDWN;Nordhorn-Lingen Airfield (DE);Klausheide;52.45750;7.18222
+EDWO;Atterheide Airfield (DE);Osnabrück;52.28639;7.96972
+EDWP;Wiefelstede-Conneforde Airfield (DE);Wiefelstede;53.32139;8.07333
+EDWQ;Ganderkesee Atlas Airfield (DE);Ganderkesee;53.03611;8.50556
+EDWR;Borkum Airport (DE);Borkum;53.59639;6.70917
+EDWS;Norden-Norddeich Airport (DE);Norddeich;53.63306;7.19028
+EDWU;Varrelbusch Airfield (DE);Cloppenburg;52.90833;8.04056
+EDWV;Verden-Scharnhorst Airfield (DE);Verden (Aller);52.96528;9.28278
+EDWX;Westerstede-Felde Airfield (DE);Westerstede;53.28861;7.93056
+EDWY;Norderney Airport (DE);Norderney;53.70694;7.23000
+EDWZ;Baltrum Airport (DE);Baltrum;53.72485;7.37326
+EDXA;Flugplatz Achmer (DE);Bramsche;52.37722;7.91333
+EDXB;Heide-Büsum Airport (DE);Oesterdeichstrich;54.15333;8.90167
+EDXC;Schleswig-Kropp Airfield (DE);Kropp;54.42550;9.54188
+EDXD;Bohmte-Bad Essen Airfield (DE);Bohmte;52.35139;8.32833
+EDXE;Rheine-Eschendorf Airfield (DE);Rheine;52.27639;7.49278
+EDXF;Flensburg-Schäferhaus Airport (DE);Flensburg;54.77334;9.37889
+EDXG;Melle-Grönegau Airfield (DE);Melle;52.20083;8.38056
+EDXH;Helgoland-Düne Airport (DE);Helgoland;54.18528;7.91583
+EDXI;Nienburg-Holzbalge Airfield (DE);Balge;52.70972;9.16250
+EDXJ;Husum-Schwesing Airport (DE);Husum;54.51000;9.13833
+EDXK;Leck Airfield (DE);Leck;54.79091;8.96344
+EDXL;Barßel Airfield (DE);Barßel;53.16444;7.79389
+EDXM;Sankt Michaelisdonn Airfield (DE);Sankt Michaelisdonn;53.97826;9.14521
+EDXN;Nordholz-Spieka Airfield (DE);Wurster Nordseeküste;53.76722;8.64361
+EDXO;Sankt Peter-Ording Airport (DE);Sankt Peter-Ording;54.30889;8.68694
+EDXP;Harle Airfield (DE);Harlesiel;53.70667;7.82028
+EDXQ;Rotenburg (Wümme) Airfield (DE);Rotenburg (Wümme);53.12833;9.34861
+EDXR;Rendsburg-Schachtholm Airfield (DE);Hörsten;54.22000;9.59944
+EDXS;Seedorf Airfield (DE);Zeven;53.33556;9.25944
+EDXT;Sierksdorf/Hof Altona Airfield (DE);Sierksdorf;54.06674;10.74218
+EDXU;Hüttenbusch Airfield (DE);Worpswede;53.28667;8.94722
+EDXW;Westerland Sylt Airport (DE);Sylt;54.91320;8.34047
+EDXY;Wyk auf Föhr Airport (DE);Wyk auf Föhr;54.68444;8.52833
+EDXZ;Kührstedt-Bederkesa Airfield (DE);Geestland;53.56805;8.78944
+EPAR;Arłamów Airfield (PL);Wola Korzeniecka;49.65750;22.51430
+EPBA;Bielsko-Biała Aleksandrowice Airfield (PL);Bielsko-Biała;49.80500;19.00190
+EPBB;Babięta (PL);Babięta;53.66790;21.25543
+EPBC;Warsaw Babice Airport (PL);Warszawa;52.26920;20.90720
+EPBK;Białystok-Krywlany Airfield (PL);Białystok;53.10140;23.17060
+EPBY;Ignacy Jan Paderewski Bydgoszcz Airport (PL);Bydgoszcz;53.09680;17.97770
+EPCD;Depułtycze Królewskie Airfield (PL);Królewskie;51.08207;23.43701
+EPCE;Cewice Naval Air Base (PL);Siemirowice;54.41653;17.76573
+EPDA;Darłówo Naval Air Base (PL);Darłowo;54.40470;16.35310
+EPDE;Deblin Military Air Base (PL);Dęblin;51.55102;21.89232
+EPDK;Debowa Klada Airfield (PL);;51.61260;23.00720
+EPDS;Witków Airfield (PL);Witków;50.79686;16.11448
+EPEL;Elbląg Airfield (PL);Elbląg;54.14080;19.42330
+EPGD;Gdańsk Lech Wałęsa Airport (PL);Gdańsk;54.37760;18.46620
+EPGE;Giże Airfield (PL);Giże;53.98244;22.40315
+EPGI;Grudziądz Lisie Kąty Airfield (PL);Grudziądz;53.52440;18.84920
+EPGL;Gliwice-Trynek Airfield (PL);Gliwice;50.26874;18.67247
+EPGM;Giżycko-Mazury Residence (PL);Giżycko;54.00645;21.81824
+EPGR;Łańsk / Gryźliny Airfield (PL);Gryźliny;53.60807;20.34969
+EPGS;Grójec-Słomczyn Airfield (PL);Grójec;51.87549;20.93774
+EPGY;Grądy Airfield (PL);Grądy;52.83698;21.77764
+EPHN;Narew (PL);Narew;52.90878;23.54134
+EPIN;Inowrocław Airfield (PL);Inowrocław;52.80615;18.28313
+EPIR;Inowroclaw Military Air Base (PL);;52.82940;18.33060
+EPJA;Jastarnia Airfield (PL);Jastarnia;54.71028;18.64528
+EPJG;Jelenia Góra Airfield (PL);Jelenia Góra;50.89890;15.78560
+EPJL;Laszki Field (PL);Laszki;50.00850;22.91890
+EPJS;Jeżów Sudecki Airfield (PL);Jeżów Sudecki;50.94403;15.76653
+EPKA;Kielce-Masłów Airfield (PL);Kielce;50.89670;20.73170
+EPKB;Kazimierz Biskupi Airfield (PL);Kazimierz Biskupi;52.31955;18.16432
+EPKD;Końskie-Komaszyce (PL);;51.25532;20.47132
+EPKE;Kȩtrzyn-Wilamowo Airfield (PL);Kȩtrzyn;54.04714;21.42612
+EPKI;Kikity (PL);;53.98290;20.87722
+EPKK;Kraków John Paul II International Airport (PL);Balice;50.07770;19.78480
+EPKL;Krasocin Field (PL);Krasocin;50.89932;20.12804
+EPKM;Katowice-Muchowiec Airfield (PL);Katowice;50.23818;19.03368
+EPKN;Opole-Kamień Śląski Airfield (PL);Kamień Śląski;50.53060;18.07928
+EPKP;Pobiednik Wielki Airfield (PL);Kraków;50.08644;20.20025
+EPKR;Krosno Airfield (PL);Krosno;49.68381;21.74095
+EPKS;Krzesiny Military Air Base (PL);Poznań;52.33170;16.96640
+EPKT;Katowice Wojciech Korfanty International Airport (PL);Katowice;50.47601;19.08070
+EPKW;Bielsko-Biała Kaniów Airfield (PL);Kaniów;49.94159;19.01957
+EPLB;Lublin Airport (PL);Lublin;51.24016;22.71346
+EPLK;Łask Air Base (PL);Łask;51.55170;19.17910
+EPLL;Łódź Władysław Reymont Airport (PL);Łódź;51.72190;19.39810
+EPLR;Lublin Radwiec Airfield (PL);;51.22190;22.39470
+EPLS;Leszno-Strzyzewice Airfield (PL);Leszno;51.83500;16.52190
+EPLU;Lubin Airfield (PL);;51.42300;16.19620
+EPLY;Leźnica Wielka Air Base (PL);Leźnica Wielka;52.00494;19.14379
+EPMB;Malbork Królewo Air Base (PL);Królewo;54.02660;19.13572
+EPMI;Miroslawiec Military Air Base (PL);Mirosławiec;53.39510;16.08280
+EPML;Mielec Airfield (PL);Mielec;50.32230;21.46210
+EPMM;Minsk Mazowiecki Military Air Base (PL);;52.19550;21.65590
+EPMO;Warsaw Modlin Airport (PL);Nowy Dwór Mazowiecki;52.45110;20.65180
+EPMR;Mirosławice Private Airfield (PL);Mirosławice;50.95780;16.77030
+EPMX;Milewo Airfield (PL);Milewo;52.66521;20.42842
+EPMY;Myślibórz-Giżyn Airfield (PL);Nowogródek Pomorski;52.94116;15.02981
+EPNA;Nadarzyce Air Base (PL);Nadarzyce;53.45488;16.48946
+EPNL;Nowy Sącz-Łososina Dolna Airfield (PL);Łososina Dolna;49.74532;20.62347
+EPNM;Nowe Miasto nad Pilicą Airfield (PL);Nowe Miasto nad Pilicą;51.62833;20.54123
+EPNT;Nowy Targ Airfield (PL);Nowy Targ;49.46280;20.05030
+EPOD;Olsztyn-Dajtki Airfield (PL);Olsztyn;53.77389;20.41347
+EPOK;Oksywie Air Base / Gdynia-Kosakowo Airfield (PL);Kosakowo;54.57970;18.51720
+EPOM;Ostrów Wielkopolski Michałków Airfield (PL);Ostrów Wielkopolski;51.70077;17.84663
+EPOP;Opole-Polska Nowa Wieś Airfield (PL);Polska Nowa Wieś;50.63330;17.78170
+EPPC;Pińczów Airfield (PL);Pińczów;50.51744;20.51676
+EPPI;Piła Airfield (PL);Piła;53.17010;16.71109
+EPPK;Poznań-Kobylnica Airfield (PL);Poznań;52.43458;17.04404
+EPPL;Płock Airfield (PL);Płock;52.56222;19.72032
+EPPO;Poznań-Ławica Airport (PL);Poznań;52.42160;16.82336
+EPPR;Pruszcz Gdański Air Base (PL);Pruszcz Gdański;54.24800;18.67160
+EPPT;Piotrków Trybunalski-Bujny Airfield (PL);Piotrków Trybunalski;51.38310;19.68830
+EPPW;Powidz Military Air Base (PL);Powidz;52.38009;17.85316
+EPRA;Warsaw Radom Airport (PL);Radom;51.38937;21.21474
+EPRD;Mazury Air Camp Airfield (PL);Radzieje;54.13437;21.59875
+EPRG;Rybnik-Gotartowice Glider Field (PL);Rybnik;50.07080;18.62830
+EPRJ;Rzeszów Sports Airfield (PL);Nowa Wieś;50.10417;22.04703
+EPRP;Radom-Piastrów Airfield (PL);Piastów;51.47890;21.11000
+EPRS;Sochaczew-Rybno (PL);Rybno;52.24279;20.12658
+EPRU;Częstochowa-Rudniki Airport (PL);Rudniki;50.88472;19.20184
+EPRZ;Rzeszów-Jasionka Airport (PL);Jasionka;50.10979;22.02416
+EPSC;Solidarity Szczecin–Goleniów Airport (PL);Szczecin(Glewice);53.58470;14.90220
+EPSD;Szczecin-Dąbie Airfield (PL);Szczecin;53.39066;14.63277
+EPSJ;Sobienie Field (PL);;51.95114;21.35253
+EPSK;Słupsk-Krȩpa Airfield (PL);Krępa Słupska;54.41004;17.09057
+EPSN;Swidwin Military Air Base (PL);;53.79060;15.82630
+EPSS;Świdnica - Krzczonów Airstrip (PL);;50.81718;16.58186
+EPST;Stalowa Wola-Turbia Airfield (PL);Zaleszany;50.62638;21.99896
+EPSU;Suwałki Airfield (PL);Suwałki;54.07280;22.89920
+EPSW;Świdnik Airfield (PL);Lublin;51.23190;22.69030
+EPSY;Olsztyn-Mazury Airport (PL);Szymany;53.48190;20.93770
+EPTM;Tomaszów Mazowiecki Military Air Base (PL);Nowy Glinnik;51.58440;20.09780
+EPTO;Toruń Airfield (PL);Toruń;53.02920;18.54590
+EPVA;Roszczep Airstrip (PL);;52.43590;21.33000
+EPWA;Warsaw Chopin Airport (PL);Warszawa;52.16570;20.96710
+EPWK;Włocławek-Kruszyn Airfield (PL);Włocławek;52.58470;19.01560
+EPWR;Copernicus Wrocław Airport (PL);Wrocław;51.10372;16.88210
+EPWS;Wrocław-Szymanów Airfield (PL);Lubięcin;51.20610;16.99860
+EPZA;Zamość-Mokre Airfield (PL);Zamość;50.70170;23.20440
+EPZB;Zborowo Airfield (PL);Zborowo;52.36206;16.63872
+EPZG;Zielona Góra-Babimost Airport (PL);Nowe Kramsko;52.13850;15.79860
+EPZI;Zieleń Airfield (PL);Zieleń;53.18850;18.96170
+EPZK;Konopnica Airfield (PL);Konopnica;51.36018;18.82206
+EPZL;Zdziar-Lopatki Airfield (PL);Zdziar Wielki;52.63547;20.07036
+EPZP;Zielona Góra-Przylep Airfield (PL);Zielona Góra;51.97890;15.46390
+EPZR;Żar Airfield (PL);Międzybrodzie  Żywieckie;49.77110;19.21810
+ETAD;Spangdahlem Air Base (DE);Trier;49.97651;6.69841
+ETAR;Ramstein Air Base (DE);Ramstein-Miesenbach;49.43690;7.60028
+ETHA;Altenstadt Army Airfield (DE);Altenstadt;47.83550;10.87120
+ETHB;Bückeburg Air Base (DE);Bückeburg;52.27850;9.08217
+ETHC;Celle Army Airfield (DE);Celle;52.59120;10.02210
+ETHE;Rheine-Bentlage Airfield (DE);;52.29120;7.38700
+ETHF;Fritzlar Army Airfield (DE);Fritzlar;51.11460;9.28600
+ETHL;Laupheim Air Base (DE);Laupheim;48.22030;9.91002
+ETHM;Mendig Airfield (DE);Mendig;50.36600;7.31533
+ETHN;Niederstetten Army Air Base (DE);Niederstetten;49.39162;9.95675
+ETHR;Roth Airfield (DE);Roth;49.21750;11.10020
+ETHS;Faßberg Air Base (DE);Faßberg;52.91940;10.18583
+ETIC;Grafenwöhr Army Air Field (DE);Grafenwöhr;49.69870;11.94020
+ETIH;Hohenfels Army Airfield (DE);Hohenfels;49.21654;11.83606
+ETIN;Kitzingen Airfield (DE);Kitzingen;49.74429;10.20731
+ETMN;Sea-Airport Cuxhaven/Nordholz / Nordholz Naval Airbase (DE);Wurster Nordseeküste;53.76769;8.65920
+ETND;Diepholz Air Base (DE);Diepholz;52.58556;8.34222
+ETNG;Geilenkirchen Air Base (DE);Geilenkirchen;50.96080;6.04242
+ETNH;Hohn Air Base (DE);Hohn;54.31220;9.53817
+ETNL;Rostock-Laage Airport (DE);Laage;53.91820;12.27830
+ETNN;Nörvenich Air Base (DE);Nörvenich;50.83120;6.65817
+ETNS;Schleswig Air Base (DE);Jagel;54.45930;9.51633
+ETNT;Wittmundhafen Air Base (DE);Wittmund;53.54780;7.66733
+ETNW;Wunstorf Air Base (DE);;52.45730;9.42717
+ETOI;Vilseck Army Air Field (DE);Vilseck;49.63408;11.76750
+ETOU;Wiesbaden Army Airfield (DE);Wiesbaden;50.04980;8.32540
+ETSB;Büchel Air Base (DE);Alflen;50.17380;7.06333
+ETSH;Holzdorf Air Base (DE);Holzdorf;51.76780;13.16770
+ETSI;Ingolstadt Manching Airport (DE);Manching;48.71570;11.53400
+ETSL;Lechfeld Air Base (DE);Graben;48.18550;10.86120
+ETSN;Neuburg Air Base (DE);Neuburg an der Donau;48.71100;11.21150
+ETWM;Meppen Air Base (DE);;52.72320;7.32633
+LOAA;Ottenschlag Airfield (AT);Ottenschlag;48.41856;15.21529
+LOAB;Dobersberg Airfield (AT);Dobersberg;48.92211;15.29683
+LOAD;Völtendorf Airfield (AT);Ober-Grafendorf;48.16008;15.58677
+LOAG;Krems/Langenlois Airfield (AT);Krems an der Donau;48.44615;15.63501
+LOAN;Wiener Neustadt East Airport (AT);Wiener Neustadt;47.84330;16.26010
+LOAR;Altlichtenwarth Gliderfield (AT);Altlichtenwarth;48.66610;16.82500
+LOAS;Spitzerberg Airfield (AT);Hundsheim;48.09916;16.93353
+LOAU;Stockerau Airfield (AT);Stockerau;48.40912;16.19102
+LOAV;Vöslau-Kottingbrunn Airfield (AT);Bad Vöslau;47.96500;16.26000
+LOGF;Fürstenfeld Airfield (AT);Fürstenfeld;47.06187;16.08390
+LOGG;Punitz-Güssing Airfield (AT);Punitz;47.14665;16.31706
+LOGI;Trieben Airfield (AT);Trieben;47.49336;14.49558
+LOGK;Kapfenberg Airfield (AT);Kapfenberg;47.45754;15.33113
+LOGL;Lanzen-Turnau Airfield (AT);Göriach;47.55615;15.32033
+LOGM;Mariazell Airfield (AT);Mariazell;47.78973;15.30033
+LOGO;Niederöblarn Airfield (AT);Niederöblarn;47.47874;14.00710
+LOGP;Pinkafeld Airfield (AT);Pinkafeld;47.38668;16.11267
+LOGT;Leoben/Timmersdorf Airfield (AT);Timmersdorf;47.37965;14.96404
+LOGW;Weiz-Unterfladnitz Airfield (AT);Weiz;47.17029;15.66447
+LOIH;Hohenems-Dornbirn Airfield (AT);Hohenems;47.38448;9.69978
+LOIJ;Sankt Johann Airfield (AT);Sankt Johann in Tirol;47.52010;12.44970
+LOIK;Kufstein-Langkampfen Airfield (AT);Langkampfen;47.56471;12.12758
+LOIR;Reutte-Höfen Airfield (AT);Reutte;47.47090;10.69130
+LOKF;Feldkirchen Airfield (AT);Feldkirchen in Kärnten;46.70893;14.07672
+LOKG;Ferlach-Glainach Airfield (AT);Ferlach;46.53278;14.33083
+LOKH;Friesach/Hirt Airfield (AT);Micheldorf;46.92749;14.43185
+LOKL;Lienz-Nikolsdorf Airfield (AT);Lengberg;46.79807;12.87833
+LOKM;Mayerhofen Airfield (AT);Mayerhofen;46.97500;14.37123
+LOKN;Nötsch im Gailtal Airfield (AT);Nötsch im Gailtal;46.58110;13.62920
+LOKR;Sankt Donat / Mairist Airfield (AT);Mairist;46.74314;14.41313
+LOKW;Wolfsberg Airfield (AT);Wolfsberg;46.81820;14.82515
+LOLC;Scharnstein Airfield (AT);Scharnstein;47.89860;13.93940
+LOLE;Eferding Airfield (AT);Pupping;48.33879;13.98521
+LOLF;Freistadt Airfield (AT);Freistadt;48.51375;14.40658
+LOLG;Sankt Georgen-Ybbsfeld Airfield (AT);Sankt Georgen am Ybbsfelde;48.10332;14.95109
+LOLH;Hofkirchen Airfield (AT);Hofkirchen;48.13911;14.33584
+LOLK;Ried-Kirchheim Airfield (AT);Kirchheim im Innkreis;48.21227;13.34568
+LOLM;Micheldorf Airfield (AT);Micheldorf;47.87167;14.12515
+LOLO;Linz-East Glider Field (AT);Linz;48.30004;14.33361
+LOLS;Schärding-Suben Airfield (AT);Suben;48.40330;13.44830
+LOLT;Flugplatz Seitenstetten (AT);Seitenstetten;48.05056;14.66194
+LOLU;Gmunden-Laakirchen Airfield (AT);Laakirchen;47.95154;13.86727
+LOLW;Wels Airfield (AT);Wels;48.18251;14.03928
+LOSM;Mauterndorf Airfield (AT);Mauterndorf;47.13200;13.69587
+LOWG;Graz Airport (AT);Feldkirchen bei Graz;46.99110;15.43960
+LOWI;Innsbruck Airport (AT);Innsbruck;47.26020;11.34400
+LOWK;Klagenfurt Airport (AT);Klagenfurt am Wörthersee;46.64250;14.33770
+LOWL;Linz-Hörsching Airport (AT);Linz;48.23536;14.18813
+LOWS;Salzburg Airport (AT);Salzburg;47.79330;13.00430
+LOWW;Vienna International Airport (AT);Wien;48.11030;16.56970
+LOWZ;Zell am See Airfield (AT);Zell am See;47.29147;12.79063
+LOXA;Fiala-Fernbrugg Air Base (AT);Aigen im Ennstal;47.53573;14.14149
+LOXN;Wiener Neustadt West Airport (AT);Wiener Neustadt;47.83693;16.22184
+LOXT;Brumowski  Air Base (AT);Tulln an der Donau;48.31925;16.11402
+LOXZ;Hinterstoisser Air Base (AT);Zeltweg;47.20280;14.74420
+LSKV;Kvetoslavov Airfield (SK);Kvetoslavov;48.04507;17.34963
+LZBD;Bidovce Airfield (SK);Bidovce;48.74319;21.44821
+LZDB;Slávnica-Dubnica nad Váhom Airfield (SK);Dubnica nad Váhom;48.99690;18.19220
+LZDV;Dubová Airstrip (SK);Dubová;48.34702;17.35658
+LZHL;Holič Airfield (SK);Holič;48.81030;17.13380
+LZIB;M. R. Štefánik Airport (SK);Bratislava;48.17020;17.21270
+LZJS;Jasná Airfield (SK);Dúbrava;49.04794;19.50679
+LZKC;Kamenica nad Cirochou Airfield (SK);Kamenica nad Cirochou;48.93624;21.99420
+LZKZ;Košice International Airport (SK);Košice;48.66310;21.24110
+LZLU;Lučenec Airfield (SK);Lučenec;48.33940;19.73580
+LZMA;Martin Airfield (SK);Martin;49.06530;18.95080
+LZMC;Malacky/Kuchyňa Air Base (SK);Kuchyňa;48.40200;17.11840
+LZNI;Nitra Airfield (SK);Nitra;48.27940;18.13280
+LZNZ;Nové Zámky Airfield (SK);Nové Zámky;47.96194;18.18444
+LZOC;Očová Airfield (SK);Očová;48.59533;19.26581
+LZPE;Prievidza Airfield (SK);Prievidza;48.76610;18.58670
+LZPP;Piešťany Airport (SK);Piešťany;48.62520;17.82840
+LZPT;Male Bielice-Partizánske Airfield (SK);Partizánske;48.61920;18.32970
+LZPW;Prešov Air Base (SK);Prešov;49.02970;21.31560
+LZRU;Ružomberok Airfield (SK);Ružomberok;49.08548;19.36858
+LZRY;Ražňany Airfield (SK);Ražňany;49.07806;21.09972
+LZSE;Senica Airfield (SK);Hlboké;48.65793;17.32946
+LZSK;Svidník Airfield (SK);Svidník;49.33390;21.57030
+LZSL;Sliač Airport (SK);Sliač;48.63780;19.13410
+LZSV;Spišská Nová Ves Airfield (SK);Spišská Nová Ves;48.94083;20.53389
+LZSY;Šurany Airfield (SK);Šurany;48.07597;18.11400
+LZTN;Trenčín Airfield (SK);Trenčín;48.86517;18.00015
+LZTR;Trnava Airfield (SK);Boleráz;48.45196;17.53182
+LZTT;Poprad-Tatry Airport (SK);Poprad;49.07099;20.24139
+LZZI;Žilina-Dolný Hričov Airport (SK);Dolný Hričov;49.23329;18.61339

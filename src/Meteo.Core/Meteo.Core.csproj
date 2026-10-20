@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Společné jádro: žádná závislost na OS ani na UI. Použitelné z WPF, Avalonie i konzole. -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>Meteo.Core</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Data\airports.csv" LogicalName="airports.csv" />
+  </ItemGroup>
+
+</Project>
