@@ -2,10 +2,11 @@ using System.Globalization;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Meteo.Core;
 
-namespace Meteo.Wpf;
+namespace Meteo.Windows;
 
 /// <summary>
 /// Celá obrazovka šetřiče kreslená ručně do DrawingContextu: hlavička, meteogram (teplota, srážky, vítr se šipkami, tlak,
@@ -21,6 +22,15 @@ public sealed class Dashboard : FrameworkElement
     private readonly DispatcherTimer _clock;
 
     private DashboardState? _state;
+
+    // radar
+    private readonly DispatcherTimer _radarTimer;
+    private IReadOnlyList<RadarFrameImage> _radar = [];
+    private int _radarIndex;
+    private int _radarHold;
+    private bool _radarVisible;
+    private MapData? _map;
+    private (Rect Rect, StreamGeometry Borders, StreamGeometry Regions)? _mapCache;
     private double _ppd = 1.0;   // pixelů na DIP
     private int _scale = 1;      // celočíselné zvětšení buňky 8x16
 
@@ -39,8 +49,31 @@ public sealed class Dashboard : FrameworkElement
 
         _clock = new DispatcherTimer { Interval = TimeSpan.FromSeconds(20) };
         _clock.Tick += (_, _) => InvalidateVisual();
-        Loaded += (_, _) => _clock.Start();
-        Unloaded += (_, _) => _clock.Stop();
+        _radarTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(450) };
+        _radarTimer.Tick += OnRadarTick;
+
+        Loaded += (_, _) => { _clock.Start(); _radarTimer.Start(); };
+        Unloaded += (_, _) => { _clock.Stop(); _radarTimer.Stop(); };
+    }
+
+    public void SetRadar(IReadOnlyList<RadarFrameImage> frames)
+    {
+        _radar = frames;
+        // Nové snímky: začni od prvního; po načtení se rovnou přehrává.
+        _radarIndex = 0;
+        _radarHold = 0;
+        InvalidateVisual();
+    }
+
+    private void OnRadarTick(object? sender, EventArgs e)
+    {
+        if (!_radarVisible || _radar.Count < 2) return;
+        if (_radarHold > 0) { _radarHold--; return; }
+
+        _radarIndex++;
+        if (_radarIndex >= _radar.Count) _radarIndex = 0;
+        if (_radarIndex == _radar.Count - 1) _radarHold = 5;   // na posledním snímku chvíli počkej
+        InvalidateVisual();
     }
 
     public void SetState(DashboardState state)
@@ -176,7 +209,7 @@ public sealed class Dashboard : FrameworkElement
 
         DrawMeteogram(dc, meteo, fc);
         DrawInfo(dc, info, fc, landscape);
-        if (_settings.ShowFlymet) DrawFlymet(dc, fly, st.Flymet);
+        DrawLower(dc, fly, st, landscape);
     }
 
     // ------------------------------------------------------------------ hlavička a patička
@@ -205,6 +238,7 @@ public sealed class Dashboard : FrameworkElement
         var ly = Mid(y + 1 / _ppd);
         dc.DrawLine(MakePen(Vga.DarkGray), new Point(ox, ly), new Point(ox + cols * CW, ly));
         var text = " Zdroj: model ALADIN (ČHMÚ) přes Open-Meteo.com, CC BY 4.0" +
+                   (_settings.ShowRadar ? " · radar ČHMÚ" : "") +
                    (_settings.ShowFlymet ? " · Flymet / Meteopress" : "");
         Text(dc, text, ox, y, Vga.DarkGray);
     }
@@ -259,22 +293,31 @@ public sealed class Dashboard : FrameworkElement
         // --- rozdělení výšky mezi panely
         var firstRow = 4;
         var rem = rows - firstRow;
-        int[] weights = [3, 2, 3, 2];
-        var heights = weights.Select(wt => rem * wt / 10).ToArray();
+
+        // Oblačnost (tři křivky) se přidá jen tehdy, když je pro pět panelů dost řádků.
+        var withCloud = rem >= 32;
+        var iCloud = withCloud ? 1 : -1;
+        var iPrecip = withCloud ? 2 : 1;
+        var iWind = withCloud ? 3 : 2;
+        var iPressure = withCloud ? 4 : 3;
+        var panelCount = withCloud ? 5 : 4;
+
+        int[] weights = withCloud ? [3, 2, 2, 3, 2] : [3, 2, 3, 2];
+        var heights = weights.Select(wt => rem * wt / weights.Sum()).ToArray();
         heights[0] += rem - heights.Sum();
 
         var rowStart = firstRow;
-        var panelTops = new double[4];
-        var plots = new Rect[4];
-        for (var p = 0; p < 4; p++)
+        var panelTops = new double[panelCount];
+        var plots = new Rect[panelCount];
+        for (var p = 0; p < panelCount; p++)
         {
             panelTops[p] = RowY(rowStart);
-            var reserve = p == 2 ? 1.5 : 0.5;                   // vítr: místo pro řádek šipek
+            var reserve = p == iWind ? 1.5 : 0.5;               // vítr: místo pro řádek šipek
             var plotH = (heights[p] - 1 - reserve) * ch;
             plots[p] = new Rect(left, panelTops[p] + ch, right - left, Math.Max(plotH, ch * 2));
             rowStart += heights[p];
         }
-        var lastBottom = plots[3].Bottom;
+        var lastBottom = plots[panelCount - 1].Bottom;
 
         // --- panel 1: teplota
         {
@@ -303,14 +346,38 @@ public sealed class Dashboard : FrameworkElement
             }
         }
 
+        // --- panel: oblačnost – nízká, střední a vysoká zvlášť
+        if (withCloud)
+        {
+            var plot = plots[iCloud];
+            DrawPanelBackground(dc, plot, hs, n, X, 0, 100, 50, dark, dotted, axis, zeroLine: false);
+
+            var tx = TextAdvance(dc, "Oblačnost % ", left, panelTops[iCloud], Vga.Gray);
+            tx = TextAdvance(dc, "nízká ", tx, panelTops[iCloud], Vga.White);
+            tx = TextAdvance(dc, "střední ", tx, panelTops[iCloud], Vga.LightBlue);
+            TextAdvance(dc, "vysoká", tx, panelTops[iCloud], Vga.LightCyan);
+
+            var any = hs.CloudLow.Concat(hs.CloudMid).Concat(hs.CloudHigh).Any(v => !double.IsNaN(v));
+            if (any)
+            {
+                DrawSeries(dc, MakePen(Vga.LightCyan), hs.CloudHigh, plot, 0, 100, X);
+                DrawSeries(dc, MakePen(Vga.LightBlue), hs.CloudMid, plot, 0, 100, X);
+                DrawSeries(dc, MakePen(Vga.White, 2), hs.CloudLow, plot, 0, 100, X);
+            }
+            else
+            {
+                Text(dc, "bez dat (doplní se při příštím stažení)", plot.Left + plot.Width / 2, plot.Top + plot.Height / 2 - ch / 2, Vga.DarkGray, TextAlignment.Center);
+            }
+        }
+
         // --- panel 2: srážky
         {
-            var plot = plots[1];
+            var plot = plots[iPrecip];
             var (_, pmaxRaw) = WeatherMath.Range(hs.Precipitation);
             var sc = WeatherMath.NiceScale(0, Math.Max(1.0, double.IsNaN(pmaxRaw) ? 1.0 : pmaxRaw), Math.Max(2, (int)(plot.Height / (ch * 2.2)) + 1));
             DrawPanelBackground(dc, plot, hs, n, X, sc.Min, sc.Max, sc.Step, dark, dotted, axis, zeroLine: false);
-            var tx = TextAdvance(dc, "Srážky mm/h ", left, panelTops[1], Vga.LightCyan);
-            TextAdvance(dc, "sníh", tx, panelTops[1], Vga.White);
+            var tx = TextAdvance(dc, "Srážky mm/h ", left, panelTops[iPrecip], Vga.LightCyan);
+            TextAdvance(dc, "sníh", tx, panelTops[iPrecip], Vga.White);
 
             for (var i = 0; i < n; i++)
             {
@@ -328,15 +395,15 @@ public sealed class Dashboard : FrameworkElement
 
         // --- panel 3: vítr
         {
-            var plot = plots[2];
+            var plot = plots[iWind];
             var (_, gmaxRaw) = WeatherMath.Range(hs.WindGusts.Concat(hs.WindSpeed));
             var sc = WeatherMath.NiceScale(0, Math.Max(10, double.IsNaN(gmaxRaw) ? 10 : gmaxRaw), Math.Max(3, (int)(plot.Height / (ch * 2.2)) + 1));
             DrawPanelBackground(dc, plot, hs, n, X, sc.Min, sc.Max, sc.Step, dark, dotted, axis, zeroLine: false);
 
-            var tx = TextAdvance(dc, "Vítr m/s ", left, panelTops[2], Vga.LightGreen);
-            tx = TextAdvance(dc, "rychlost ", tx, panelTops[2], Vga.LightGreen);
-            tx = TextAdvance(dc, "nárazy ", tx, panelTops[2], Vga.Yellow);
-            TextAdvance(dc, "šipka = kam vane", tx, panelTops[2], Vga.Gray);
+            var tx = TextAdvance(dc, "Vítr m/s ", left, panelTops[iWind], Vga.LightGreen);
+            tx = TextAdvance(dc, "rychlost ", tx, panelTops[iWind], Vga.LightGreen);
+            tx = TextAdvance(dc, "nárazy ", tx, panelTops[iWind], Vga.Yellow);
+            TextAdvance(dc, "šipka = kam vane", tx, panelTops[iWind], Vga.Gray);
 
             DrawSeries(dc, MakePen(Vga.Yellow), hs.WindGusts, plot, sc.Min, sc.Max, X);
             DrawSeries(dc, MakePen(Vga.LightGreen, 2), hs.WindSpeed, plot, sc.Min, sc.Max, X);
@@ -355,12 +422,12 @@ public sealed class Dashboard : FrameworkElement
 
         // --- panel 4: tlak
         {
-            var plot = plots[3];
+            var plot = plots[iPressure];
             var (lo, hi) = WeatherMath.Range(hs.Pressure);
             if (!double.IsNaN(lo) && hi - lo < 6) { var m = (lo + hi) / 2; lo = m - 3; hi = m + 3; }
             var sc = WeatherMath.NiceScale(lo, hi, Math.Max(2, (int)(plot.Height / (ch * 2.2)) + 1));
             DrawPanelBackground(dc, plot, hs, n, X, sc.Min, sc.Max, sc.Step, dark, dotted, axis, zeroLine: false);
-            TextAdvance(dc, "Tlak hPa (hladina moře)", left, panelTops[3], Vga.LightMagenta);
+            TextAdvance(dc, "Tlak hPa (hladina moře)", left, panelTops[iPressure], Vga.LightMagenta);
             DrawSeries(dc, MakePen(Vga.LightMagenta, 2), hs.Pressure, plot, sc.Min, sc.Max, X);
         }
 
@@ -518,6 +585,179 @@ public sealed class Dashboard : FrameworkElement
         Row("Nárazy m/s", k => (F(d.GustMax[k], "0"), WindBrush(d.GustMax[k])));
         Row("Východ", k => (d.Sunrise[k]?.ToString("HH:mm", Cs) ?? "-", Vga.Brown));
         Row("Západ", k => (d.Sunset[k]?.ToString("HH:mm", Cs) ?? "-", Vga.Brown));
+    }
+
+    // ------------------------------------------------------------------ spodní část: radar + Flymet
+
+    // Zobrazený výřez radaru = oblast, kam až sahají data (zbytek PNG je prázdný).
+    private const double RadarViewLonMax = 19.624, RadarViewLatMax = 51.458;
+
+    private static (double U0, double V0, double W, double H) RadarView()
+    {
+        var (u0, v0) = RadarGeo.ToUnit(RadarViewLatMax, RadarGeo.LonMin);
+        var (u1, v1) = RadarGeo.ToUnit(RadarGeo.LatMin, RadarViewLonMax);
+        return (u0, v0, u1 - u0, v1 - v0);
+    }
+
+    /// <summary>Poměr šířky k výšce zobrazeného výřezu radaru.</summary>
+    private static double RadarAspect
+    {
+        get
+        {
+            var v = RadarView();
+            return v.W * RadarGeo.Aspect / v.H;
+        }
+    }
+
+    private void DrawLower(DrawingContext dc, Rect r, DashboardState st, bool landscape)
+    {
+        _radarVisible = false;
+        var radarOn = _settings.ShowRadar;
+        var flyOn = _settings.ShowFlymet;
+        if (r.Width < 100 || r.Height < CH * 4) return;
+        if (!radarOn && !flyOn) return;
+        if (!radarOn) { DrawFlymet(dc, r, st.Flymet); return; }
+        if (!flyOn) { DrawRadar(dc, r, st); return; }
+
+        double cw = CW, ch = CH;
+        if (landscape)
+        {
+            // radar nahoře přes celou šířku, Flymet pod ním, je-li místo; jinak se střídají
+            var need = r.Width / RadarAspect + 2 * ch;
+            if (r.Height >= need + 8 * ch)
+            {
+                DrawRadar(dc, new Rect(r.Left, r.Top, r.Width, need), st);
+                var fy = r.Top + need + ch;
+                DrawFlymet(dc, new Rect(r.Left, fy, r.Width, Math.Max(0, r.Bottom - fy)), st.Flymet);
+            }
+            else
+            {
+                // 30 s radar, 15 s Flymet (chybí-li jedno z nich, zobrazí se jen druhé)
+                var slot = (DateTime.UtcNow.Ticks / TimeSpan.TicksPerSecond) % 45;
+                var showRadar = _radar.Count > 0 && (slot < 30 || st.Flymet is null);
+                if (showRadar) DrawRadar(dc, r, st);
+                else DrawFlymet(dc, r, st.Flymet);
+            }
+        }
+        else
+        {
+            // na výšku vedle sebe: vlevo radar, vpravo Flymet
+            var rw = Math.Floor(r.Width * 0.5 / cw) * cw;
+            DrawRadar(dc, new Rect(r.Left, r.Top, rw, r.Height), st);
+            DrawFlymet(dc, new Rect(r.Left + rw + cw, r.Top, Math.Max(0, r.Width - rw - cw), r.Height), st.Flymet);
+        }
+    }
+
+    private void DrawRadar(DrawingContext dc, Rect r, DashboardState st)
+    {
+        double cw = CW, ch = CH;
+        if (r.Width < 24 * cw || r.Height < 8 * ch) return;
+
+        var frames = _radar;
+        Text(dc, "RADAR ČHMÚ", r.Left, r.Top, Vga.White);
+        Text(dc, "max. odrazivost", r.Right, r.Top, Vga.DarkGray, TextAlignment.Right);
+
+        if (frames.Count == 0)
+        {
+            Text(dc, "Čekám na radarové snímky…", r.Left, r.Top + ch, Vga.DarkGray);
+            return;
+        }
+        _radarVisible = true;
+        if (_radarIndex >= frames.Count) _radarIndex = 0;
+        var frame = frames[_radarIndex];
+
+        // --- mapa se zachovaným poměrem stran
+        var area = new Rect(r.Left, r.Top + ch, r.Width, r.Height - 2 * ch);
+        var aspect = RadarAspect;
+        var mh = Math.Min(area.Height, area.Width / aspect);
+        var mw = mh * aspect;
+        var map = new Rect(Snap(area.Left), Snap(area.Top), Snap(mw), Snap(mh));
+
+        var view = RadarView();
+        var fullW = map.Width / view.W;
+        var fullH = map.Height / view.H;
+        var img = new Rect(map.Left - view.U0 * fullW, map.Top - view.V0 * fullH, fullW, fullH);
+
+        Point Project(double lat, double lon)
+        {
+            var (ux, uy) = RadarGeo.ToUnit(lat, lon);
+            return new Point(img.Left + ux * img.Width, img.Top + uy * img.Height);
+        }
+
+        _map ??= MapData.Load();
+        if (_mapCache is null || _mapCache.Value.Rect != img)
+            _mapCache = (img, BuildLines(_map.Borders, Project), BuildLines(_map.Regions, Project));
+        var cache = _mapCache.Value;
+
+        dc.DrawRectangle(Vga.Black, MakePen(Vga.DarkGray), new Rect(map.Left - 1 / _ppd, map.Top - 1 / _ppd, map.Width + 2 / _ppd, map.Height + 2 / _ppd));
+        dc.PushClip(new RectangleGeometry(map));
+
+        dc.DrawGeometry(null, MakePen(Vga.DarkGray, 1, true), cache.Regions);
+        dc.DrawImage(frame.Image, img);
+        dc.DrawGeometry(null, MakePen(Vga.Gray), cache.Borders);
+
+        // orientační města (názvy jen na větší mapě, aby se nepřekrývaly)
+        var names = map.Width >= 520;
+        foreach (var c in RadarGeo.Cities)
+        {
+            if (!RadarGeo.IsInside(c.Lat, c.Lon)) continue;
+            var pt = Project(c.Lat, c.Lon);
+            if (!map.Contains(pt)) continue;
+            dc.DrawRectangle(Vga.DarkGray, null, new Rect(Snap(pt.X) - 1 / _ppd, Snap(pt.Y) - 1 / _ppd, 3 / _ppd, 3 / _ppd));
+            if (names) Text(dc, c.Name, pt.X + 4 / _ppd, pt.Y - ch / 2, Vga.DarkGray);
+        }
+
+        // právě zobrazené místo: křížek a kód
+        var here = Project(st.Place.Latitude, st.Place.Longitude);
+        if (map.Contains(here))
+        {
+            var pen = MakePen(Vga.Yellow);
+            var a = 6 / _ppd;
+            dc.DrawLine(pen, new Point(Mid(here.X) - a, Mid(here.Y)), new Point(Mid(here.X) + a, Mid(here.Y)));
+            dc.DrawLine(pen, new Point(Mid(here.X), Mid(here.Y) - a), new Point(Mid(here.X), Mid(here.Y) + a));
+            var label = st.Place.Code.Length > 0 ? st.Place.Code : st.Place.Name;
+            var lx = here.X + 8 / _ppd;
+            if (lx + label.Length * cw > map.Right) lx = here.X - 8 / _ppd - label.Length * cw;
+            Text(dc, label, lx, Math.Clamp(here.Y - ch / 2, map.Top, map.Bottom - ch), Vga.Yellow);
+        }
+        dc.Pop();
+
+        // --- čas snímku a ukazatel průběhu
+        var local = frame.TimeUtc.ToLocalTime();
+        var caption = frame.IsForecast
+            ? $"{local:HH:mm}  extrapolace +{frame.LeadMinutes} min"
+            : $"{local:HH:mm}  měření";
+        var y = map.Bottom + 2 / _ppd;
+        Text(dc, caption, map.Left, y, frame.IsForecast ? Vga.LightCyan : Vga.Yellow);
+
+        var count = frames.Count;
+        var barW = Math.Min(map.Width * 0.45, count * 8 / _ppd);
+        var tickW = barW / count;
+        var bx = map.Right - barW;
+        for (var i = 0; i < count; i++)
+        {
+            var brush = i == _radarIndex ? Vga.White : frames[i].IsForecast ? Vga.Cyan : Vga.DarkGray;
+            dc.DrawRectangle(brush, null, new Rect(Snap(bx + i * tickW), Snap(y + 3 / _ppd), Math.Max(1 / _ppd, Snap(tickW) - 2 / _ppd), Snap(ch * 0.6)));
+        }
+    }
+
+    private StreamGeometry BuildLines(IReadOnlyList<GeoPoint[]> lines, Func<double, double, Point> project)
+    {
+        var g = new StreamGeometry();
+        using (var ctx = g.Open())
+        {
+            foreach (var line in lines)
+            {
+                for (var i = 0; i < line.Length; i++)
+                {
+                    var p = project(line[i].Lat, line[i].Lon);
+                    if (i == 0) ctx.BeginFigure(p, false, false);
+                    else ctx.LineTo(p, true, false);
+                }
+            }
+        }
+        g.Freeze();
+        return g;
     }
 
     // ------------------------------------------------------------------ Flymet

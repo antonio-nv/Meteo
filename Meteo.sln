@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meteo.Core", "src\Meteo.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meteo.Windows", "src\Meteo.Windows\Meteo.Windows.csproj", "{5B5174F4-B346-4D5B-BB20-9BB65F7783B6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Meteo.Wpf", "src\Meteo.Wpf\Meteo.Wpf.csproj", "{1E128ACE-5B8D-4792-A085-72116231DDAE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,10 +22,6 @@ Global
 		{DB4836D6-E964-4ED5-84EF-33400DA89CD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB4836D6-E964-4ED5-84EF-33400DA89CD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB4836D6-E964-4ED5-84EF-33400DA89CD4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1E128ACE-5B8D-4792-A085-72116231DDAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1E128ACE-5B8D-4792-A085-72116231DDAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1E128ACE-5B8D-4792-A085-72116231DDAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1E128ACE-5B8D-4792-A085-72116231DDAE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5B5174F4-B346-4D5B-BB20-9BB65F7783B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5B5174F4-B346-4D5B-BB20-9BB65F7783B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B5174F4-B346-4D5B-BB20-9BB65F7783B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -36,6 +30,5 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{DB4836D6-E964-4ED5-84EF-33400DA89CD4} = {024A5464-882F-4A42-9ECF-5521C579813E}
 		{5B5174F4-B346-4D5B-BB20-9BB65F7783B6} = {024A5464-882F-4A42-9ECF-5521C579813E}
-		{1E128ACE-5B8D-4792-A085-72116231DDAE} = {024A5464-882F-4A42-9ECF-5521C579813E}
 	EndGlobalSection
 EndGlobal

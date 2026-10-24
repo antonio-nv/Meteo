@@ -9,7 +9,7 @@ public sealed record Place(string Code, string Name, double Latitude, double Lon
     /// <summary>Klíč uložený v nastavení: ICAO kód, jinak název.</summary>
     public string Key => Code.Length > 0 ? Code : Name;
 
-    /// <summary>Popisek: "LKPR Václav Havel Airport Prague" nebo "Přibyslav".</summary>
+    /// <summary>Popisek: "LKPR Praha-Ruzyně Airport" nebo "Přibyslav".</summary>
     public string Title => Code.Length > 0 ? Code + " " + Name : Name;
 
     public string FlymetName => Locality.Length > 0 ? Locality : Name;
@@ -25,6 +25,10 @@ public sealed class HourlySeries
     public double[] Precipitation { get; init; } = [];
     public double[] Snowfall { get; init; } = [];
     public double[] CloudCover { get; init; } = [];
+    /// <summary>Oblačnost v nízkých / středních / vysokých hladinách, %.</summary>
+    public double[] CloudLow { get; init; } = [];
+    public double[] CloudMid { get; init; } = [];
+    public double[] CloudHigh { get; init; } = [];
     public double[] Pressure { get; init; } = [];
     /// <summary>Rychlost větru ve 10 m, m/s.</summary>
     public double[] WindSpeed { get; init; } = [];

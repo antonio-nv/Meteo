@@ -1,8 +1,7 @@
 using System.Windows;
 using Meteo.Core;
-using Meteo.Windows;
 
-namespace Meteo.Wpf;
+namespace Meteo.Windows;
 
 public static class Program
 {
@@ -52,12 +51,14 @@ public static class Program
 
             var dash = new Dashboard(services.Settings, family);
             host.Updated += dash.SetState;
+            host.RadarUpdated += dash.SetRadar;
             new FullscreenWindow(services, host, dash, provider, target).Show();
         }
         else if (parsed.Mode == ScreensaverMode.Windowed)
         {
             var dash = new Dashboard(services.Settings, family) { Width = parsed.Width, Height = parsed.Height };
             host.Updated += dash.SetState;
+            host.RadarUpdated += dash.SetRadar;
             new ScreensaverWindow(dash, null, windowed: true).Show();
         }
         else
@@ -69,6 +70,7 @@ public static class Program
                 {
                     dash = new Dashboard(services.Settings, family);
                     host.Updated += dash.SetState;
+                    host.RadarUpdated += dash.SetRadar;
                 }
                 new ScreensaverWindow(dash, screen, windowed: false).Show();
             }

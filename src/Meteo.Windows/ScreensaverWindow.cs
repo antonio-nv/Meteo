@@ -3,9 +3,8 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using Meteo.Core;
-using Meteo.Windows;
 
-namespace Meteo.Wpf;
+namespace Meteo.Windows;
 
 /// <summary>Okno přes celý monitor (nebo ladicí okno). Zavře se klávesou, kliknutím nebo pohybem myši.</summary>
 public sealed class ScreensaverWindow : Window

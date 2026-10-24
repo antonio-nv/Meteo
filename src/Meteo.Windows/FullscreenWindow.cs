@@ -3,10 +3,9 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using Meteo.Core;
-using Meteo.Windows;
 using Microsoft.Win32;
 
-namespace Meteo.Wpf;
+namespace Meteo.Windows;
 
 /// <summary>
 /// Samostatné okno přes jeden monitor (spuštění Meteo.exe). Není to šetřič:

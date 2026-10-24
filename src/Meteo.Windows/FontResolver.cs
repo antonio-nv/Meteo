@@ -1,6 +1,6 @@
 using System.Windows.Media;
 
-namespace Meteo.Wpf;
+namespace Meteo.Windows;
 
 /// <summary>
 /// Výběr neproporcionálního písma: 1) nainstalovaný PxPlus IBM VGA, 2) soubor .ttf ve složce "fonts"

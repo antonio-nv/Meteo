@@ -28,6 +28,15 @@ public sealed class AppSettings
     /// <summary>Zobrazit i meteogram Flymet (Meteopress), pokud pro dané město existuje.</summary>
     public bool ShowFlymet { get; set; } = true;
 
+    /// <summary>Zobrazit animaci srážkového radaru ČHMÚ.</summary>
+    public bool ShowRadar { get; set; } = true;
+
+    /// <summary>Kolik hodin zpět se v animaci radaru přehrává (snímky po 10 minutách).</summary>
+    public int RadarHours { get; set; } = 2;
+
+    /// <summary>K radaru přidat extrapolaci ČHMÚ na dalších 60 minut.</summary>
+    public bool RadarForecast { get; set; } = true;
+
     /// <summary>Ručně zadané názvy souborů Flymet podle klíče místa, např. { "LKPI": "PRIBYSLAV" }.</summary>
     public Dictionary<string, string> FlymetSlugs { get; set; } = new();
 

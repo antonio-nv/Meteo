@@ -1,6 +1,6 @@
 using System.Windows.Media;
 
-namespace Meteo.Wpf;
+namespace Meteo.Windows;
 
 /// <summary>Standardní 16barevná paleta VGA – drží vzhled v duchu fontu IBM VGA.</summary>
 internal static class Vga

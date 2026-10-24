@@ -3,7 +3,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Meteo.Core;
 
-namespace Meteo.Wpf;
+namespace Meteo.Windows;
 
 /// <summary>Co se má právě zobrazit.</summary>
 public sealed class DashboardState
@@ -16,6 +16,9 @@ public sealed class DashboardState
     public bool IsStale { get; init; }
 }
 
+/// <summary>Snímek radaru připravený k vykreslení.</summary>
+public sealed record RadarFrameImage(DateTime TimeUtc, bool IsForecast, int LeadMinutes, BitmapSource Image);
+
 /// <summary>Střídá místa, stahuje data na pozadí a hlásí hotový stav všem oknům (monitorům).</summary>
 internal sealed class DashboardHost
 {
@@ -27,6 +30,13 @@ internal sealed class DashboardHost
     public DashboardState? Current { get; private set; }
     public event Action<DashboardState>? Updated;
 
+    // Radar je společný pro všechna místa a obnovuje se po 5 minutách (tolik trvá nový snímek).
+    private readonly DispatcherTimer _radarTimer = new() { Interval = TimeSpan.FromMinutes(5) };
+    private readonly Dictionary<string, BitmapSource> _decoded = new();
+    private bool _radarBusy;
+    public IReadOnlyList<RadarFrameImage> CurrentRadar { get; private set; } = [];
+    public event Action<IReadOnlyList<RadarFrameImage>>? RadarUpdated;
+
     public DashboardHost(AppServices services) => _s = services;
 
     public void Start()
@@ -35,6 +45,49 @@ internal sealed class DashboardHost
         _timer.Tick += async (_, _) => await ShowAsync(1);
         _timer.Start();
         _ = ShowAsync(1);
+
+        _radarTimer.Tick += async (_, _) => await RefreshRadarAsync();
+        _radarTimer.Start();
+        _ = RefreshRadarAsync();
+    }
+
+    private async Task RefreshRadarAsync()
+    {
+        if (!_s.Settings.ShowRadar || _radarBusy) return;
+        _radarBusy = true;
+        try
+        {
+            var frames = await _s.Radar.GetFramesAsync(
+                _s.Settings.RadarHours, DateTime.UtcNow, CancellationToken.None, _s.Settings.RadarForecast);
+
+            var list = new List<RadarFrameImage>();
+            var keep = new HashSet<string>();
+            foreach (var f in frames)
+            {
+                keep.Add(f.FilePath);
+                if (!_decoded.TryGetValue(f.FilePath, out var image))
+                {
+                    try { image = Decode(File.ReadAllBytes(f.FilePath)); }
+                    catch (IOException) { image = null; }
+                    if (image is null) continue;
+                    _decoded[f.FilePath] = image;
+                }
+                list.Add(new RadarFrameImage(f.TimeUtc, f.IsForecast, f.LeadMinutes, image));
+            }
+            foreach (var old in _decoded.Keys.Where(k => !keep.Contains(k)).ToList()) _decoded.Remove(old);
+
+            if (list.Count == 0) return;
+            CurrentRadar = list;
+            RadarUpdated?.Invoke(list);
+        }
+        catch (Exception ex)
+        {
+            _s.Log(ex);
+        }
+        finally
+        {
+            _radarBusy = false;
+        }
     }
 
     /// <summary>Ručně: další místo (a časovač střídání začne znovu).</summary>

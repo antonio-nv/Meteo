@@ -1,8 +1,7 @@
 using System.Net.Http;
 using Meteo.Core;
-using Meteo.Windows;
 
-namespace Meteo.Wpf;
+namespace Meteo.Windows;
 
 /// <summary>Jednoduchý kontejner služeb (bez DI frameworku – aplikace je malá).</summary>
 internal sealed class AppServices
@@ -12,6 +11,7 @@ internal sealed class AppServices
     public required PlaceCatalog Catalog { get; init; }
     public required ForecastService Forecasts { get; init; }
     public required FlymetClient Flymet { get; init; }
+    public required RadarClient Radar { get; init; }
     public required GeocodingClient Geocoding { get; init; }
 
     public string DataDir => Store.DataDirectory;
@@ -31,6 +31,7 @@ internal sealed class AppServices
             Catalog = new PlaceCatalog(settings),
             Forecasts = new ForecastService(new OpenMeteoClient(http), store.DataDirectory),
             Flymet = new FlymetClient(http, store.DataDirectory),
+            Radar = new RadarClient(http, store.DataDirectory),
             Geocoding = new GeocodingClient(http),
         };
     }

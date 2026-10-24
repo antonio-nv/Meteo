@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Meteo.Core;
 
-namespace Meteo.Wpf;
+namespace Meteo.Windows;
 
 /// <summary>Nastavení (/c): seznam míst ke střídání (ICAO kódy, obce, souřadnice), interval, měřítko, font.</summary>
 internal sealed class SettingsWindow : Window
@@ -17,6 +17,9 @@ internal sealed class SettingsWindow : Window
     private readonly TextBox _scale = new() { Width = 70 };
     private readonly TextBox _font = new() { Width = 220 };
     private readonly CheckBox _flymet = new() { Content = "Zobrazit meteogram Flymet (pokud pro místo existuje)" };
+    private readonly CheckBox _radar = new() { Content = "Zobrazit srážkový radar ČHMÚ (animace)" };
+    private readonly CheckBox _radarFc = new() { Content = "K radaru přidat extrapolaci na dalších 60 minut" };
+    private readonly TextBox _radarHours = new() { Width = 70 };
     private readonly CheckBox _allMonitors = new() { Content = "Stejný obsah na všech monitorech (jinak jsou ostatní černé)" };
     private readonly CheckBox _ascii = new() { Content = "Pouze ASCII (náhrada diakritiky, pokud ji font nemá)" };
     private readonly TextBlock _status = new() { Margin = new Thickness(0, 4, 0, 0), TextWrapping = TextWrapping.Wrap };
@@ -26,7 +29,7 @@ internal sealed class SettingsWindow : Window
         _s = services;
         Title = "Meteo – nastavení";
         Width = 600;
-        Height = 740;
+        Height = 820;
         WindowStartupLocation = WindowStartupLocation.CenterScreen;
         FontFamily = new System.Windows.Media.FontFamily("Segoe UI");
 
@@ -70,13 +73,17 @@ internal sealed class SettingsWindow : Window
         _font.Text = _s.Settings.FontFamily;
         _flymet.IsChecked = _s.Settings.ShowFlymet;
         _allMonitors.IsChecked = _s.Settings.AllMonitors;
+        _radar.IsChecked = _s.Settings.ShowRadar;
+        _radarFc.IsChecked = _s.Settings.RadarForecast;
+        _radarHours.Text = _s.Settings.RadarHours.ToString(CultureInfo.InvariantCulture);
         _ascii.IsChecked = _s.Settings.AsciiOnly;
 
         root.Children.Add(Row("Přepnutí na další místo po (s):", _rotate));
         root.Children.Add(Row("Obnovení předpovědi po (min):", _refresh));
         root.Children.Add(Row("Zvětšení písma 8×16 (0 = auto):", _scale));
         root.Children.Add(Row("Font:", _font));
-        foreach (var cb in new[] { _flymet, _allMonitors, _ascii }) { cb.Margin = new Thickness(0, 4, 0, 0); root.Children.Add(cb); }
+        root.Children.Add(Row("Radar: hodin zpět (1–6):", _radarHours));
+        foreach (var cb in new[] { _radar, _radarFc, _flymet, _allMonitors, _ascii }) { cb.Margin = new Thickness(0, 4, 0, 0); root.Children.Add(cb); }
 
         root.Children.Add(new TextBlock
         {
@@ -201,6 +208,9 @@ internal sealed class SettingsWindow : Window
         st.UiScale = Parse(_scale.Text, st.UiScale, 0, 8);
         st.FontFamily = string.IsNullOrWhiteSpace(_font.Text) ? "PxPlus IBM VGA8" : _font.Text.Trim();
         st.ShowFlymet = _flymet.IsChecked == true;
+        st.ShowRadar = _radar.IsChecked == true;
+        st.RadarForecast = _radarFc.IsChecked == true;
+        st.RadarHours = Parse(_radarHours.Text, st.RadarHours, 1, 6);
         st.AllMonitors = _allMonitors.IsChecked == true;
         st.AsciiOnly = _ascii.IsChecked == true;
 

@@ -13,7 +13,7 @@ public sealed class OpenMeteoClient
     public const string Model = "chmi_aladin_seamless";
 
     private const string HourlyVars =
-        "temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,snowfall,cloud_cover," +
+        "temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,snowfall,cloud_cover,cloud_cover_low,cloud_cover_mid,cloud_cover_high," +
         "pressure_msl,wind_speed_10m,wind_direction_10m,wind_gusts_10m,is_day";
 
     private const string DailyVars =
@@ -70,6 +70,9 @@ public sealed class OpenMeteoClient
             Precipitation = Series(h, "precipitation", n),
             Snowfall = Series(h, "snowfall", n),
             CloudCover = Series(h, "cloud_cover", n),
+            CloudLow = Series(h, "cloud_cover_low", n),
+            CloudMid = Series(h, "cloud_cover_mid", n),
+            CloudHigh = Series(h, "cloud_cover_high", n),
             Pressure = Series(h, "pressure_msl", n),
             WindSpeed = Series(h, "wind_speed_10m", n),
             WindDirection = Series(h, "wind_direction_10m", n),
