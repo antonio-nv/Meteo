@@ -11,7 +11,7 @@ internal static class Vga
         brush.Freeze();
         return brush;
     }
-
+    
     public static readonly SolidColorBrush Black = B(0x00, 0x00, 0x00);
     public static readonly SolidColorBrush Blue = B(0x00, 0x00, 0xAA);
     public static readonly SolidColorBrush Green = B(0x00, 0xAA, 0x00);
