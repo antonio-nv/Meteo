@@ -36,9 +36,11 @@ internal sealed class AppServices
         };
     }
 
-    public void Log(Exception ex)
+    public void Log(Exception ex) => Log(ex.ToString());
+
+    public void Log(string message)
     {
-        try { File.AppendAllText(Path.Combine(DataDir, "error.log"), $"{DateTime.Now:s} {ex}{Environment.NewLine}"); }
+        try { File.AppendAllText(Path.Combine(DataDir, "error.log"), $"{DateTime.Now:s} {message}{Environment.NewLine}"); }
         catch { /* logování nesmí shodit šetřič */ }
     }
 }

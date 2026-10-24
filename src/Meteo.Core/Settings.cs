@@ -8,8 +8,7 @@ public sealed class AppSettings
     /// Místa, která se v šetřiči střídají, v tomto pořadí. Každé místo je ICAO kód letiště (LKPR), název dříve přidané obce
     /// nebo souřadnice ("49.58, 15.76").
     /// </summary>
-    ///public List<string> Places { get; set; } = ["LKLT", "LKPR", "LKKO", "LKSU", "LKTB", "LKJI", "LKPI", "49.58, 15.76"];
-    public List<string> Places { get; set; } = ["LKLT", "LKPR", "LKKO", "LKSU", "LKTB", "LKJI", "LKPI", "Nové Veselí"];
+     public List<string> Places { get; set; } = ["LKLT", "LKPR", "LKKO", "LKSU", "LKTB", "LKJI", "LKPI", "Nové Veselí"];
 
     /// <summary>Obce přidané přes vyhledávání v nastavení (souřadnice se dohledají automaticky a uloží sem).</summary>
       public List<Place> CustomPlaces { get; set; } = [ new Place("", "Nové Veselí", 49.5197, 15.9086, "Nové Veselí")];
@@ -18,7 +17,7 @@ public sealed class AppSettings
     public int RotateSeconds { get; set; } = 10;
 
     /// <summary>Po jak dlouhé době se předpověď stahuje znovu (model se aktualizuje po 6 hodinách).</summary>
-    public int RefreshMinutes { get; set; } = 10;
+    public int RefreshMinutes { get; set; } = 60;
 
     /// <summary>Celočíselné zvětšení písma 8x16 (0 = automaticky podle rozlišení).</summary>
     public int UiScale { get; set; } = 0;

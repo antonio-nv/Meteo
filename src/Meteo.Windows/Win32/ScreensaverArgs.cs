@@ -14,10 +14,12 @@ public enum ScreensaverMode
     Windowed,
     /// <summary>/f [N] nebo .exe bez parametru – samostatné okno přes jeden monitor (N = pořadí zleva, od 1).</summary>
     Fullscreen,
+    /// <summary>/d[:varianta] – živé pozadí plochy: okna zavěšená do plochy na všech monitorech, ikona u hodin.</summary>
+    Desktop,
 }
 
 /// <summary>Parametry příkazové řádky podle konvencí Windows pro soubory .scr, plus režimy pro běžný .exe.</summary>
-public sealed record ScreensaverArgs(ScreensaverMode Mode, IntPtr ParentWindow, int Width, int Height, int Monitor = 0)
+public sealed record ScreensaverArgs(ScreensaverMode Mode, IntPtr ParentWindow, int Width, int Height, int Monitor = 0, string? Variant = null)
 {
     /// <param name="launchedAsScr">
     /// true, pokud byl program spuštěn jako soubor .scr. Bez parametru to podle konvence znamená nastavení;
@@ -45,6 +47,10 @@ public sealed record ScreensaverArgs(ScreensaverMode Mode, IntPtr ParentWindow, 
                 return new(ScreensaverMode.Fullscreen, IntPtr.Zero, 0, 0, monitor);
             }
 
+            case "/d" or "-d":
+                // /d:bottom (výchozí) | auto | legacy | top | between | workerw | progman vynutí způsob umístění; sw, diag viz DesktopOptions
+                return new(ScreensaverMode.Desktop, IntPtr.Zero, 0, 0, 0, string.IsNullOrWhiteSpace(inline) ? null : inline);
+
             case "/p" or "-p" or "/l" or "-l":
                 return new(ScreensaverMode.Preview, ParseHandle(second), 0, 0);
 
@@ -69,6 +75,28 @@ public sealed record ScreensaverArgs(ScreensaverMode Mode, IntPtr ParentWindow, 
                 // /c, /c:12345 i cokoli neznámého → nastavení
                 return new(ScreensaverMode.Configure, ParseHandle(second), 0, 0);
         }
+    }
+
+    /// <summary>
+    /// Volby režimu /d z <see cref="Variant"/>, oddělené čárkou:
+    /// způsob umístění okna: bez volby "bottom" (okno pod všemi ostatními, ověřeno na Windows 11 24H2),
+    /// "auto" (zkusí zavěšení do plochy), nebo vynucený způsob zavěšení legacy, top, between, workerw, progman;
+    /// "sw" = kreslit softwarově (jinak grafickou kartou), "diag" = zapsat do error.log výpis oken plochy.
+    /// </summary>
+    public (string? Method, bool Software, bool Diagnostics) DesktopOptions()
+    {
+        string? method = null;
+        var software = false;
+        var diag = false;
+        foreach (var token in (Variant ?? "").Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+        {
+            if (token.Equals("sw", StringComparison.OrdinalIgnoreCase)) software = true;
+            else if (token.Equals("diag", StringComparison.OrdinalIgnoreCase)) diag = true;
+            else method ??= token.ToLowerInvariant();
+        }
+        // "auto" = null = WallpaperHost zkouší zavěšení do plochy sám; bez volby se použije ověřené "bottom".
+        method = method is null ? "bottom" : method == "auto" ? null : method;
+        return (method, software, diag);
     }
 
     private static IntPtr ParseHandle(string? s) =>

@@ -38,7 +38,6 @@ internal sealed class FullscreenWindow : Window
         ResizeMode = ResizeMode.NoResize;
         ShowInTaskbar = true;
         Topmost = false;
-        Cursor = Cursors.None;
         WindowStartupLocation = WindowStartupLocation.Manual;
 
         // Přibližné hodnoty (DIP); přesné pixely nastaví WindowPlacement.
@@ -133,9 +132,7 @@ internal sealed class FullscreenWindow : Window
     private void OpenSettings()
     {
         var dialog = new SettingsWindow(_s) { Owner = this };
-        Cursor = Cursors.Arrow;
         dialog.ShowDialog();
-        Cursor = Cursors.None;
         _host.Refresh();
     }
 

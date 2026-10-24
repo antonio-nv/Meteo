@@ -50,6 +50,7 @@ dělat Linux, vyplatí se rozvržení a výpočty vytáhnout do jádra za malé 
 | `Meteo.exe` nebo `Meteo.exe /f` | **Samostatné okno** přes jeden monitor. Není nad ostatními okny, je na hlavním panelu. |
 | `Meteo.exe /f:2` | totéž na 2. monitoru zleva (jinak naposledy použitý, jinak hlavní) |
 | `Meteo.exe /c` (nebo `.scr` bez parametru) | Nastavení |
+| `Meteo.exe /d` | **Živé pozadí plochy** na všech monitorech (viz níže). |
 | `Meteo.exe /w 1080x1920` | Ladicí okno běžné velikosti (Esc zavře) |
 
 **Samostatné okno:** nejde měnit velikost, maximalizovat, přesouvat ani připnout (Win+šipky, Aero Snap, tažení nic nezmění;
@@ -58,6 +59,28 @@ Klávesy: **Win+Shift+Vlevo / Vpravo** přesune okno na sousední monitor (zleva
 **Vlevo / Vpravo** = předchozí / další místo, **F2** = nastavení, **Esc** nebo Alt+F4 = konec.
 Win+šipky se zachytávají nízkoúrovňovým hákem klávesnice (`ShellKeyHook`) a jen dokud je v popředí okno Meteo;
 ve šetřiči hák není.
+
+## Živé pozadí plochy (`/d`)
+
+`Meteo.exe /d` vloží okno Meteo na každém monitoru do plochy Windows (ve starších Windows za ikony, ve Windows 11 24H2 a novějších nad ně). Nemá tlačítko na hlavním
+panelu, není v Alt+Tab a ostatní okna ho překrývají jako běžné pozadí. Běží, dokud se neukončí, nebo dokud se nezhasne
+počítač; po pádu programu se Windows vrátí k původní tapetě. Spustí se jen jednou (druhé spuštění se tiše ukončí).
+
+Okno za ikonami nedostává klávesy ani kliknutí, proto se ovládá takto:
+
+- **Ikona vedle hodin** (pravé nebo levé tlačítko): Další místo, Předchozí místo, Obnovit data, Nastavení, Spouštět s Windows
+  (zapíše `Meteo.exe /d` do `HKCU\...\Run`, bez práv správce), **Ukončit Meteo…** s potvrzením.
+- **Klávesy:** `Ctrl+Alt+Vlevo / Vpravo` kdekoli, a samotné `Vlevo / Vpravo`, když je v popředí plocha (kliknutí na prázdné
+  místo, `Win+D`). V ostatních aplikacích se šipky nikdy nezachytávají.
+- `Win+D` pozadí nezavře, plocha jen ukáže ikony nad ním.
+- Při změně monitorů nebo restartu Průzkumníka se okna po chvíli vytvoří znovu.
+
+Vložení do plochy není oficiální rozhraní Windows: od verze 24H2 se uspořádání oken plochy změnilo, proto program zkouší víc
+způsobů a výsledek zapíše do `error.log` (např. `zavěšeno (ProgmanChildWorkerW) na \\.\DISPLAY1 1200x1920`). Kdyby se nic nezavěsilo,
+okno zůstane obyčejné, pod všemi ostatními (bez lišty a Alt+Tab). Na ladění lze způsob vynutit: `Meteo.exe /d:legacy`,
+`/d:top`, `/d:between`, `/d:workerw`, `/d:progman` nebo `/d:bottom`.
+V režimu `/d` se kreslí softwarově (WPF `SoftwareOnly`), protože okno zavěšené do plochy se při kreslení grafickou kartou nezobrazilo; `/d:hw` (případně `/d:top,hw`) vrátí kreslení grafickou kartou.
+Ve Windows 11 24H2 a novějších se okno vkládá **nad ikony plochy** (`ProgmanTop`) a ikony tak nejsou vidět; zavěšení pod ikony (`between`) se na sestavení 10.0.26300 nezobrazilo.
 
 ## Sestavení
 
