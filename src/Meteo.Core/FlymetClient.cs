@@ -5,7 +5,7 @@ namespace Meteo.Core;
 /// <summary>
 /// Stažení hotového PNG meteogramu Flymet (Meteopress), např. https://flymet.meteopress.cz/meteogram1/PRIBYSLAV.png.
 /// Název souboru se odvodí z obce místa (velká písmena bez diakritiky a mezer); jinak ho lze přepsat v nastavení
-/// (FlymetSlugs, klíč = ICAO kód nebo název místa). Neexistující obrázky se na 24 hodin zapamatují.
+/// (AppSettings.FlymetSlugs, klíč = ICAO kód nebo název místa). Neexistující obrázky se na 24 hodin zapamatují.
 /// </summary>
 public sealed class FlymetClient
 {
@@ -22,21 +22,12 @@ public sealed class FlymetClient
         Directory.CreateDirectory(_dir);
     }
 
-    /// <summary>
-    /// Vestavěné názvy pro letiště, jejichž obec v databázi není název meteogramu Flymet
-    /// (LKSU leží v Novém Malíně, meteogram je pro Šumperk). Nastavení uživatele (FlymetSlugs) má přednost.
-    /// </summary>
-    public static readonly IReadOnlyDictionary<string, string> BuiltInSlugs =
-        new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) { ["LKSU"] = "SUMPERK" };
-
     public static string DeriveSlug(string name) => TextUtil.Compact(name);
 
     public static string SlugFor(Place place, IReadOnlyDictionary<string, string> overrides) =>
         overrides.TryGetValue(place.Key, out var o) && !string.IsNullOrWhiteSpace(o)
             ? o.Trim()
-            : BuiltInSlugs.TryGetValue(place.Key, out var b)
-                ? b
-                : DeriveSlug(place.FlymetName);
+            : DeriveSlug(place.FlymetName);
 
     public async Task<byte[]?> GetAsync(Place place, IReadOnlyDictionary<string, string> overrides, TimeSpan maxAge, CancellationToken ct)
     {

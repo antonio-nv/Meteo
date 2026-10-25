@@ -9,7 +9,7 @@ namespace Meteo.Windows;
 /// </summary>
 internal sealed class TrayIcon : IDisposable
 {
-    public const int CmdNext = 1, CmdPrevious = 2, CmdRefresh = 3, CmdSettings = 4, CmdAutoStart = 5, CmdExit = 6;
+    public const int CmdNext = 1, CmdPrevious = 2, CmdRefresh = 3, CmdInfo = 4, CmdOpenFolder = 5, CmdAutoStart = 6, CmdExit = 7;
 
     private const int WM_APP_TRAY = 0x8001;
     private readonly HwndSource _source;
@@ -23,8 +23,11 @@ internal sealed class TrayIcon : IDisposable
     /// <summary>Průzkumník se restartoval a ikona se vrátila (okna plochy se musí zavěsit znovu).</summary>
     public event Action? ShellRestarted;
 
-    /// <summary>Zeptá se, zda je zapnuté spouštění s Windows (kvůli zatržítku v nabídce).</summary>
+    /// <summary>Zeptá se, zda je zapnuté spouštění s Windows (kvůli zatržítku v nabídce). Null = položka se nezobrazí.</summary>
     public Func<bool>? IsAutoStartEnabled { get; set; }
+
+    /// <summary>U položek "Další / Předchozí místo" ukázat klávesovou zkratku (jen živé pozadí, tam okno klávesy nedostává).</summary>
+    public bool ShowKeyHints { get; set; }
 
     public TrayIcon(string tip)
     {
@@ -83,12 +86,17 @@ internal sealed class TrayIcon : IDisposable
         if (menu == IntPtr.Zero) return;
         try
         {
-            DesktopNative.AppendMenu(menu, DesktopNative.MF_STRING, new UIntPtr(CmdNext), "Další místo\tCtrl+Alt+→");
-            DesktopNative.AppendMenu(menu, DesktopNative.MF_STRING, new UIntPtr(CmdPrevious), "Předchozí místo\tCtrl+Alt+←");
+            DesktopNative.AppendMenu(menu, DesktopNative.MF_STRING, new UIntPtr(CmdNext), ShowKeyHints ? "Další místo\tCtrl+Alt+→" : "Další místo");
+            DesktopNative.AppendMenu(menu, DesktopNative.MF_STRING, new UIntPtr(CmdPrevious), ShowKeyHints ? "Předchozí místo\tCtrl+Alt+←" : "Předchozí místo");
             DesktopNative.AppendMenu(menu, DesktopNative.MF_STRING, new UIntPtr(CmdRefresh), "Obnovit data");
-            DesktopNative.AppendMenu(menu, DesktopNative.MF_STRING, new UIntPtr(CmdSettings), "Nastavení…");
-            var auto = DesktopNative.MF_STRING | (IsAutoStartEnabled?.Invoke() == true ? DesktopNative.MF_CHECKED : 0);
-            DesktopNative.AppendMenu(menu, auto, new UIntPtr(CmdAutoStart), "Spouštět s Windows");
+            DesktopNative.AppendMenu(menu, DesktopNative.MF_SEPARATOR, UIntPtr.Zero, null);
+            DesktopNative.AppendMenu(menu, DesktopNative.MF_STRING, new UIntPtr(CmdInfo), "Informace o Meteo…");
+            DesktopNative.AppendMenu(menu, DesktopNative.MF_STRING, new UIntPtr(CmdOpenFolder), "Otevřít složku s daty a logem");
+            if (IsAutoStartEnabled is { } autoStart)
+            {
+                var auto = DesktopNative.MF_STRING | (autoStart() ? DesktopNative.MF_CHECKED : 0);
+                DesktopNative.AppendMenu(menu, auto, new UIntPtr(CmdAutoStart), "Spouštět s Windows");
+            }
             DesktopNative.AppendMenu(menu, DesktopNative.MF_SEPARATOR, UIntPtr.Zero, null);
             DesktopNative.AppendMenu(menu, DesktopNative.MF_STRING, new UIntPtr(CmdExit), "Ukončit Meteo…");
 

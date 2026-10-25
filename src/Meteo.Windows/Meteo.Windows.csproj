@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <!-- Aplikace pro Windows 11: WPF (kreslení meteogramu, okno šetřiče, nastavení; kód bez XAML kvůli pixel-přesnému kreslení)
-       + Win32 (složka Win32: monitory, zamčení okna, zachytávání Win+šipek, parametry .scr).
+  <!-- Aplikace pro Windows 11: WPF (kreslení meteogramu, samostatné okno, živé pozadí; kód bez XAML kvůli pixel-přesnému kreslení)
+       + Win32 (složka Win32: monitory, zamčení okna, zachytávání Win+šipek, parametry příkazové řádky, umístění dat).
        Pro Linux Mint vznikne samostatná aplikace Meteo.Linux; společné je jen jádro Meteo.Core. -->
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -24,15 +24,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Meteo.Core\Meteo.Core.csproj" />
   </ItemGroup>
-
-  <!-- Windows spouští šetřiče jako *.scr. Po sestavení vznikne kopie Meteo.scr vedle .exe. -->
-  <Target Name="MakeScr" AfterTargets="Build">
-    <Copy SourceFiles="$(OutDir)Meteo.exe" DestinationFiles="$(OutDir)Meteo.scr" ContinueOnError="true" />
-  </Target>
-
-  <!-- Totéž po "dotnet publish": do složky publish přibude Meteo.scr. -->
-  <Target Name="MakeScrPublish" AfterTargets="Publish">
-    <Copy SourceFiles="$(PublishDir)Meteo.exe" DestinationFiles="$(PublishDir)Meteo.scr" ContinueOnError="true" />
-  </Target>
 
 </Project>

@@ -8,11 +8,11 @@ using Microsoft.Win32;
 namespace Meteo.Windows;
 
 /// <summary>
-/// Samostatné okno přes jeden monitor (spuštění Meteo.exe). Není to šetřič:
+/// Samostatné okno přes jeden monitor (spuštění Meteo.exe):
 ///  - není topmost, může ho překrýt jiné okno, je na hlavním panelu,
 ///  - nejde měnit velikost ani polohu, maximalizovat, připnout (Win+šipky) – hlídá to <see cref="FullscreenGuard"/>,
 ///  - Win+Shift+Vlevo / Vpravo ho přesune na sousední monitor (zleva doprava, dokola),
-///  - Vlevo / Vpravo = předchozí / další místo, F2 = nastavení, Esc (nebo Alt+F4) = konec.
+///  - Vlevo / Vpravo = předchozí / další místo, Esc (nebo Alt+F4) = konec.
 /// </summary>
 internal sealed class FullscreenWindow : Window
 {
@@ -90,9 +90,6 @@ internal sealed class FullscreenWindow : Window
         _guard.Target = next;   // nejdřív cíl, pak přesun – jinak by ho guard vrátil zpět
         Place();
 
-        _s.Settings.LastMonitor = next.Name;
-        try { _s.Store.Save(_s.Settings); }
-        catch (Exception ex) { _s.Log(ex); }
     }
 
     private void OnDisplaySettingsChanged(object? sender, EventArgs e) =>
@@ -122,18 +119,7 @@ internal sealed class FullscreenWindow : Window
                 _host.Previous();
                 e.Handled = true;
                 break;
-            case Key.F2:
-                OpenSettings();
-                e.Handled = true;
-                break;
         }
-    }
-
-    private void OpenSettings()
-    {
-        var dialog = new SettingsWindow(_s) { Owner = this };
-        dialog.ShowDialog();
-        _host.Refresh();
     }
 
     private void OnClosed(object? sender, EventArgs e)

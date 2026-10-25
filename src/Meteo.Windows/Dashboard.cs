@@ -34,6 +34,15 @@ public sealed class Dashboard : FrameworkElement
     private double _ppd = 1.0;   // pixelů na DIP
     private int _scale = 1;      // celočíselné zvětšení buňky 8x16
 
+    private string _hint = "";
+
+    /// <summary>Text v pravém dolním rohu (název programu a způsob ukončení).</summary>
+    public string Hint
+    {
+        get => _hint;
+        set { _hint = value ?? ""; InvalidateVisual(); }
+    }
+
     public Dashboard(AppSettings settings, FontFamily family)
     {
         _settings = settings;
@@ -241,6 +250,10 @@ public sealed class Dashboard : FrameworkElement
                    (_settings.ShowRadar ? " · radar ČHMÚ" : "") +
                    (_settings.ShowFlymet ? " · Flymet / Meteopress" : "");
         Text(dc, text, ox, y, Vga.DarkGray);
+
+        // Pravý dolní roh: co je to za program a jak se ukončí (nastaví okno, např. "Meteo · Esc = konec").
+        if (Hint.Length > 0 && cols > text.Length + Hint.Length + 2)
+            Text(dc, Hint + " ", ox + cols * CW, y, Vga.Gray, TextAlignment.Right);
     }
 
     // ------------------------------------------------------------------ meteogram

@@ -21,7 +21,7 @@ internal sealed class DesktopController : IDisposable
     private bool _building;
     private readonly List<(DesktopWindow Window, Dashboard? Dash)> _windows = new();
     private readonly DispatcherTimer _rebuildTimer = new() { Interval = TimeSpan.FromSeconds(2) };
-    private TrayIcon? _tray;
+    private AppTray? _tray;
     private DesktopKeyHook? _keys;
     private bool _disposed;
 
@@ -41,8 +41,7 @@ internal sealed class DesktopController : IDisposable
         _s.Log($"Start živého pozadí (/d{(_variant is null ? "" : ":" + _variant)}), sestavení {(exe is null ? "?" : File.GetLastWriteTime(exe).ToString("s"))}, kreslení {System.Windows.Media.RenderOptions.ProcessRenderMode}");
         Build();
 
-        _tray = new TrayIcon("Meteo – pravé tlačítko: nabídka") { IsAutoStartEnabled = AutoStart.IsEnabled };
-        _tray.Command += cmd => Application.Current.Dispatcher.InvokeAsync(() => OnCommand(cmd));
+        _tray = new AppTray(_s, _host, "Živé pozadí", "Win+D", desktopMode: true);
         _tray.ShellRestarted += ScheduleRebuild;
 
         _keys = new DesktopKeyHook();
@@ -84,7 +83,7 @@ internal sealed class DesktopController : IDisposable
             Dashboard? dash = null;
             if (screen.IsPrimary || _s.Settings.AllMonitors)
             {
-                dash = new Dashboard(_s.Settings, _family);
+                dash = new Dashboard(_s.Settings, _family) { Hint = "Meteo · Win+D = konec" };
                 _host.Updated += dash.SetState;
                 _host.RadarUpdated += dash.SetRadar;
                 if (_host.Current is { } state) dash.SetState(state);
@@ -114,32 +113,6 @@ internal sealed class DesktopController : IDisposable
             window.Close();
         }
         _windows.Clear();
-    }
-
-    private void OnCommand(int cmd)
-    {
-        switch (cmd)
-        {
-            case TrayIcon.CmdNext: _host.Next(); break;
-            case TrayIcon.CmdPrevious: _host.Previous(); break;
-            case TrayIcon.CmdRefresh: _host.Refresh(); break;
-            case TrayIcon.CmdSettings:
-                new SettingsWindow(_s).ShowDialog();
-                _host.Refresh();
-                break;
-            case TrayIcon.CmdAutoStart:
-                if (!AutoStart.Set(!AutoStart.IsEnabled()))
-                    System.Windows.MessageBox.Show("Nepodařilo se zapsat do registru.", "Meteo",
-                        MessageBoxButton.OK, MessageBoxImage.Warning);
-                break;
-            case TrayIcon.CmdExit:
-                var answer = System.Windows.MessageBox.Show(
-                    "Ukončit Meteo? Pozadí plochy se vrátí k původnímu. Znovu se spustí po dalším přihlášení" +
-                    (AutoStart.IsEnabled() ? "." : " (jen pokud zapnete „Spouštět s Windows“)."),
-                    "Meteo", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
-                if (answer == MessageBoxResult.Yes) Application.Current.Shutdown();
-                break;
-        }
     }
 
     public void Dispose()
