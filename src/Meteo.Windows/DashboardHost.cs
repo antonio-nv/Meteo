@@ -139,6 +139,11 @@ internal sealed class DashboardHost
             }
 
             if (ct.IsCancellationRequested) return;
+
+            // Flymet pro toto místo není: ponechá se předchozí meteogram. Prázdné místo by při přepínání bliklo
+            // (meteogram Flymet je bílý) a obrázek jiného místa nevadí.
+            if (image is null && settings.ShowFlymet) image = Current?.Flymet;
+
             Publish(new DashboardState
             {
                 Place = place,
@@ -159,6 +164,7 @@ internal sealed class DashboardHost
             {
                 Place = place,
                 Forecast = Current?.Forecast?.Place == place ? Current.Forecast : null,
+                Flymet = Current?.Flymet,
                 Status = "Chyba: " + ex.Message,
                 IsError = true,
             });
