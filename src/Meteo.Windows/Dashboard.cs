@@ -601,7 +601,8 @@ public sealed class Dashboard : FrameworkElement
             var moon = Astronomy.Moon(utc, lat, lon);
             Row("Slunce", SkyText(sun), sun.Elevation > 0 ? Vga.Yellow : Vga.Brown);
             Row("Měsíc", SkyText(moon.Position), moon.Position.Elevation > 0 ? Vga.White : Vga.Gray);
-            Row("Fáze Měsíce", $"{moon.IlluminationPercent.ToString("0.00", Cs)} %", Vga.White);
+            // Šipka ukazuje směr: ↑ osvětlená část roste (dorůstá), ↓ ubývá (couvá). Poblíž úplňku a novu se číslo skoro nemění.
+            Row("Fáze Měsíce", $"{moon.IlluminationPercent.ToString("0.00", Cs)} %  {(moon.Waxing ? "↑" : "↓")}", Vga.White);
         }
 
         DrawDaily(dc, dailyX, dailyY, f);
