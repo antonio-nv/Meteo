@@ -94,41 +94,50 @@ např. `/d:auto,diag`.
 - Ladění: `src/Meteo.Windows/Properties/launchSettings.json` obsahuje profily „Celá obrazovka“, „Živé pozadí (/d)“, „Okno 1080x1920“,
   „Okno 1200x1920“ a „Okno 1366x768“. Vybírají se v nabídce vedle tlačítka Start.
 
-## Rychlý start ze zdrojů
+## Postup od nuly: všechno v `C:\Program Files\Meteo`
 
-Potřebuješ **.NET 10 SDK** (je i ve Visual Studiu), Windows 11 a nic dalšího. Žádný instalátor ani podpis není, program se zkompiluje
-na tvém počítači, takže Windows nehlásí SmartScreen.
+Požadavky: Windows 11, **.NET 10 SDK** (je součástí Visual Studia 2026; jinak <https://dotnet.microsoft.com/download> nebo `winget install Microsoft.DotNet.SDK.10`), Git (<https://git-scm.com/download/win> nebo `winget install Git.Git`) a **příkazový řádek spuštěný jako správce**
+(Win → `cmd` → pravé tlačítko → Spustit jako správce), protože se zapisuje do `C:\Program Files`. Žádný instalátor ani podpis není,
+program se zkompiluje na tvém počítači, takže Windows nehlásí SmartScreen.
 
-```
-git clone https://github.com/antonio-nv/Meteo.git
-cd Meteo
-dotnet run --project src/Meteo.Windows -c Release            (celá obrazovka)
-dotnet run --project src/Meteo.Windows -c Release -- /d      (živé pozadí)
-```
+Všechno (zdroje, kompilace i hotový program) leží v jedné složce, `C:\Program Files\Meteo`, a mimo ni nevzniká nic kromě dat
+(`%LOCALAPPDATA%\Meteo`, viz níže) a zkratek v nabídce Start.
 
-Ve Visual Studiu stačí otevřít `Meteo.sln` a spustit (F5).
+**1. Stažení zdrojů.** Nemusíš nic dělat zvlášť: při prvním spuštění skriptu z kroku 2 se zdroje stáhnou samy do `C:\Program Files\Meteo`
+(`git clone https://github.com/antonio-nv/Meteo.git "C:\Program Files\Meteo"`). Skript stačí mít uložený kdekoli, třeba ho stáhnout z
+[GitHubu](https://github.com/antonio-nv/Meteo/blob/master/tools/Instaluj.ps1) (Raw → uložit jako). Chceš-li zdroje stáhnout ručně, použij
+příkaz výše, s cílovou cestou, jinak by `git clone` založil složku tam, kde příkazový řádek zrovna stojí (`C:\Users\<jméno>`).
+I `git clone` do `C:\Program Files` vyžaduje správce, protože složku Meteo tam jinak nelze vytvořit.
 
-## Instalace
-
-`dotnet run` nic neinstaluje: zkompiluje program do složky `bin` a `obj` uvnitř naklonovaného repozitáře a odtud ho spustí.
-Při dalším spuštění se kompiluje znovu jen tehdy, když se změnily zdrojové soubory.
-
-Pro trvalé umístění do `C:\Program Files\Meteo` spusť **příkazový řádek jako správce** (Win → `cmd` → Spustit jako správce) a v kořeni repozitáře:
+**2. Instalace jedním příkazem** (opět v příkazovém řádku jako správce). Skript zkompiluje program do `C:\Program Files\Meteo\Program`
+a vytvoří v nabídce Start složku Meteo se dvěma zkratkami:
 
 ```
-dotnet publish src\Meteo.Windows -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true -o "C:\Program Files\Meteo"
+powershell -ExecutionPolicy Bypass -File "C:\Program Files\Meteo\tools\Instaluj.ps1"
 ```
 
-Vznikne jeden samostatný `Meteo.exe` (`Meteo.exe` = celá obrazovka, `Meteo.exe /d` = živé pozadí). Je potřeba **.NET 10 Desktop Runtime**
-(v SDK je). Kompilace se opakuje jen při změně zdrojů. „Spouštět s Windows“ zapni v nabídce u ikony vedle hodin až z tohoto umístění, ne z `bin`.
+(Při prvním spuštění uveď cestu k tomu uloženému skriptu, např. `C:\Users\<jméno>\Downloads\Instaluj.ps1`; po stažení zdrojů je skript i ve složce `tools`.)
 
-Zkratky v nabídce Start (**Meteo** = celá obrazovka, **Meteo - pozadí** = živé pozadí) vytvoří skript (spuštěný jako správce, protože ikony se kopírují do `Program Files`):
+Vznikne jeden samostatný `C:\Program Files\Meteo\Program\Meteo.exe`: bez parametru celá obrazovka (Esc = konec), s `/d` živé pozadí
+(Win+D = konec). Zkratky **Meteo** (celá obrazovka) a **Meteo - pozadí** (živé pozadí) si můžeš pravým tlačítkem připnout na Start.
+Na cílovém počítači stačí **.NET 10 Desktop Runtime** (v SDK je). PowerShell je tu jen kvůli zkratkám: příkazový řádek (`cmd`) obyčejné
+zkratky `.lnk` vytvořit neumí.
 
-```
-powershell -ExecutionPolicy Bypass -File tools\Vytvor-zkratky.ps1 -Exe "C:\Program Files\Meteo\Meteo.exe"
-```
+Bez skriptu: `cd /d "C:\Program Files\Meteo"` a
+`dotnet publish src\Meteo.Windows -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true -o "C:\Program Files\Meteo\Program"`;
+zkratku pak vytvoř ručně (pravé tlačítko na `Meteo.exe` → Zobrazit další možnosti → Připnout na Start; pro pozadí zkratka s cílem
+`"C:\Program Files\Meteo\Program\Meteo.exe" /d`).
 
-Skript vedle `Meteo.exe` zkopíruje i dvě ikony zkratek (`tools/ikony`). Odstraní je `-Odstranit`. Ikona (`src/Meteo.Windows/meteo.ico`, čtyři pidi-obrázky 2×2) je součástí `Meteo.exe`.
+**3. Spouštění po přihlášení** (volitelné): spusť živé pozadí a v nabídce u ikony vedle hodin zapni „Spouštět s Windows“.
+
+**Aktualizace na novou verzi:** stejný příkaz ze kroku 2. Skript nejdřív ukončí běžící Meteo, udělá `git pull`, znovu zkompiluje
+(jen to, co se změnilo) a obnoví zkratky.
+
+**Odinstalace:** stejný příkaz s `-Odinstalovat` na konci. Smaže program, zkratky, data v `%LOCALAPPDATA%\Meteo` i položku pro spouštění
+po přihlášení. Zbývá ručně smazat složku `C:\Program Files\Meteo` (zdroje a skript).
+
+Poznámka: .NET si sám drží mezipaměť balíčků v profilu uživatele (`C:\Users\<jméno>\.nuget`, `.dotnet`). To není součást Meteo a týká se každého
+projektu v .NET.
 
 ## Kde jsou data
 
@@ -138,8 +147,8 @@ Do `Program Files` se nezapisuje. Cache a log jsou ve složce (první zapisovate
 2. `%LOCALAPPDATA%\Meteo`.
 
 Uvnitř: `cache\` (předpovědi), `radar\`, `flymet\` (obrázky), `fonts\` (volitelně `.ttf`), `error.log`. Nastavení tam není,
-to je v kódu. Odinstalace = smazat `C:\Program Files\Meteo`, `%LOCALAPPDATA%\Meteo`, zkratky ve Startu a případně položku „Meteo“
-v registru `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` (zapíná se v nabídce u ikony vedle hodin).
+to je v kódu.
+
 
 ## Font
 
