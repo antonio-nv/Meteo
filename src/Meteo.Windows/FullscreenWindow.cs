@@ -47,7 +47,7 @@ internal sealed class FullscreenWindow : Window
         Height = screen.Height;
 
         SourceInitialized += OnSourceInitialized;
-        ContentRendered += (_, _) => Place();
+        ContentRendered += (_, _) => { Place(); TakeKeyboard(); };
         StateChanged += OnStateChanged;
         PreviewKeyDown += OnKeyDown;
         Closed += OnClosed;
@@ -63,6 +63,15 @@ internal sealed class FullscreenWindow : Window
 
         _hook = new ShellKeyHook(Handle);
         _hook.MoveRequested += dir => Dispatcher.InvokeAsync(() => MoveToNeighbour(dir));
+    }
+
+    /// <summary>Po spuštění z Průzkumníka / příkazové řádky okno nemá fokus, takže šipky nefungují, dokud se neklikne.</summary>
+    private void TakeKeyboard()
+    {
+        DesktopNative.SetForegroundWindow(Handle);
+        Activate();
+        Focus();
+        Keyboard.Focus(this);
     }
 
     private void Place() => WindowPlacement.CoverScreen(Handle, _current, topmost: false);
