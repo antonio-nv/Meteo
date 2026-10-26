@@ -125,19 +125,39 @@ public sealed class Dashboard : FrameworkElement
         return sb.ToString();
     }
 
+    // Hotové texty se používají znovu: většina popisků se při každém překreslení (u radaru dvakrát za sekundu) opakuje, a vytvářet
+    // stovky objektů FormattedText pokaždé znovu zbytečně zatěžovalo procesor a paměť. Klíč je text a štětec, platnost
+    // se hlídá podle velikosti buňky a DPI.
+    private readonly Dictionary<(string Text, Brush Brush), (FormattedText Ft, double Width)> _textCache = new();
+    private (int Scale, double Ppd) _textCacheSignature;
+    private const int TextCacheLimit = 4000;
+
     private void Text(DrawingContext dc, string s, double x, double y, Brush brush, TextAlignment align = TextAlignment.Left)
     {
         if (string.IsNullOrEmpty(s)) return;
         if (_settings.AsciiOnly) s = Ascii(s);
-        var ft = new FormattedText(s, Cs, FlowDirection.LeftToRight, _typeface, Em, brush,
-            new NumberSubstitution(), TextFormattingMode.Display, _ppd)
+
+        if (_textCacheSignature != (_scale, _ppd))
         {
-            LineHeight = CH,
-        };
-        var w = ft.WidthIncludingTrailingWhitespace;
+            _textCache.Clear();
+            _textCacheSignature = (_scale, _ppd);
+        }
+        if (!_textCache.TryGetValue((s, brush), out var entry))
+        {
+            if (_textCache.Count >= TextCacheLimit) _textCache.Clear();
+            var ft = new FormattedText(s, Cs, FlowDirection.LeftToRight, _typeface, Em, brush,
+                new NumberSubstitution(), TextFormattingMode.Display, _ppd)
+            {
+                LineHeight = CH,
+            };
+            entry = (ft, ft.WidthIncludingTrailingWhitespace);
+            _textCache[(s, brush)] = entry;
+        }
+
+        var w = entry.Width;
         if (align == TextAlignment.Right) x -= w;
         else if (align == TextAlignment.Center) x -= w / 2;
-        dc.DrawText(ft, new Point(Snap(x), Snap(y)));
+        dc.DrawText(entry.Ft, new Point(Snap(x), Snap(y)));
     }
 
     /// <summary>Vykreslí text a vrátí x za jeho koncem (předpoklad: znak = jedna buňka).</summary>

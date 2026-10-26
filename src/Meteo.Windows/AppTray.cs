@@ -77,7 +77,8 @@ internal sealed class AppTray : IDisposable
             $"Stav: {(string.IsNullOrEmpty(st?.Status) ? "v pořádku" : st.Status)}\n" +
             $"Sestaveno: {built}\n" +
             $"Verze: {Assembly.GetExecutingAssembly().GetName().Version}\n" +
-            $"Data a log: {_s.DataDir}";
+            $"Data a log: {_s.DataDir}\n" +
+            MemoryJanitor.Describe();
         System.Windows.MessageBox.Show(text, "Meteo", MessageBoxButton.OK, MessageBoxImage.Information);
     }
 

@@ -41,6 +41,10 @@ public static class Program
         var family = FontResolver.Resolve(services.Settings, services.DataDir);
         var host = new DashboardHost(services);
 
+        // Pravidelný úklid paměti (viz MemoryJanitor): bez něj Správce úloh ukazuje stovky MB.
+        var janitor = new MemoryJanitor(TimeSpan.FromSeconds(60));
+        app.Exit += (_, _) => janitor.Dispose();
+
         switch (parsed.Mode)
         {
             case StartMode.Desktop:
@@ -69,7 +73,7 @@ public static class Program
                     ?? screens.FirstOrDefault(s => s.IsPrimary)
                     ?? screens[0];
 
-                var dash = new Dashboard(services.Settings, family) { Hint = "Meteo · Esc = konec" };
+                var dash = new Dashboard(services.Settings, family) { Hint = "Meteo · ←/→ místo · Esc = konec" };
                 host.Updated += dash.SetState;
                 host.RadarUpdated += dash.SetRadar;
                 new FullscreenWindow(services, host, dash, provider, target).Show();
