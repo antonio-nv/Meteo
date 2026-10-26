@@ -14,12 +14,14 @@ $program = Join-Path $koren "Program"
 $exe     = Join-Path $program "Meteo.exe"
 $start   = Join-Path ([Environment]::GetFolderPath("CommonPrograms")) "Meteo"   # nabídka Start pro všechny uživatele
 $data    = Join-Path $env:LOCALAPPDATA "Meteo"
+# Zkratky ze starších verzí skriptu ležely v osobní nabídce Start; ty se při instalaci i odinstalaci uklidí, ať nejsou dvakrát.
+$staryStart = Join-Path ([Environment]::GetFolderPath("Programs")) "Meteo"
 
 # Běžící Meteo drží Meteo.exe zamčený, takže se musí ukončit.
 Get-Process -Name "Meteo" -ErrorAction SilentlyContinue | Stop-Process -Force
 
 if ($Odinstalovat) {
-    foreach ($cesta in $program, $start, $data) {
+    foreach ($cesta in $program, $start, $staryStart, $data) {
         if (Test-Path $cesta) { Remove-Item $cesta -Recurse -Force }
     }
     Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "Meteo" -ErrorAction SilentlyContinue
@@ -44,9 +46,15 @@ if ((Test-Path (Join-Path $koren ".git")) -and (Get-Command git -ErrorAction Sil
     if ($LASTEXITCODE -ne 0) { Write-Warning "git pull se nepovedl, pokračuji s tím, co ve složce je." }
 }
 
-Write-Host "Kompiluji do $program ..."
-& dotnet publish (Join-Path $koren "src\Meteo.Windows") -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true -o $program
-if ($LASTEXITCODE -ne 0) { throw "Kompilace se nepovedla (viz výpis výše)." }
+if (Test-Path $staryStart) { Remove-Item $staryStart -Recurse -Force }
+
+# Na slabším počítači může kompilace trvat několik minut a výpis stojí; neklikej do okna (označení textu myší program pozastaví,
+# dokud nestiskneš Enter nebo Esc). Build servery se vypínají, aby po skončení nezůstaly běžet a nezabíraly paměť.
+Write-Host "Kompiluji do $program (na slabším počítači i několik minut, neklikej do tohoto okna) ..."
+& dotnet publish (Join-Path $koren "src\Meteo.Windows") -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true --disable-build-servers -o $program
+$kod = $LASTEXITCODE
+& dotnet build-server shutdown | Out-Null
+if ($kod -ne 0) { throw "Kompilace se nepovedla (viz výpis výše)." }
 
 # Ikony zkratek leží vedle Meteo.exe, odtud je zkratky berou.
 Copy-Item (Join-Path $koren "tools\ikony\*.ico") $program -Force
