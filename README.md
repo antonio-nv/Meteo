@@ -1,10 +1,11 @@
 # Meteo
 
-Šetřič obrazovky pro Windows 11 (C#, .NET 10, WPF). Zobrazuje 72hodinový meteogram z modelu ALADIN (ČHMÚ), údaje „nyní“,
+Zobrazovač počasí pro Windows 11 (C#, .NET 10, WPF), buď jako samostatné okno přes celý monitor, nebo jako živé pozadí
+plochy. Zobrazuje 72hodinový meteogram z modelu ALADIN (ČHMÚ), údaje „nyní“,
 denní přehled a (pokud existuje) meteogram Flymet. Místa se po nastavené době samy střídají.
 
-Místa se zadávají **zkratkou**: ICAO kód letiště (`LKPR`, `LKTB`, `LKPI`…), názvem obce, nebo souřadnicemi.
-Souřadnice se nikde nezadávají ručně.
+Místa se zadávají **zkratkou**: ICAO kód letiště (`LKPR`, `LKTB`, `LKPI`…), názvem vlastního místa, nebo souřadnicemi.
+Nastavení není v souboru ani v dialogu: mění se přímo v kódu, ve třídě `AppSettings` (`src/Meteo.Core/Settings.cs`).
 
 Licence: [MIT](LICENSE).
 
@@ -12,8 +13,8 @@ Licence: [MIT](LICENSE).
 
 | Projekt | Cíl | Obsah |
 |---|---|---|
-| `Meteo.Core` | `net10.0` | Bez závislosti na OS a UI: stažení dat (Open-Meteo / ALADIN), databáze letišť, geokódování, cache, nastavení, Flymet, `IScreenProvider`. |
-| `Meteo.Windows` | `net10.0-windows` | Celá aplikace pro Windows 11: WPF (kreslení meteogramu, okno šetřiče, nastavení; bez XAML) a ve složce `Win32` vše, co se týká Windows API (monitory v pixelech, zamčení okna, zachytávání Win+šipek, parametry `/s /c /p` pro `.scr`, umístění dat). Sestaví se jako `Meteo.exe` / `Meteo.scr`. |
+| `Meteo.Core` | `net10.0` | Bez závislosti na OS a UI: stažení dat (Open-Meteo / ALADIN), databáze letišť, cache, nastavení (`AppSettings`), Flymet, `IScreenProvider`. |
+| `Meteo.Windows` | `net10.0-windows` | Celá aplikace pro Windows 11: WPF (kreslení meteogramu, samostatné okno, živé pozadí, ikona vedle hodin; bez XAML) a ve složce `Win32` vše, co se týká Windows API (monitory v pixelech, zamčení okna, zachytávání Win+šipek, parametry příkazové řádky, umístění dat). Sestaví se jako `Meteo.exe`. |
 
 Pro Linux Mint přibude **samostatný projekt `Meteo.Linux`** (vlastní `IScreenProvider`, okno, umístění dat; překlad z příkazové řádky
 pomocí `dotnet`), bez společného UI frameworku (Avalonia se na podobné úloze neosvědčila: ve fullscreenu na Windows zůstává
@@ -25,9 +26,11 @@ dělat Linux, vyplatí se rozvržení a výpočty vytáhnout do jádra za malé 
 - **Výchozí střídání:** `LKLT`, `LKPR`, `LKKO`, `LKSU`, `LKTB`, `LKJI`, `LKPI`.
 - **Letiště:** vestavěná databáze (917 letišť: celá ČR bez heliportů, plus SK, AT, DE, PL s kódem ICAO). Hledá se bez internetu,
   podle kódu, názvu nebo obce, bez ohledu na diakritiku (`pribyslav`, `LKK`, `ruzyne`, `wien`).
-- **Obce:** vyhledání přes internet (Open-Meteo Geocoding, ČR, při málo výsledcích i SK, AT, DE, PL). Souřadnice se uloží do nastavení.
-- **Souřadnice:** `49.58, 15.76` (desetinná tečka).
-- Nastavení se otevře parametrem `/c` (v samostatném okně klávesou F2; `.scr` bez parametru otevře také nastavení). Pořadí míst lze měnit.
+- **Vlastní místa:** do `AppSettings.CustomPlaces` se přidá `new Place("", "Název", šířka, délka, "Obec pro Flymet")` a název se
+  vloží do `AppSettings.Places`. Příklad je v kódu (Nové Veselí).
+- **Souřadnice:** přímo v `Places`, `"49.58, 15.76"` (desetinná tečka).
+- Pořadí a výběr míst, doba střídání (`RotateSeconds`), obnovení předpovědi (`RefreshMinutes`), radar, Flymet, font a další volby jsou
+  ve stejné třídě. Po změně stačí program znovu sestavit.
 
 ## Co se zobrazuje
 
@@ -46,83 +49,92 @@ dělat Linux, vyplatí se rozvržení a výpočty vytáhnout do jádra za malé 
 
 | Spuštění | Co se stane |
 |---|---|
-| `Meteo.scr /s` (Windows po nečinnosti) | **Šetřič:** okno na každém monitoru, nad ostatními okny, zavře se klávesou, kliknutím nebo pohybem myši. Poloha a velikost oken jsou zamčené. |
-| `Meteo.exe` nebo `Meteo.exe /f` | **Samostatné okno** přes jeden monitor. Není nad ostatními okny, je na hlavním panelu. |
-| `Meteo.exe /f:2` | totéž na 2. monitoru zleva (jinak naposledy použitý, jinak hlavní) |
-| `Meteo.exe /c` (nebo `.scr` bez parametru) | Nastavení |
-| `Meteo.exe /d` | **Živé pozadí plochy** na všech monitorech (viz níže). |
+| `Meteo.exe` nebo `Meteo.exe /f` | **Samostatné okno** přes jeden monitor. Není nad ostatními okny, je na hlavním panelu. Ukončí se klávesou **Esc**. |
+| `Meteo.exe /f:2` | totéž na 2. monitoru zleva (jinak `AppSettings.Monitor`, jinak hlavní monitor) |
+| `Meteo.exe /d` | **Živé pozadí plochy** na všech monitorech (viz níže). Ukončí se klávesou **Win+D**. |
 | `Meteo.exe /w 1080x1920` | Ladicí okno běžné velikosti (Esc zavře) |
+
+Neznámý nebo starý parametr (např. `/s`, `/c`) otevře samostatné okno. Šetřič obrazovky (`.scr`) byl zrušen.
 
 **Samostatné okno:** nejde měnit velikost, maximalizovat, přesouvat ani připnout (Win+šipky, Aero Snap, tažení nic nezmění;
 hlídá to `FullscreenGuard`). Minimalizace (kliknutím na tlačítko na hlavním panelu) zůstává, aby šlo okno schovat.
-Klávesy: **Win+Shift+Vlevo / Vpravo** přesune okno na sousední monitor (zleva doprava, dokola; poslední monitor se pamatuje),
-**Vlevo / Vpravo** = předchozí / další místo, **F2** = nastavení, **Esc** nebo Alt+F4 = konec.
-Win+šipky se zachytávají nízkoúrovňovým hákem klávesnice (`ShellKeyHook`) a jen dokud je v popředí okno Meteo;
-ve šetřiči hák není.
+Klávesy: **Win+Shift+Vlevo / Vpravo** přesune okno na sousední monitor (zleva doprava, dokola),
+**Vlevo / Vpravo** = předchozí / další místo, **Esc** nebo Alt+F4 = konec.
+Win+šipky se zachytávají nízkoúrovňovým hákem klávesnice (`ShellKeyHook`) a jen dokud je v popředí okno Meteo.
+
+**Pravý dolní roh** obou režimů ukazuje, co to je a jak se ukončí („Meteo · Esc = konec“, „Meteo · Win+D = konec“).
+**Ikona vedle hodin** ukazuje, že Meteo běží, a slouží k diagnostice: Informace o Meteo (režim, místo, stav, čas sestavení,
+složka s daty), Otevřít složku s daty a logem, Další / Předchozí místo, Obnovit data, Ukončit (s potvrzením).
 
 ## Živé pozadí plochy (`/d`)
 
-`Meteo.exe /d` vloží okno Meteo na každém monitoru do plochy Windows (ve starších Windows za ikony, ve Windows 11 24H2 a novějších nad ně). Nemá tlačítko na hlavním
-panelu, není v Alt+Tab a ostatní okna ho překrývají jako běžné pozadí. Běží, dokud se neukončí, nebo dokud se nezhasne
-počítač; po pádu programu se Windows vrátí k původní tapetě. Spustí se jen jednou (druhé spuštění se tiše ukončí).
+`Meteo.exe /d` otevře na každém monitoru okno přes celou obrazovku, které leží **pod všemi ostatními okny**, nemá tlačítko na
+hlavním panelu a není v Alt+Tab. Chová se tedy jako pozadí plochy: ostatní programy ho překrývají. Ikony plochy jsou pod ním
+skryté. Běží, dokud se neukončí, nebo dokud se nezhasne počítač. Spustí se jen jednou (druhé spuštění se tiše ukončí).
 
-Okno za ikonami nedostává klávesy ani kliknutí, proto se ovládá takto:
-
-- **Ikona vedle hodin** (pravé nebo levé tlačítko): Další místo, Předchozí místo, Obnovit data, Nastavení, Spouštět s Windows
-  (zapíše `Meteo.exe /d` do `HKCU\...\Run`, bez práv správce), **Ukončit Meteo…** s potvrzením.
-- **Klávesy:** `Ctrl+Alt+Vlevo / Vpravo` kdekoli, a samotné `Vlevo / Vpravo`, když je v popředí plocha (kliknutí na prázdné
-  místo, `Win+D`). V ostatních aplikacích se šipky nikdy nezachytávají.
-- `Win+D` pozadí nezavře, plocha jen ukáže ikony nad ním.
+- **Win+D** (zobrazit plochu), tlačítko „Zobrazit plochu“ na konci hlavního panelu i Win+M živé pozadí **ukončí**, takže zůstane
+  obyčejná plocha s ikonami. (Win+Ctrl+D, nová virtuální plocha, ho neukončí.)
+- **Ikona vedle hodin** (pravé nebo levé tlačítko): jako výše, a navíc **Spouštět s Windows**
+  (zapíše `Meteo.exe /d` do `HKCU\...\Run`, bez práv správce).
+- **Klávesy:** `Ctrl+Alt+Vlevo / Vpravo` kdekoli, a samotné `Vlevo / Vpravo`, když je v popředí plocha. V ostatních aplikacích se
+  šipky nikdy nezachytávají.
 - Při změně monitorů nebo restartu Průzkumníka se okna po chvíli vytvoří znovu.
 
-Vložení do plochy není oficiální rozhraní Windows: od verze 24H2 se uspořádání oken plochy změnilo, proto program zkouší víc
-způsobů a výsledek zapíše do `error.log` (např. `zavěšeno (ProgmanChildWorkerW) na \\.\DISPLAY1 1200x1920`). Kdyby se nic nezavěsilo,
-okno zůstane obyčejné, pod všemi ostatními (bez lišty a Alt+Tab). Na ladění lze způsob vynutit: `Meteo.exe /d:legacy`,
-`/d:top`, `/d:between`, `/d:workerw`, `/d:progman` nebo `/d:bottom`.
-V režimu `/d` se kreslí softwarově (WPF `SoftwareOnly`), protože okno zavěšené do plochy se při kreslení grafickou kartou nezobrazilo; `/d:hw` (případně `/d:top,hw`) vrátí kreslení grafickou kartou.
-Ve Windows 11 24H2 a novějších se okno vkládá **nad ikony plochy** (`ProgmanTop`) a ikony tak nejsou vidět; zavěšení pod ikony (`between`) se na sestavení 10.0.26300 nezobrazilo.
+**Proč pod okny a ne zavěšené do plochy.** Zavěšení okna do vrstvy plochy (starý trik s `WorkerW`) se na Windows 11 24H2
+(sestavení 10.0.26300) nezobrazilo: okno bylo v seznamu oken, správně umístěné a viditelné, ale Windows ho nevykreslily.
+Zkoušené varianty (potomek `WorkerW` v `Progman`, mezi ikonami a tapetou, nad ikonami, i se softwarovým kreslením)
+se nezobrazily; nezkoušelo se jen `progman` a `legacy`. Funguje obyčejné okno posunuté na dno pořadí oken. Ostatní způsoby jsou k dispozici pro ladění:
+`Meteo.exe /d:auto` (zkusí zavěšení do plochy), nebo vynuceně `/d:legacy`, `/d:top`, `/d:between`, `/d:workerw`,
+`/d:progman`. Další volby, oddělené čárkou: `sw` (softwarové kreslení), `diag` (zapíše do `error.log` strom oken plochy),
+např. `/d:auto,diag`.
 
 ## Sestavení
 
 - Visual Studio s podporou .NET 10 (Visual Studio 2026), .NET 10 SDK, úloha „.NET desktop development“. Spouštěcí projekt: **`Meteo.Windows`**.
-- Ladění: `src/Meteo.Windows/Properties/launchSettings.json` obsahuje profily „Celá obrazovka“, „Šetřič (/s)“, „Okno 1080x1920“,
-  „Okno 1200x1920“, „Okno 1366x768“ a „Nastavení“. Vybírají se v nabídce vedle tlačítka Start.
+- Ladění: `src/Meteo.Windows/Properties/launchSettings.json` obsahuje profily „Celá obrazovka“, „Živé pozadí (/d)“, „Okno 1080x1920“,
+  „Okno 1200x1920“ a „Okno 1366x768“. Vybírají se v nabídce vedle tlačítka Start.
 
-## Instalace jako šetřič
+## Instalace
 
 ```
 dotnet publish src/Meteo.Windows -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true
 ```
 
-Ve složce `publish` vznikne `Meteo.exe` a jeho kopie `Meteo.scr`. Pravým tlačítkem na `.scr` → **Nainstalovat** (šetřič).
-`Meteo.exe` si lze nechat i vedle dat, např. v `C:\DOS\Meteo\`, a spouštět ručně jako samostatné okno.
-Single-file je důležitý: Windows při instalaci kopíruje do `System32` jen samotný `.scr`.
+Ve složce `publish` vznikne samostatný `Meteo.exe`. Zkopíruj ho třeba do `C:\DOS\Meteo\` a spouštěj ručně (`Meteo.exe` nebo
+`Meteo.exe /d`). „Spouštět s Windows“ zapni v nabídce u ikony vedle hodin až z tohoto umístění, ne z `bin`.
 Je potřeba nainstalované **.NET 10 Desktop Runtime**.
 
-## Kde jsou data a nastavení
+Zkratky v nabídce Start (**Meteo** = celá obrazovka, **Meteo - pozadí** = živé pozadí) vytvoří skript:
 
-Pořadí hledání (první zapisovatelné vyhrává):
+```
+powershell -ExecutionPolicy Bypass -File tools\Vytvor-zkratky.ps1 -Exe C:\DOS\Meteo\Meteo.exe
+```
+
+Odstraní je `-Odstranit`. Ikona (`src/Meteo.Windows/meteo.ico`, čtyři pidi-obrázky 2×2) je součástí `Meteo.exe`.
+
+## Kde jsou data
+
+Složka pro cache a log (první zapisovatelná vyhrává):
 
 1. proměnná prostředí `METEO_HOME`,
 2. složka `C:\DOS\Meteo`, **pokud existuje** (stačí ji vytvořit),
 3. `%LOCALAPPDATA%\Meteo`.
 
-Uvnitř: `settings.json`, `cache\` (předpovědi), `flymet\` (obrázky), `fonts\` (volitelně `.ttf`), `error.log`.
-`C:\Program Files` se nepoužívá: zápis tam vyžaduje práva správce a konfigurace šetřiče by tiše skončila v přesměrované
-složce virtualizace.
+Uvnitř: `cache\` (předpovědi), `radar\`, `flymet\` (obrázky), `fonts\` (volitelně `.ttf`), `error.log`. Nastavení tam není,
+to je v kódu.
 
 ## Font
 
 Preferuje se **PxPlus IBM VGA 8x16** (VileR, *The Ultimate Oldschool PC Font Pack*, licence CC BY-SA 4.0; do repozitáře
 není přibalen). Hledá se v tomto pořadí:
 
-1. nainstalovaný font `PxPlus IBM VGA8`, `PxPlus IBM VGA 8x16`, `Px437 IBM VGA 8x16` (nebo jméno z nastavení),
+1. nainstalovaný font `PxPlus IBM VGA8`, `PxPlus IBM VGA 8x16`, `Px437 IBM VGA 8x16` (nebo jméno z `AppSettings.FontFamily`),
 2. soubor `.ttf` ve složce `fonts` v datovém adresáři nebo vedle programu,
 3. záložní neproporcionální: Consolas → Lucida Console → Courier New.
 
 Text je vykreslován bez vyhlazování (`TextRenderingMode.Aliased`, `EdgeMode.Aliased`), nezávisle na ClearType.
 Rozvržení je v buňkách 8×16 px. Pokud font nemá českou diakritiku, WPF ji dokreslí ze záložního fontu; kdyby to vadilo,
-zapněte v nastavení „Pouze ASCII“.
+nastavte v `AppSettings` `AsciiOnly = true`.
 
 ## Data a licence třetích stran
 
@@ -134,14 +146,15 @@ zapněte v nastavení „Pouze ASCII“.
   EPSG:3857 a pokrývají východní délku 11,267–20,770° a severní šířku 48,047–52,167° (`Meteo.Core/RadarGeo.cs`); zobrazuje se
   výřez, kam až sahají data. Podklad (státní a krajské hranice) je z **Natural Earth** (volné dílo, `Data/map.txt`).
 - Flymet: `https://flymet.meteopress.cz/meteogram1/<NÁZEV>.png`. Název se odvodí z obce místa (velká písmena bez diakritiky
-  a mezer, např. `PRIBYSLAV`); pokud obrázek neexistuje, ukáže se jen informace a další pokus je za 24 hodin. Ruční přepsání:
-  `FlymetSlugs` v `settings.json`, např. `{ "LKPI": "PRIBYSLAV" }`. Obrázky jsou majetek Meteopress, jen pro osobní použití
+  a mezer, např. `PRIBYSLAV`); pokud obrázek neexistuje, další pokus je za 24 hodin. Ruční přepsání:
+  `AppSettings.FlymetSlugs`, např. `["LKSU"] = "SUMPERK"` (letiště LKSU leží v Novém Malíně, meteogram je pro Šumperk).
+  Pokud pro místo obrázek není, zůstane zobrazen předchozí meteogram (bílý obrázek by při přepínání blikal). Obrázky jsou majetek Meteopress, jen pro osobní použití
   a v repozitáři nejsou.
 
 ## Co bylo ověřeno
 
 Jádro a Windows vrstva se zkompilovaly a otestovaly na syntetických datech (parsování odpovědi Open-Meteo včetně vrstev
-oblačnosti, databáze letišť a hledání, nastavení, parametry příkazové řádky, georeference a mapový podklad radaru,
+oblačnosti, databáze letišť a hledání, výchozí nastavení, parametry příkazové řádky, georeference a mapový podklad radaru,
 stahování a cache radarových snímků proti falešnému serveru, zamykání okna). Zdrojový kód WPF části prošel jen syntaktickou
 kontrolou. WPF projekt nebyl v prostředí, kde vznikl, zkompilován ani spuštěn
 a skutečné servery Open-Meteo, Flymet a ČHMÚ nebyly dostupné. Názvy radarových souborů a rozsah snímku vycházejí z popisu

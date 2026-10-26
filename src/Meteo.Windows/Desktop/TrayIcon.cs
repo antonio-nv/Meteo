@@ -48,7 +48,12 @@ internal sealed class TrayIcon : IDisposable
         var data = Data();
         data.uFlags = DesktopNative.NIF_MESSAGE | DesktopNative.NIF_ICON | DesktopNative.NIF_TIP;
         data.uCallbackMessage = WM_APP_TRAY;
-        data.hIcon = DesktopNative.LoadIcon(IntPtr.Zero, new IntPtr(DesktopNative.IDI_APPLICATION));
+        // Ikona z Meteo.exe (meteo.ico); kdyby nešla načíst, obecná ikona aplikace.
+        var exe = Environment.ProcessPath;
+        var own = string.IsNullOrEmpty(exe) ? IntPtr.Zero : DesktopNative.ExtractIcon(IntPtr.Zero, exe, 0);
+        data.hIcon = own.ToInt64() > 1
+            ? own
+            : DesktopNative.LoadIcon(IntPtr.Zero, new IntPtr(DesktopNative.IDI_APPLICATION));
         data.szTip = _tip.Length > 120 ? _tip[..120] : _tip;
         _added = DesktopNative.Shell_NotifyIcon(DesktopNative.NIM_ADD, ref data);
     }

@@ -128,6 +128,9 @@ internal static class DesktopNative
     public static extern IntPtr LoadIcon(IntPtr hInstance, IntPtr lpIconName);
 
     [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
+    public static extern IntPtr ExtractIcon(IntPtr hInst, string lpszExeFileName, int nIconIndex);
+
+    [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
     public static extern bool Shell_NotifyIcon(uint dwMessage, ref NotifyIconData lpData);
 
     [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]

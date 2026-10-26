@@ -11,6 +11,7 @@
     <RootNamespace>Meteo.Windows</RootNamespace>
     <StartupObject>Meteo.Windows.Program</StartupObject>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>meteo.ico</ApplicationIcon>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
   </PropertyGroup>
 
