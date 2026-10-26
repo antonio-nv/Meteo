@@ -13,7 +13,7 @@ public sealed class OpenMeteoClient
     public const string Model = "chmi_aladin_seamless";
 
     private const string HourlyVars =
-        "temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,snowfall,cloud_cover,cloud_cover_low,cloud_cover_mid,cloud_cover_high," +
+        "temperature_2m,relative_humidity_2m,precipitation,snowfall,cloud_cover,cloud_cover_low,cloud_cover_mid,cloud_cover_high," +
         "pressure_msl,wind_speed_10m,wind_direction_10m,wind_gusts_10m,is_day";
 
     private const string DailyVars =
@@ -61,12 +61,15 @@ public sealed class OpenMeteoClient
         var times = Times(h.GetProperty("time"));
         var n = times.Length;
 
+        var temperature = Series(h, "temperature_2m", n);
+        var humidity = Series(h, "relative_humidity_2m", n);
+
         var hourly = new HourlySeries
         {
             Time = times,
-            Temperature = Series(h, "temperature_2m", n),
-            ApparentTemperature = Series(h, "apparent_temperature", n),
-            Humidity = Series(h, "relative_humidity_2m", n),
+            Temperature = temperature,
+            DewPoint = temperature.Select((t, i) => WeatherMath.DewPoint(t, humidity[i])).ToArray(),
+            Humidity = humidity,
             Precipitation = Series(h, "precipitation", n),
             Snowfall = Series(h, "snowfall", n),
             CloudCover = Series(h, "cloud_cover", n),

@@ -20,7 +20,8 @@ public sealed class HourlySeries
 {
     public DateTime[] Time { get; init; } = [];
     public double[] Temperature { get; init; } = [];
-    public double[] ApparentTemperature { get; init; } = [];
+    /// <summary>Rosný bod, °C (počítá se z teploty a vlhkosti, viz <see cref="WeatherMath.DewPoint"/>).</summary>
+    public double[] DewPoint { get; init; } = [];
     public double[] Humidity { get; init; } = [];
     public double[] Precipitation { get; init; } = [];
     public double[] Snowfall { get; init; } = [];

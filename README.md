@@ -34,7 +34,7 @@ dělat Linux, vyplatí se rozvržení a výpočty vytáhnout do jádra za malé 
 
 ## Co se zobrazuje
 
-- **Meteogram (72 h):** teplota (s pocitovou, denní maxima a minima), **oblačnost – nízká, střední a vysoká zvlášť**,
+- **Meteogram (72 h):** teplota (s rosným bodem, denní maxima a minima), **oblačnost – nízká, střední a vysoká zvlášť**,
   srážky (sníh bíle), vítr (rychlost, nárazy, šipky směru), tlak, pruh den/noc a celková oblačnost. Panel oblačnosti se
   zobrazí, jen když je na obrazovce dost řádků (na 1366×768 je).
 - **Údaje „nyní“** a denní přehled na 3 dny.
@@ -94,34 +94,52 @@ např. `/d:auto,diag`.
 - Ladění: `src/Meteo.Windows/Properties/launchSettings.json` obsahuje profily „Celá obrazovka“, „Živé pozadí (/d)“, „Okno 1080x1920“,
   „Okno 1200x1920“ a „Okno 1366x768“. Vybírají se v nabídce vedle tlačítka Start.
 
+## Rychlý start ze zdrojů
+
+Potřebuješ **.NET 10 SDK** (je i ve Visual Studiu), Windows 11 a nic dalšího. Žádný instalátor ani podpis není, program se zkompiluje
+na tvém počítači, takže Windows nehlásí SmartScreen.
+
+```
+git clone https://github.com/antonio-nv/Meteo.git
+cd Meteo
+dotnet run --project src/Meteo.Windows -c Release            (celá obrazovka)
+dotnet run --project src/Meteo.Windows -c Release -- /d      (živé pozadí)
+```
+
+Ve Visual Studiu stačí otevřít `Meteo.sln` a spustit (F5).
+
 ## Instalace
 
-```
-dotnet publish src/Meteo.Windows -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true
-```
+`dotnet run` nic neinstaluje: zkompiluje program do složky `bin` a `obj` uvnitř naklonovaného repozitáře a odtud ho spustí.
+Při dalším spuštění se kompiluje znovu jen tehdy, když se změnily zdrojové soubory.
 
-Ve složce `publish` vznikne samostatný `Meteo.exe`. Zkopíruj ho třeba do `C:\DOS\Meteo\` a spouštěj ručně (`Meteo.exe` nebo
-`Meteo.exe /d`). „Spouštět s Windows“ zapni v nabídce u ikony vedle hodin až z tohoto umístění, ne z `bin`.
-Je potřeba nainstalované **.NET 10 Desktop Runtime**.
-
-Zkratky v nabídce Start (**Meteo** = celá obrazovka, **Meteo - pozadí** = živé pozadí) vytvoří skript:
+Pro trvalé umístění do `C:\Program Files\Meteo` spusť **příkazový řádek jako správce** (Win → `cmd` → Spustit jako správce) a v kořeni repozitáře:
 
 ```
-powershell -ExecutionPolicy Bypass -File tools\Vytvor-zkratky.ps1 -Exe C:\DOS\Meteo\Meteo.exe
+dotnet publish src\Meteo.Windows -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true -o "C:\Program Files\Meteo"
 ```
 
-Odstraní je `-Odstranit`. Ikona (`src/Meteo.Windows/meteo.ico`, čtyři pidi-obrázky 2×2) je součástí `Meteo.exe`.
+Vznikne jeden samostatný `Meteo.exe` (`Meteo.exe` = celá obrazovka, `Meteo.exe /d` = živé pozadí). Je potřeba **.NET 10 Desktop Runtime**
+(v SDK je). Kompilace se opakuje jen při změně zdrojů. „Spouštět s Windows“ zapni v nabídce u ikony vedle hodin až z tohoto umístění, ne z `bin`.
+
+Zkratky v nabídce Start (**Meteo** = celá obrazovka, **Meteo - pozadí** = živé pozadí) vytvoří skript (spuštěný jako správce, protože ikony se kopírují do `Program Files`):
+
+```
+powershell -ExecutionPolicy Bypass -File tools\Vytvor-zkratky.ps1 -Exe "C:\Program Files\Meteo\Meteo.exe"
+```
+
+Skript vedle `Meteo.exe` zkopíruje i dvě ikony zkratek (`tools/ikony`). Odstraní je `-Odstranit`. Ikona (`src/Meteo.Windows/meteo.ico`, čtyři pidi-obrázky 2×2) je součástí `Meteo.exe`.
 
 ## Kde jsou data
 
-Složka pro cache a log (první zapisovatelná vyhrává):
+Do `Program Files` se nezapisuje. Cache a log jsou ve složce (první zapisovatelná vyhrává):
 
 1. proměnná prostředí `METEO_HOME`,
-2. složka `C:\DOS\Meteo`, **pokud existuje** (stačí ji vytvořit),
-3. `%LOCALAPPDATA%\Meteo`.
+2. `%LOCALAPPDATA%\Meteo`.
 
 Uvnitř: `cache\` (předpovědi), `radar\`, `flymet\` (obrázky), `fonts\` (volitelně `.ttf`), `error.log`. Nastavení tam není,
-to je v kódu.
+to je v kódu. Odinstalace = smazat `C:\Program Files\Meteo`, `%LOCALAPPDATA%\Meteo`, zkratky ve Startu a případně položku „Meteo“
+v registru `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` (zapíná se v nabídce u ikony vedle hodin).
 
 ## Font
 
@@ -145,6 +163,9 @@ nastavte v `AppSettings` `AsciiOnly = true`.
   odrazivost, snímek po 5 minutách) a `composite/fct_maxz/png/` (extrapolace +10 až +60 min). Snímky jsou v projekci
   EPSG:3857 a pokrývají východní délku 11,267–20,770° a severní šířku 48,047–52,167° (`Meteo.Core/RadarGeo.cs`); zobrazuje se
   výřez, kam až sahají data. Podklad (státní a krajské hranice) je z **Natural Earth** (volné dílo, `Data/map.txt`).
+- Slunce a Měsíc (azimut, výška, fáze, východy a západy Měsíce): **počítá se v programu** (`Meteo.Core/Astronomy.cs`), nic se
+  nestahuje. Slunce podle vzorců NOAA, Měsíc zkrácenou řadou podle Meeuse (Astronomical Algorithms) s opravou na paralaxu.
+  Polohy se shodují s knihovnou PyEphem na asi 0,02°, časy východů a západů do 1–2 minut. Open data ČHMÚ astronomické údaje nenabízejí.
 - Flymet: `https://flymet.meteopress.cz/meteogram1/<NÁZEV>.png`. Název se odvodí z obce místa (velká písmena bez diakritiky
   a mezer, např. `PRIBYSLAV`); pokud obrázek neexistuje, další pokus je za 24 hodin. Ruční přepsání:
   `AppSettings.FlymetSlugs`, např. `["LKSU"] = "SUMPERK"` (letiště LKSU leží v Novém Malíně, meteogram je pro Šumperk).

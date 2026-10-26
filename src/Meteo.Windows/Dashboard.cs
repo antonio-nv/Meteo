@@ -176,6 +176,25 @@ public sealed class Dashboard : FrameworkElement
         ms < 10.8 ? Vga.Yellow :
         ms < 17.2 ? Vga.LightRed : Vga.LightMagenta;
 
+    /// <summary>"az 143° JV  výš +24.1°": azimut od severu a výška nad obzorem.</summary>
+    private static string SkyText(SkyPosition p) =>
+        $"az {p.Azimuth.ToString("0", Cs)}° {WeatherMath.CompassName(p.Azimuth)}  výš {(p.Elevation >= 0 ? "+" : "")}{p.Elevation.ToString("0.0", Cs)}°";
+
+    // Východy a západy Měsíce se počítají jednou za místo a den (hledání po minutách by se při každém překreslení zbytečně opakovalo).
+    private readonly Dictionary<(double Lat, double Lon, DateOnly Day), (DateTime? Rise, DateTime? Set)> _moonTimes = new();
+
+    private (DateTime? Rise, DateTime? Set) MoonTimes(Place place, DateTime day)
+    {
+        var key = (place.Latitude, place.Longitude, DateOnly.FromDateTime(day));
+        if (!_moonTimes.TryGetValue(key, out var t))
+        {
+            if (_moonTimes.Count > 64) _moonTimes.Clear();
+            t = Astronomy.MoonRiseSet(key.Item3, place.Latitude, place.Longitude);
+            _moonTimes[key] = t;
+        }
+        return t;
+    }
+
     private static string F(double v, string format) => double.IsNaN(v) ? "-" : v.ToString(format, Cs);
 
     // ------------------------------------------------------------------ hlavní kreslení
@@ -222,7 +241,7 @@ public sealed class Dashboard : FrameworkElement
             meteo = new Rect(body.Left, body.Top, mw, body.Height);
             var rx = body.Left + mw + cw;
             var rw = body.Right - rx;
-            var infoH = Math.Min(19 * ch, body.Height);
+            var infoH = Math.Min(24 * ch, body.Height);
             info = new Rect(rx, body.Top, rw, infoH);
             fly = new Rect(rx, body.Top + infoH + ch, rw, Math.Max(0, body.Height - infoH - ch));
         }
@@ -230,7 +249,7 @@ public sealed class Dashboard : FrameworkElement
         {
             var mh = Math.Floor(body.Height / ch * 0.52) * ch;
             meteo = new Rect(body.Left, body.Top, body.Width, mh);
-            var infoH = Math.Min(11 * ch, body.Height - mh);
+            var infoH = Math.Min(13 * ch, body.Height - mh);
             info = new Rect(body.Left, body.Top + mh + ch, body.Width, infoH);
             var fy = info.Bottom + ch;
             fly = new Rect(body.Left, fy, body.Width, Math.Max(0, body.Bottom - fy));
@@ -355,14 +374,14 @@ public sealed class Dashboard : FrameworkElement
         // --- panel 1: teplota
         {
             var plot = plots[0];
-            var (lo, hi) = WeatherMath.Range(hs.Temperature.Concat(hs.ApparentTemperature));
+            var (lo, hi) = WeatherMath.Range(hs.Temperature.Concat(hs.DewPoint));
             var sc = WeatherMath.NiceScale(lo, hi, Math.Max(3, (int)(plot.Height / (ch * 2.2)) + 1));
             DrawPanelBackground(dc, plot, hs, n, X, sc.Min, sc.Max, sc.Step, dark, dotted, axis, zeroLine: true);
 
             var tx = TextAdvance(dc, "Teplota °C ", left, panelTops[0], Vga.LightRed);
-            TextAdvance(dc, "pocitová", tx, panelTops[0], Vga.DarkGray);
+            TextAdvance(dc, "rosný bod", tx, panelTops[0], Vga.LightCyan);
 
-            DrawSeries(dc, MakePen(Vga.DarkGray, 1, true), hs.ApparentTemperature, plot, sc.Min, sc.Max, X);
+            DrawSeries(dc, MakePen(Vga.LightCyan, 1, true), hs.DewPoint, plot, sc.Min, sc.Max, X);
             DrawSeries(dc, MakePen(Vga.LightRed, 2), hs.Temperature, plot, sc.Min, sc.Max, X);
 
             // denní maxima a minima přímo v grafu
@@ -548,14 +567,14 @@ public sealed class Dashboard : FrameworkElement
 
         double nowX = r.Left;
         double dailyX = landscape ? r.Left : r.Left + Math.Floor(r.Width / cw * 0.42) * cw;
-        double dailyY = landscape ? r.Top + 9.5 * ch : r.Top;
+        double dailyY = landscape ? r.Top + 13.5 * ch : r.Top;
 
         if (idx >= 0)
         {
             var y = r.Top;
             Text(dc, "NYNÍ " + hs.Time[idx].ToString("HH:mm", Cs), nowX, y, Vga.White);
             y += ch;
-            const double vx = 11;
+            const double vx = 13;
 
             void Row(string label, string value, Brush brush)
             {
@@ -565,13 +584,24 @@ public sealed class Dashboard : FrameworkElement
             }
 
             var ws = hs.WindSpeed[idx];
-            Row("Teplota", $"{F(hs.Temperature[idx], "0.0")} °C  (pocit {F(hs.ApparentTemperature[idx], "0.0")})", Vga.LightRed);
+            Row("Teplota", $"{F(hs.Temperature[idx], "0.0")} °C", Vga.LightRed);
+            Row("Rosný bod", $"{F(hs.DewPoint[idx], "0.0")} °C", Vga.LightCyan);
             Row("Vítr", $"{F(ws, "0.0")} m/s  {WeatherMath.CompassName(hs.WindDirection[idx])}  {WeatherMath.Beaufort(ws)} Bft", WindBrush(ws));
             Row("Nárazy", $"{F(hs.WindGusts[idx], "0.0")} m/s", WindBrush(hs.WindGusts[idx]));
             Row("Srážky", $"{F(hs.Precipitation[idx], "0.0")} mm/h", Vga.LightCyan);
             Row("Oblačnost", $"{F(hs.CloudCover[idx], "0")} %", Vga.Gray);
             Row("Vlhkost", $"{F(hs.Humidity[idx], "0")} %", Vga.Gray);
             Row("Tlak", $"{F(hs.Pressure[idx], "0")} hPa", Vga.LightMagenta);
+
+            // Slunce a Měsíc: počítá se z polohy místa a času, nic se nestahuje.
+            var utc = DateTime.Now.ToUniversalTime();
+            var lat = f.Place.Latitude;
+            var lon = f.Place.Longitude;
+            var sun = Astronomy.Sun(utc, lat, lon);
+            var moon = Astronomy.Moon(utc, lat, lon);
+            Row("Slunce", SkyText(sun), sun.Elevation > 0 ? Vga.Yellow : Vga.Brown);
+            Row("Měsíc", SkyText(moon.Position), moon.Position.Elevation > 0 ? Vga.White : Vga.Gray);
+            Row("Fáze Měsíce", $"{moon.IlluminationPercent.ToString("0.00", Cs)} %", Vga.White);
         }
 
         DrawDaily(dc, dailyX, dailyY, f);
@@ -584,7 +614,7 @@ public sealed class Dashboard : FrameworkElement
         var hs = f.Hourly;
         if (d.Count == 0) return;
 
-        const int labelCols = 13, dayCols = 10;
+        const int labelCols = 16, dayCols = 10;
         var days = Math.Min(3, d.Count);
 
         Text(dc, "PŘEHLED", x, y, Vga.White);
@@ -616,8 +646,10 @@ public sealed class Dashboard : FrameworkElement
             return (F(d.WindMax[k], "0") + dir, WindBrush(d.WindMax[k]));
         });
         Row("Nárazy m/s", k => (F(d.GustMax[k], "0"), WindBrush(d.GustMax[k])));
-        Row("Východ", k => (d.Sunrise[k]?.ToString("HH:mm", Cs) ?? "-", Vga.Brown));
-        Row("Západ", k => (d.Sunset[k]?.ToString("HH:mm", Cs) ?? "-", Vga.Brown));
+        Row("Východ Slunce", k => (d.Sunrise[k]?.ToString("HH:mm", Cs) ?? "-", Vga.Brown));
+        Row("Západ Slunce", k => (d.Sunset[k]?.ToString("HH:mm", Cs) ?? "-", Vga.Brown));
+        Row("Východ Měsíce", k => (MoonTimes(f.Place, d.Date[k]).Rise?.ToString("HH:mm", Cs) ?? "-", Vga.Gray));
+        Row("Západ Měsíce", k => (MoonTimes(f.Place, d.Date[k]).Set?.ToString("HH:mm", Cs) ?? "-", Vga.Gray));
     }
 
     // ------------------------------------------------------------------ spodní část: radar + Flymet

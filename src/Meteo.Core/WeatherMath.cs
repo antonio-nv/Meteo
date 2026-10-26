@@ -3,6 +3,18 @@ namespace Meteo.Core;
 /// <summary>Drobné meteorologické a grafové pomůcky bez závislosti na UI.</summary>
 public static class WeatherMath
 {
+    /// <summary>
+    /// Rosný bod (°C) z teploty (°C) a relativní vlhkosti (%) podle Magnusova vzorce; chyba je pod půl stupně.
+    /// Při chybějícím údaji nebo nulové vlhkosti vrací NaN.
+    /// </summary>
+    public static double DewPoint(double temperature, double humidityPercent)
+    {
+        if (double.IsNaN(temperature) || double.IsNaN(humidityPercent) || humidityPercent <= 0) return double.NaN;
+        const double a = 17.625, b = 243.04;
+        var gamma = Math.Log(Math.Min(humidityPercent, 100) / 100.0) + a * temperature / (b + temperature);
+        return b * gamma / (a - gamma);
+    }
+
     private static readonly string[] Compass8 = ["S", "SV", "V", "JV", "J", "JZ", "Z", "SZ"];
 
     /// <summary>Světová strana, ODKUD vítr vane (česky: S, SV, V, JV, J, JZ, Z, SZ).</summary>

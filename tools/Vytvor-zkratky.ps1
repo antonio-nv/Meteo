@@ -19,17 +19,25 @@ if (-not (Test-Path $Exe)) { throw "Soubor $Exe neexistuje. Zadej správnou cest
 $Exe = (Resolve-Path $Exe).Path
 New-Item -ItemType Directory -Force -Path $slozka | Out-Null
 
+# Ikony zkratek (černá = celá obrazovka, modrá = pozadí) se zkopírují vedle Meteo.exe, odkud je zkratky berou.
+$zdroj = Join-Path $PSScriptRoot "ikony"
+foreach ($ikona in "fullscreen.ico", "pozadi.ico") {
+    $z = Join-Path $zdroj $ikona
+    if (Test-Path $z) { Copy-Item $z (Join-Path (Split-Path $Exe) $ikona) -Force }
+}
+
 $shell = New-Object -ComObject WScript.Shell
-function Zkratka($nazev, $parametry, $popis) {
+function Zkratka($nazev, $parametry, $popis, $ikona) {
     $lnk = $shell.CreateShortcut((Join-Path $slozka "$nazev.lnk"))
     $lnk.TargetPath = $Exe
     $lnk.Arguments = $parametry
     $lnk.WorkingDirectory = Split-Path $Exe
-    $lnk.IconLocation = "$Exe,0"
+    $soubor = Join-Path (Split-Path $Exe) $ikona
+    $lnk.IconLocation = if (Test-Path $soubor) { "$soubor,0" } else { "$Exe,0" }
     $lnk.Description = $popis
     $lnk.Save()
 }
 
-Zkratka "Meteo" "" "Předpověď počasí na celou obrazovku (Esc = konec)"
-Zkratka "Meteo - pozadí" "/d" "Předpověď počasí jako živé pozadí plochy (Win+D = konec)"
+Zkratka "Meteo" "" "Předpověď počasí na celou obrazovku (Esc = konec)" "fullscreen.ico"
+Zkratka "Meteo - pozadí" "/d" "Předpověď počasí jako živé pozadí plochy (Win+D = konec)" "pozadi.ico"
 Write-Host "Hotovo: $slozka"
